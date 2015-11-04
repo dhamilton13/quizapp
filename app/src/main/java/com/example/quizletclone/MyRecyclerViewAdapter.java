@@ -1,0 +1,105 @@
+package com.example.quizletclone;
+
+/**
+ * Created by jefflau on 11/2/15.
+ */
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import android.content.Intent;
+
+
+
+public class MyRecyclerViewAdapter extends
+        RecyclerView.Adapter<MyRecyclerViewAdapter.ItemHolder>{
+
+    private List<String> cardQuestion;
+    private LayoutInflater layoutInflater;
+    private Context context;
+    private ModelViewController mvc;
+
+    public MyRecyclerViewAdapter(Context context){
+        this.context = context;
+        layoutInflater = LayoutInflater.from(context);
+        cardQuestion = new ArrayList<String>();
+    }
+
+    @Override
+    public ItemHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        CardView itemCardView =
+                (CardView)layoutInflater.inflate(R.layout.layout_cardview, viewGroup, false);
+
+        return new ItemHolder(itemCardView, this);
+    }
+
+    @Override
+    public void onBindViewHolder(ItemHolder itemHolder, int i) {
+        itemHolder.setItemName(cardQuestion.get(i));
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return cardQuestion.size();
+    }
+
+    public void add(int location, String iName, String iValue){
+        cardQuestion.add(location, iName);
+        notifyItemInserted(location);
+    }
+
+    public void remove(int location){
+        if(location >= cardQuestion.size())
+            return;
+
+        cardQuestion.remove(location);
+        notifyItemRemoved(location);
+    }
+
+    public static class ItemHolder extends RecyclerView.ViewHolder{
+
+        private MyRecyclerViewAdapter parent;
+        private CardView cardView;
+        TextView textItemName;
+
+        public ItemHolder(CardView cView, MyRecyclerViewAdapter parent) {
+            super(cView);
+            cardView = cView;
+            this.parent = parent;
+            textItemName = (TextView) cardView.findViewById(R.id.card_question);
+
+
+            cView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+
+                    Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+                    intent.putExtra("POS", position);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        }
+
+        public void setItemName(CharSequence name){
+            textItemName.setText(name);
+        }
+
+        public CharSequence getItemName(){
+            return textItemName.getText();
+        }
+    }
+}

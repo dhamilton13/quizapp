@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.quizletclone.TrueFalse">
+
+    <TextView
+        android:id="@+id/createQuestionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="39dp"
+        android:text="Enter a question:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/createAnswerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createQuestionLabel"
+        android:layout_below="@+id/createQuestionLabel"
+        android:layout_marginTop="90dp"
+        android:text="Choose your answer:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/createFlashcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Question"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="39dp"
+        android:layout_alignLeft="@+id/answerFalse"
+        android:layout_alignStart="@+id/answerFalse" />
+
+    <EditText
+        android:id="@+id/questionField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createQuestionLabel"
+        android:layout_below="@+id/createQuestionLabel"
+        android:ems="10" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/answerFalse"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/createAnswerLabel"
+        android:layout_alignStart="@+id/createAnswerLabel"
+        android:checked="false" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/answerTrue"
+        android:layout_above="@+id/answerFalse"
+        android:layout_alignLeft="@+id/answerFalse"
+        android:layout_alignStart="@+id/answerFalse"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="True"
+        android:id="@+id/trueField"
+        android:layout_alignTop="@+id/answerTrue"
+        android:layout_toRightOf="@+id/answerFalse"
+        android:layout_toEndOf="@+id/answerFalse" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="False"
+        android:id="@+id/falseField"
+        android:layout_alignBottom="@+id/answerFalse"
+        android:layout_alignLeft="@+id/trueField"
+        android:layout_alignStart="@+id/trueField" />
+
+</RelativeLayout>
+<!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/layout/activity_true_false.xml -->
