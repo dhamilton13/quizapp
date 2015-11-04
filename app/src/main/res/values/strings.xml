@@ -8,4 +8,11 @@
     <string name="title_activity_list">List</string>
     <string name="title_activity_flashcard">Flashcard</string>
 
+    <string-array name="categories">
+        <item>Math</item>
+        <item>English</item>
+        <item>History</item>
+        <item>Computer Science</item>
+    </string-array>
+
 </resources>

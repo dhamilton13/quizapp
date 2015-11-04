@@ -2,6 +2,9 @@ package com.example.quizletclone;
 import java.util.List;
 import java.util.ArrayList;
 
+
+/* Ignore this class until the iteration calls for creation of groups */
+
 public class Room {
 	private String roomName;
 	private List<Flashcard> setOfFlashcards = new ArrayList<Flashcard>();

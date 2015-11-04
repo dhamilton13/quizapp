@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="categories">
+        <item>Math</item>
+        <item>English</item>
+        <item>History</item>
+        <item>Computer Science</item>
+    </string-array>
     <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>

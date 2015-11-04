@@ -12,7 +12,8 @@ public class Flashcard implements Parcelable {
 		this.category = category;
         this.tag = tag;
 	}
-	
+
+    /* Getters for retrieving flashcard data */
 	public String getQuestion() {
 		return this.question;
 	}

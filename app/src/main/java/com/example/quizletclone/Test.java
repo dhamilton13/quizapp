@@ -21,6 +21,11 @@ public class Test implements Parcelable {
         //setFlags(isTestDynamic);
     }
 
+    /* Build a test with proper formatting. The test structure depends on whether the user
+        specifies his/her own question types (mc, tf, etc.) or randomized. Possible future
+         implementation of choosing individual cards. This method currently only displays
+         a title and does not build the test .
+     */
     public ArrayList<String> generateTest(ArrayList<Flashcard> fcs){
         ArrayList<String> questions = new ArrayList<String>();
         this.flashcards = fcs;
@@ -44,6 +49,8 @@ public class Test implements Parcelable {
 
     public String getName() { return this.name; }
 
+    /* Set certain flags as true depending on which tags the user specifies to be added to the test
+    * */
     private void setFlags(boolean flag) {
         if (flag) {
             multipleChoice = true;
@@ -57,6 +64,8 @@ public class Test implements Parcelable {
             trueFalse = false;
         }
     }
+
+    /* Parcelable object creation. Ignore */
 
     protected Test(Parcel in) {
         if (in.readByte() == 0x01) {

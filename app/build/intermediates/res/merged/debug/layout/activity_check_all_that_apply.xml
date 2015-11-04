@@ -34,9 +34,8 @@
         android:layout_height="wrap_content"
         android:text="Create Question"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="39dp"
-        android:layout_alignLeft="@+id/createAnswerLabel"
-        android:layout_alignStart="@+id/createAnswerLabel" />
+        android:layout_alignLeft="@+id/checkboxE"
+        android:layout_alignStart="@+id/checkboxE" />
 
     <EditText
         android:id="@+id/questionField"
@@ -133,6 +132,26 @@
         android:layout_alignBottom="@+id/checkboxE"
         android:layout_alignLeft="@+id/fieldD"
         android:layout_alignStart="@+id/fieldD" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose a category:"
+        android:id="@+id/categoryLabel"
+        android:layout_below="@+id/checkboxE"
+        android:layout_alignRight="@+id/createQuestionLabel"
+        android:layout_alignEnd="@+id/createQuestionLabel" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/categoryLabel"
+        android:layout_alignLeft="@+id/categoryLabel"
+        android:layout_alignStart="@+id/categoryLabel"
+        android:layout_alignRight="@+id/categoryLabel"
+        android:layout_alignEnd="@+id/categoryLabel" />
 
 </RelativeLayout>
 <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/layout/activity_check_all_that_apply.xml -->

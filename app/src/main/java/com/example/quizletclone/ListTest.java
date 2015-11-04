@@ -24,11 +24,18 @@ public class ListTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_test);
+
+        /* Retrieve the ModelViewController object from the calling class */
         Intent intent = getIntent();
         mvc = intent.getExtras().getParcelable("MVCObj");
 
         setTitle("View tests");
 
+
+        // Recycler view for tests.
+        /* TODO: This currently calls flashcard's recyclerView, need to create another recyclerView
+            for test
+         */
         myRecyclerView = (RecyclerView)findViewById(R.id.myrecyclerview);
         linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -37,6 +44,9 @@ public class ListTest extends AppCompatActivity {
         myRecyclerView.setLayoutManager(linearLayoutManager);
         populateTests();
 
+        /* Construction of the floating action button which presents the user with the option
+            to create a test.
+		 */
         Fab = (ImageButton) findViewById(R.id.imageButton);
         Fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +74,7 @@ public class ListTest extends AppCompatActivity {
         });
     }
 
+    /* If the back button is pressed on the device, return home */
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
 
@@ -73,6 +84,7 @@ public class ListTest extends AppCompatActivity {
         return;
     }
 
+    /* Populate the RecycleView with tests */
     private void populateTests() {
         List<Test> cards = mvc.getTests();
 
@@ -87,6 +99,9 @@ public class ListTest extends AppCompatActivity {
                     System.getProperty(propName));
         }
     }
+
+    /* Passes control to the CreateTest class when the user selects create test. Also passes the
+        ModelViewController object */
 
     private void goToTest(){
         Intent intent = new Intent(this, CreateTest.class);

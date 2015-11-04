@@ -18,23 +18,32 @@ public class CreateTest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_test);
+
+        /* Retrieve the ModelViewController object from the calling class */
         Intent intent = getIntent();
         mvc = intent.getExtras().getParcelable("MVCObj");
 
         setTitle("Create a test");
 
+        /* Initialize the GUI elements */
         createQuestion = (Button)findViewById(R.id.createTest);
         nameField = (EditText)findViewById(R.id.nameField);
 
+        /* When the user clicks 'Create Test', use the ModelViewController object to create the
+            test.
+         */
         createQuestion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         mvc.createTest(nameField.getText().toString(), true);
                         nameField.setText("");
 
+                        /* Acknowledge the test was created by displaying a small message */
                         Toast toast = Toast.makeText(getApplicationContext(), "Test created", Toast.LENGTH_SHORT);
                         //TODO: need a better way of calling toast (instead of creating an object everytime).
                         toast.show();
+
+                        /* After a 2000ms delay, return to the list of tests */
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {

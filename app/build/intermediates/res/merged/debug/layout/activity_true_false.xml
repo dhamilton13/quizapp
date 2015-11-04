@@ -84,5 +84,26 @@
         android:layout_alignLeft="@+id/trueField"
         android:layout_alignStart="@+id/trueField" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose a category:"
+        android:id="@+id/categoryLabel"
+        android:layout_below="@+id/answerFalse"
+        android:layout_alignLeft="@+id/answerFalse"
+        android:layout_alignStart="@+id/answerFalse"
+        android:layout_marginTop="36dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/categoryLabel"
+        android:layout_alignLeft="@+id/categoryLabel"
+        android:layout_alignStart="@+id/categoryLabel"
+        android:layout_alignRight="@+id/createFlashcard"
+        android:layout_alignEnd="@+id/createFlashcard" />
+
 </RelativeLayout>
 <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/layout/activity_true_false.xml -->

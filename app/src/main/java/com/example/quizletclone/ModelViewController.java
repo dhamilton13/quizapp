@@ -51,6 +51,7 @@ public class ModelViewController implements Parcelable {
 		setOfFlashcards.add(fc);
 	}
 
+	/* Create a new Test object and add it to the Test ArrayList */
 	public void createTest(String nameOfTest, boolean testType) {
 		Test test = new Test(nameOfTest, testType);
 		test.generateTest(setOfFlashcards);
@@ -133,12 +134,14 @@ public class ModelViewController implements Parcelable {
 		}
 	}
 
-	// Will be moved in the second iteration
+	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {
 		return this.setOfFlashcards;
 	}
 
 	public List<Test> getTests() { return this.setOfTests; }
+
+	/* Parcelable object creation, ignore */
 
 	protected ModelViewController(Parcel in) {
 		if (in.readByte() == 0x01) {
