@@ -121,6 +121,25 @@
         android:layout_alignRight="@+id/fieldC"
         android:layout_alignEnd="@+id/fieldC" />
 
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/answerD"
+        android:layout_alignLeft="@+id/answerD"
+        android:layout_alignStart="@+id/answerD"
+        android:checked="false"
+        android:id="@+id/answerE" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fieldE"
+        android:layout_alignTop="@+id/answerE"
+        android:layout_alignLeft="@+id/fieldD"
+        android:layout_alignStart="@+id/fieldD"
+        android:layout_alignRight="@+id/fieldD"
+        android:layout_alignEnd="@+id/fieldD" />
+
 
 </RelativeLayout>
 <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/layout/activity_multiple_choice.xml -->

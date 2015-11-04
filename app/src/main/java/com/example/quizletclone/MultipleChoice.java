@@ -13,8 +13,8 @@ import android.widget.Toast;
 public class MultipleChoice extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
-    private EditText questionField, fieldA, fieldB, fieldC, fieldD;
-    private RadioButton answerFieldA, answerFieldB, answerFieldC, answerFieldD;
+    private EditText questionField, fieldA, fieldB, fieldC, fieldD, fieldE;
+    private RadioButton answerFieldA, answerFieldB, answerFieldC, answerFieldD, answerFieldE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,13 @@ public class MultipleChoice extends AppCompatActivity {
         answerFieldB = (RadioButton)findViewById(R.id.answerFalse);
         answerFieldC = (RadioButton)findViewById(R.id.answerC);
         answerFieldD = (RadioButton)findViewById(R.id.answerD);
+        answerFieldE = (RadioButton)findViewById(R.id.answerE);
 
         fieldA = (EditText)findViewById(R.id.fieldA);
         fieldB = (EditText)findViewById(R.id.fieldB);
         fieldC = (EditText)findViewById(R.id.fieldC);
         fieldD = (EditText)findViewById(R.id.fieldD);
+        fieldE = (EditText)findViewById(R.id.fieldE);
 
         createQuestion.setOnClickListener(
                 new View.OnClickListener() {
@@ -45,7 +47,8 @@ public class MultipleChoice extends AppCompatActivity {
                                                     + fieldA.getText().toString() + " B. "
                                                     + fieldB.getText().toString() + " C. "
                                                     + fieldC.getText().toString() + " D. "
-                                                    + fieldD.getText().toString(),
+                                                    + fieldD.getText().toString() + " E. "
+                                                    + fieldE.getText().toString(),
                                             fieldA.getText().toString(), "UCSD");
                                     answerFieldA.setChecked(false);
                                 } else if (answerFieldB.isChecked()) {
@@ -53,7 +56,8 @@ public class MultipleChoice extends AppCompatActivity {
                                                     + fieldA.getText().toString() + " B. "
                                                     + fieldB.getText().toString() + " C. "
                                                     + fieldC.getText().toString() + " D. "
-                                                    + fieldD.getText().toString(),
+                                                    + fieldD.getText().toString() + " E. "
+                                                    + fieldE.getText().toString(),
                                             fieldB.getText().toString(), "UCSD");
                                     answerFieldB.setChecked(false);
                                 } else if (answerFieldC.isChecked()) {
@@ -61,7 +65,8 @@ public class MultipleChoice extends AppCompatActivity {
                                                     + fieldA.getText().toString() + " B. "
                                                     + fieldB.getText().toString() + " C. "
                                                     + fieldC.getText().toString() + " D. "
-                                                    + fieldD.getText().toString(),
+                                                    + fieldD.getText().toString() + " E. "
+                                                    + fieldE.getText().toString(),
                                             fieldC.getText().toString(), "UCSD");
                                     answerFieldC.setChecked(false);
                                 } else {
@@ -69,7 +74,8 @@ public class MultipleChoice extends AppCompatActivity {
                                                     + fieldA.getText().toString() + " B. "
                                                     + fieldB.getText().toString() + " C. "
                                                     + fieldC.getText().toString() + " D. "
-                                                    + fieldD.getText().toString(),
+                                                    + fieldD.getText().toString() + " E. "
+                                                    + fieldE.getText().toString(),
                                             fieldD.getText().toString(), "UCSD");
                                     answerFieldD.setChecked(false);
                                 }
