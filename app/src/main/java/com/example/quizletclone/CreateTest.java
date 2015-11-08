@@ -20,8 +20,7 @@ public class CreateTest extends AppCompatActivity {
         setContentView(R.layout.activity_create_test);
 
         /* Retrieve the ModelViewController object from the calling class */
-        Intent intent = getIntent();
-        mvc = intent.getExtras().getParcelable("MVCObj");
+        mvc = ModelViewController.getInstance(this);
 
         setTitle("Create a test");
 
@@ -48,7 +47,6 @@ public class CreateTest extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Intent intent = new Intent(getApplicationContext(),ListTest.class);
-                                intent.putExtra("MVCObj", mvc);
                                 startActivity(intent);
                                 finish();
                             }

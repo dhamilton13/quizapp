@@ -23,10 +23,8 @@ public class ShortAnswer extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create);
-		Intent intent = getIntent();
+		mvc = ModelViewController.getInstance(this);
 
-		/* Retrieve the ModelViewController object from the calling class */
-		mvc = intent.getExtras().getParcelable("MVCObj");
 		setTitle("Short answer");
 		initializeGUIComponents();
 		createFlashcardObject();
@@ -119,7 +117,6 @@ public class ShortAnswer extends ActionBarActivity {
 								@Override
 								public void run() {
 									Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-									intent.putExtra("MVCObj", mvc);
 									startActivity(intent);
 									finish();
 								}

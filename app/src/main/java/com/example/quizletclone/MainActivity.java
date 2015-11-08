@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends ActionBarActivity {
-	private ModelViewController mvc = new ModelViewController(this);
+	private ModelViewController mvc = ModelViewController.getInstance(this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +87,11 @@ public class MainActivity extends ActionBarActivity {
 	 */
 	public void goToViewFlashcards(View view) {
 		Intent intent = new Intent(this, ListActivity.class);
-		// Pass the model view controller object to ListActivity
-		intent.putExtra("MVCObj", mvc);
 		startActivity(intent);
 	}
 
 	public void goToCreateTest(View view) {
 		Intent intent = new Intent(this, ListTest.class);
-		// Pass the model view controller object to ListActivity
-		intent.putExtra("MVCObj", mvc);
 		startActivity(intent);
 	}
 	

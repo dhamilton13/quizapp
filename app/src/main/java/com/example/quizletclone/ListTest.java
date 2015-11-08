@@ -26,8 +26,7 @@ public class ListTest extends AppCompatActivity {
         setContentView(R.layout.activity_list_test);
 
         /* Retrieve the ModelViewController object from the calling class */
-        Intent intent = getIntent();
-        mvc = intent.getExtras().getParcelable("MVCObj");
+        mvc = ModelViewController.getInstance(this);
 
         setTitle("View tests");
 
@@ -77,9 +76,6 @@ public class ListTest extends AppCompatActivity {
     /* If the back button is pressed on the device, return home */
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
-
-        // Pass the model view controller object to ShortAnswer
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
         return;
     }
@@ -105,9 +101,6 @@ public class ListTest extends AppCompatActivity {
 
     private void goToTest(){
         Intent intent = new Intent(this, CreateTest.class);
-
-        // Pass the model view controller object to ShortAnswer
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
     }
 }

@@ -9,23 +9,28 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-public class ModelViewController implements Parcelable {
+
+public class ModelViewController {
 	//private List<Room> rooms;
 	private ArrayList<Flashcard> setOfFlashcards; //temp
 	private ArrayList<Test> setOfTests;
 	private String FILENAME = "flashcard_data";
-	ApplicationDatabase database;
+	static ApplicationDatabase database;
+	private static ModelViewController mvc = new ModelViewController();
 
-	ModelViewController(Context context) {
-		//this.rooms = new ArrayList<QuizletRoom>();
-		this.setOfFlashcards = new ArrayList<Flashcard>();
-		this.setOfTests = new ArrayList<Test>();
-		database = new ApplicationDatabase(context);
+
+	private ModelViewController() {
+		setOfFlashcards = new ArrayList<Flashcard>();
+		setOfTests = new ArrayList<Test>();
 	}
+
+	public static ModelViewController getInstance(Context context) {
+		database = new ApplicationDatabase(context);
+		return mvc;
+	}
+
+
 
 	public void createRoom() {
 		/* bypass for now, directly create flashcard instead
@@ -104,57 +109,4 @@ public class ModelViewController implements Parcelable {
 	public List<Test> getTests() { return this.setOfTests; }
 
 
-
-		protected ModelViewController(Parcel in) {
-			if (in.readByte() == 0x01) {
-				setOfFlashcards = new ArrayList<Flashcard>();
-				in.readList(setOfFlashcards, Flashcard.class.getClassLoader());
-			} else {
-				setOfFlashcards = null;
-			}
-			if (in.readByte() == 0x01) {
-				setOfTests = new ArrayList<Test>();
-				in.readList(setOfTests, Test.class.getClassLoader());
-			} else {
-				setOfTests = null;
-			}
-			FILENAME = in.readString();
-			database = (ApplicationDatabase) in.readValue(ApplicationDatabase.class.getClassLoader());
-		}
-
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			if (setOfFlashcards == null) {
-				dest.writeByte((byte) (0x00));
-			} else {
-				dest.writeByte((byte) (0x01));
-				dest.writeList(setOfFlashcards);
-			}
-			if (setOfTests == null) {
-				dest.writeByte((byte) (0x00));
-			} else {
-				dest.writeByte((byte) (0x01));
-				dest.writeList(setOfTests);
-			}
-			dest.writeString(FILENAME);
-			dest.writeValue(database);
-		}
-
-		@SuppressWarnings("unused")
-		public static final Parcelable.Creator<ModelViewController> CREATOR = new Parcelable.Creator<ModelViewController>() {
-			@Override
-			public ModelViewController createFromParcel(Parcel in) {
-				return new ModelViewController(in);
-			}
-
-			@Override
-			public ModelViewController[] newArray(int size) {
-				return new ModelViewController[size];
-			}
-		};
-	}
+}

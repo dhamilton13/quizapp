@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by sunnysarow on 11/4/15.
  */
-public class Test implements Parcelable {
+public class Test {
     private boolean isTestDynamic, multipleChoice, shortAnswer, checkAllThatApply, trueFalse;
     private List<Flashcard> flashcards;
     private String name;
@@ -64,45 +64,4 @@ public class Test implements Parcelable {
             trueFalse = false;
         }
     }
-
-    /* Parcelable object creation. Ignore */
-
-    protected Test(Parcel in) {
-        if (in.readByte() == 0x01) {
-            flashcards = new ArrayList<Flashcard>();
-            in.readList(flashcards, Flashcard.class.getClassLoader());
-        } else {
-            flashcards = null;
-        }
-        name = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (flashcards == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeList(flashcards);
-        }
-        dest.writeString(name);
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Test> CREATOR = new Parcelable.Creator<Test>() {
-        @Override
-        public Test createFromParcel(Parcel in) {
-            return new Test(in);
-        }
-
-        @Override
-        public Test[] newArray(int size) {
-            return new Test[size];
-        }
-    };
 }

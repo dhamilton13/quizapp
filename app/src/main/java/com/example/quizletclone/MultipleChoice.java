@@ -25,8 +25,7 @@ public class MultipleChoice extends AppCompatActivity {
         setContentView(R.layout.activity_multiple_choice);
 
         /* Retrieve the ModelViewController object from the calling class */
-        Intent intent = getIntent();
-        mvc = intent.getExtras().getParcelable("MVCObj");
+        mvc = ModelViewController.getInstance(this);
 
         setTitle("Multiple choice");
         initializeGUIComponents();
@@ -152,7 +151,6 @@ public class MultipleChoice extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                    intent.putExtra("MVCObj", mvc);
                                     startActivity(intent);
                                     finish();
                                 }

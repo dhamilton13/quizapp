@@ -26,8 +26,7 @@ public class CheckAllThatApply extends AppCompatActivity {
         setContentView(R.layout.activity_check_all_that_apply);
 
         /* Retrieve the ModelViewController object from the calling class */
-        Intent intent = getIntent();
-        mvc = intent.getExtras().getParcelable("MVCObj");
+        mvc = ModelViewController.getInstance(this);
 
         setTitle("Check all that apply");
 
@@ -138,7 +137,6 @@ public class CheckAllThatApply extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                    intent.putExtra("MVCObj", mvc);
                                     startActivity(intent);
                                     finish();
                                 }

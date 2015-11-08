@@ -30,8 +30,7 @@ public class ListActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_list);
 
         /* Retrieve the ModelViewController object from the calling class */
-        Intent intent = getIntent();
-        mvc = intent.getExtras().getParcelable("MVCObj");
+        mvc = ModelViewController.getInstance(this);
 
         setTitle("View flashcards");
 
@@ -101,7 +100,6 @@ public class ListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
 
         // Pass the model view controller object to ShortAnswer
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
         return;
     }
@@ -180,9 +178,6 @@ public class ListActivity extends AppCompatActivity {
     // starts new activity leading to multiple choice creation
     private void multipleChoice(){
         Intent intent = new Intent(this, MultipleChoice.class);
-
-        // Pass the model view controller object to mc
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
     }
 
@@ -190,24 +185,16 @@ public class ListActivity extends AppCompatActivity {
     private void shortAnswer(){
         Intent intent = new Intent(this, ShortAnswer.class);
 
-        // Pass the model view controller object to ShortAnswer
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
     }
 
     private void trueFalse(){
         Intent intent = new Intent(this, TrueFalse.class);
-
-        // Pass the model view controller object to tf
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
     }
 
     private void checkAllThatApply() {
         Intent intent = new Intent(this, CheckAllThatApply.class);
-
-        // Pass the model view controller object to cata
-        intent.putExtra("MVCObj", mvc);
         startActivity(intent);
     }
 }
