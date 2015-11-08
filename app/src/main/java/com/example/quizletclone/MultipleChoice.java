@@ -132,19 +132,19 @@ public class MultipleChoice extends AppCompatActivity {
 
     /* The below methods save flashcard data whenever the activity is paused, or terminated */
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         mvc.storeFlashcards(getApplicationContext());
     }

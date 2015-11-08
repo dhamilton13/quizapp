@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Flashcard implements Parcelable {
 	private String question, answer, category, tag;
 	
-	Flashcard(String question, String answer, String category) {
+	Flashcard(String question, String answer, String tag, String category) {
 		this.question = question;
 		this.answer = answer;
 		this.category = category;

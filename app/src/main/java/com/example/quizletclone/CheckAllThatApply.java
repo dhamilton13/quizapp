@@ -31,7 +31,31 @@ public class CheckAllThatApply extends AppCompatActivity {
 
         setTitle("Check all that apply");
 
-        /* Initialize all the graphical user interface elements. */
+        initializeGUIComponents();
+        createFlashcardObject();
+    }
+
+    /* The below methods save flashcard data whenever the activity is paused, or terminated */
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        mvc.storeFlashcards(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mvc.storeFlashcards(getApplicationContext());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mvc.storeFlashcards(getApplicationContext());
+    }
+
+    /* Initialize all the graphical user interface elements. */
+    private void initializeGUIComponents() {
         createQuestion = (Button)findViewById(R.id.createFlashcard);
         questionField = (EditText)findViewById(R.id.questionField);
         checkBoxA = (CheckBox)findViewById(R.id.checkboxA);
@@ -57,14 +81,16 @@ public class CheckAllThatApply extends AppCompatActivity {
                 R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+    }
 
-        /* When the user clicks create question, create a flashcard using the ModelViewController
-            object.
-         */
+    /* When the user clicks create question, create a flashcard using the ModelViewController
+        object.
+    */
+    private void createFlashcardObject() {
         createQuestion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                    String answer = "";
+                        String answer = "";
 
                         if (checkBoxA.isChecked()) {
                             answer += "A. " + fieldA + " ";
@@ -84,12 +110,13 @@ public class CheckAllThatApply extends AppCompatActivity {
                         }
 
                         //The flashcard creation
-                        mvc.createFlashcard(questionField.getText().toString() + " "
+                        boolean successfulCreation = mvc.createFlashcard(
+                                questionField.getText().toString() + " "
                                         + fieldA.getText().toString() + " "
                                         + fieldB.getText().toString() + " "
                                         + fieldC.getText().toString() + " "
                                         + fieldD.getText().toString() + " "
-                                        + fieldE.getText().toString(), answer, "UCSD");
+                                        + fieldE.getText().toString(), answer, "Test", "UCSD");
 
                         questionField.setText("");
                         fieldA.setText("");
@@ -101,43 +128,30 @@ public class CheckAllThatApply extends AppCompatActivity {
                         /* Acknowledge the card was created by using a Toast object to display a
                             message.
                         */
-                        Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created",
-                                Toast.LENGTH_SHORT);
-                        //TODO: need a better way of calling toast (instead of creating an object everytime).
-                        toast.show();
+                        if (successfulCreation) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
 
-                        /* After a 2000 ms delay, return to the list of flashcards */
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(getApplicationContext(),ListActivity.class);
-                                intent.putExtra("MVCObj", mvc);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }, 2000);
+                            /* After a 2000 ms delay, return to the list of flashcards */
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                    intent.putExtra("MVCObj", mvc);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }, 2000);
 
+                        } else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Error creating flashcard",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        //TODO: need a better way of calling toast (instead of creating an object everytime)
                     }
                 });
 
-    }
-
-    /* The below methods save flashcard data whenever the activity is paused, or terminated */
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        mvc.storeFlashcards(getApplicationContext());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mvc.storeFlashcards(getApplicationContext());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mvc.storeFlashcards(getApplicationContext());
     }
 }
