@@ -31,6 +31,7 @@ public class ListActivity extends AppCompatActivity {
 
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
+        mvc.loadFlashcards(this);
 
         setTitle("View flashcards");
 
@@ -98,8 +99,6 @@ public class ListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
-
-        // Pass the model view controller object to ShortAnswer
         startActivity(intent);
         return;
     }
@@ -121,20 +120,20 @@ public class ListActivity extends AppCompatActivity {
      */
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
-		mvc.storeFlashcards(getApplicationContext());
+        super.onSaveInstanceState(savedInstanceState);
+		//mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
-	public void onPause() {
+    public void onPause() {
         super.onPause();
-		mvc.storeFlashcards(getApplicationContext());
+		//mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		mvc.storeFlashcards(getApplicationContext());
+		//mvc.storeFlashcards(getApplicationContext());
 	}
 
 	/**

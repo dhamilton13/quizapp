@@ -18,6 +18,7 @@ public class ModelViewController {
 	private String FILENAME = "flashcard_data";
 	static ApplicationDatabase database;
 	private static ModelViewController mvc = new ModelViewController();
+	private boolean dataIsLoaded = false;
 
 
 	private ModelViewController() {
@@ -66,39 +67,15 @@ public class ModelViewController {
 	public void loadFlashcards(Context context) {
 		Cursor res = database.getData();
 
+		if(dataIsLoaded)
+			setOfFlashcards.clear();
+
 		while(res.moveToNext()) {
 			setOfFlashcards.add(new Flashcard(res.getString(0), res.getString(1), res.getString(2),
 											res.getString(3)));
 		}
-	}
 
-	/**
-	 * Stores the flashcard data to internal phone memory by writing the
-	 * data to a text file.
-	 */
-	public void storeFlashcards(Context context) {
-		FileOutputStream fos = null;
-		try {
-			fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-		} catch (FileNotFoundException e) {
-			//TODO:Log error message
-			e.printStackTrace();
-		}
-
-
-		try {
-			for (int i = 0; i < setOfFlashcards.size(); ++i) {
-				fos.write(setOfFlashcards.get(i).getQuestion().getBytes());
-				fos.write(System.getProperty("line.separator").getBytes());
-				fos.write(setOfFlashcards.get(i).getAnswer().getBytes());
-				fos.write(System.getProperty("line.separator").getBytes());
-				fos.flush();
-			} fos.close();
-
-		} catch (IOException e) {
-			//TODO:Log error message
-			e.printStackTrace();
-		}
+		dataIsLoaded = true;
 	}
 
 	// Will be moved in the next iteration, getters for cards and tests

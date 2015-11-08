@@ -39,19 +39,19 @@ public class TrueFalse extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.updateFlashcards(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.updateFlashcards(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.updateFlashcards(this);
     }
 
     private void initializeGUIComponents() {

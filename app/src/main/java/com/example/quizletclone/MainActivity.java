@@ -9,16 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends ActionBarActivity {
-	private ModelViewController mvc = ModelViewController.getInstance(this);
+	private ModelViewController mvc;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		/* Load flashcards from internal phone memory
-		   on APP open */
-		mvc.loadFlashcards(getApplicationContext());
 		setTitle("Quiz App"); //Can be modified to match APP name
+		mvc = ModelViewController.getInstance(this);
 	}
 
 	@Override
@@ -45,41 +43,15 @@ public class MainActivity extends ActionBarActivity {
 		super.onPause();
 		/* Store flashcard data anytime app is temporarily 
 		 exited */
-		mvc.storeFlashcards(getApplicationContext());
+		//mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
 		/* Store flashcard data when app is exited */
-		mvc.storeFlashcards(getApplicationContext());
+		//mvc.storeFlashcards(getApplicationContext());
 	}
-	
-	/**
-	 * Transfers ownership to the ShortAnswer class when the
-	 * user presses "Create Flashcard".
-	 */
-/*
-
-	public void goToFlashcardCreation(View view) {
-		Intent intent = new Intent(this, ShortAnswer.class);
-		// Pass the model view controller object to ShortAnswer
-		intent.putExtra("MVCObj", mvc);
-		startActivity(intent);
-	}
-
-
-
-	    <Button
-        android:id="@+id/createFlashcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/viewFlashcard"
-        android:layout_centerHorizontal="true"
-        android:onClick="goToFlashcardCreation"
-        android:text="Create flashcard" />
-
- */
 	
 	/**
 	 * Transfers ownership to the ListActivity class when the

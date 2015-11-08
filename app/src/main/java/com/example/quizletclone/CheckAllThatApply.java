@@ -38,19 +38,16 @@ public class CheckAllThatApply extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mvc.storeFlashcards(getApplicationContext());
     }
 
     /* Initialize all the graphical user interface elements. */

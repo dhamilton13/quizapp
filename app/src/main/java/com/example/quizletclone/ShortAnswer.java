@@ -56,19 +56,16 @@ public class ShortAnswer extends ActionBarActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
-		mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
-		mvc.storeFlashcards(getApplicationContext());
 	}
 
 	private void initializeGUIComponents() {

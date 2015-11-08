@@ -36,19 +36,19 @@ public class MultipleChoice extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mvc.storeFlashcards(getApplicationContext());
+        //mvc.storeFlashcards(getApplicationContext());
     }
 
     private void initializeGUIComponents() {
