@@ -5,23 +5,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-/**
- * Created by sunnysarow on 11/7/15.
- */
+import org.json.JSONObject;
+
 public class ApplicationDatabase extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "QuizMe.db";
-    public static final String TABLE_NAME = "flashcard_table";
-    public static final String COL_1 = "QUESTION";
-    public static final String COL_2 = "ANSWER";
-    public static final String COL_3 = "TAG";
-    public static final String COL_4 = "CATEGORY";
+    private static final String DATABASE_NAME = "QuizMe.db";
+    private static final String TABLE_NAME = "flashcard_table";
+    private static final String TABLE_2_NAME = "test_table";
+    private static final String COL_1_T = "NAME";
+    private static final String COL_2_T = "FLASHCARDS";
+    private static final String COL_1 = "QUESTION";
+    private static final String COL_2 = "ANSWER";
+    private static final String COL_3 = "TAG";
+    private static final String COL_4 = "CATEGORY";
 
 
     public ApplicationDatabase(Context context) {
-        super (context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 1);
 
     }
 
@@ -29,16 +29,18 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT)");
+        db.execSQL("create table " + TABLE_2_NAME + "(FLASHCARDS TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(TABLE_NAME);
+        db.execSQL(TABLE_2_NAME);
         onCreate(db);
 
     }
 
-    public boolean insertData(String flashcardQuestion, String flashcardAnswer, String flashcardTag,
+    public boolean insertFlashcardData(String flashcardQuestion, String flashcardAnswer, String flashcardTag,
                             String flashcardCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -47,6 +49,19 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         contentValues.put(COL_3, flashcardTag);
         contentValues.put(COL_4, flashcardCategory);
         long result = db.insert(TABLE_NAME, null, contentValues);
+
+        if(result == -1)
+            return false;
+        return true;
+    }
+
+    public boolean insertTestData(String testName, String flashcards) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1_T, testName);
+        contentValues.put(COL_2_T, flashcards);
+
+        long result = db.insert(TABLE_2_NAME, null, contentValues);
 
         if(result == -1)
             return false;

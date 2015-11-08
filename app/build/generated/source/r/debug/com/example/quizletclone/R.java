@@ -1719,11 +1719,11 @@ containing a value of this type.
         public static final int cancel_action=0x7f0c007a;
         public static final int card_question=0x7f0c0078;
         public static final int categoryLabel=0x7f0c005b;
-        public static final int checkBox=0x7f0c0061;
-        public static final int checkBox2=0x7f0c0062;
-        public static final int checkBox3=0x7f0c0063;
-        public static final int checkBox4=0x7f0c0064;
-        public static final int checkBox5=0x7f0c0065;
+        public static final int shortAnswerCB =0x7f0c0061;
+        public static final int multipleChoiceCB =0x7f0c0062;
+        public static final int trueFalseCB =0x7f0c0063;
+        public static final int checkAllCB =0x7f0c0064;
+        public static final int randomCB =0x7f0c0065;
         public static final int checkbox=0x7f0c0036;
         public static final int checkboxA=0x7f0c0053;
         public static final int checkboxB=0x7f0c0054;

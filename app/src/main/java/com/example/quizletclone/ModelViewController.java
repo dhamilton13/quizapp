@@ -6,12 +6,14 @@ import java.util.List;
 import android.database.Cursor;
 import android.content.Context;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class ModelViewController {
 	//private List<Room> rooms;
-	private ArrayList<Flashcard> setOfFlashcards; //temp
+	private ArrayList<Flashcard> setOfFlashcards;
 	private ArrayList<Test> setOfTests;
-	private String FILENAME = "flashcard_data";
 	static ApplicationDatabase database;
 	private static ModelViewController mvc = new ModelViewController();
 	private boolean dataIsLoaded = false;
@@ -37,14 +39,26 @@ public class ModelViewController {
 	/** Create a flashcard and store into SQLite database */
 	public boolean createFlashcard(String question, String answer, String tag, String category) {
 		setOfFlashcards.add(new Flashcard(question, answer, tag, category));
-		return database.insertData(question, answer, tag, category);
+		return database.insertFlashcardData(question, answer, tag, category);
 	}
 
 	/** Create a new Test object and add it to the Test ArrayList */
-	public void createTest(String nameOfTest, boolean testType) {
-		Test test = new Test(nameOfTest, testType);
-		test.generateTest(setOfFlashcards);
+	public boolean createTest(String nameOfTest, boolean isDynamic, boolean isShortAnswer,
+						   boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll) {
+		Test test = new Test(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice, isTrueFalse, isCheckAll);
+		ArrayList<Flashcard> fcs = test.generateQuestions(setOfFlashcards);
 		setOfTests.add(test);
+
+		JSONObject json = new JSONObject();
+
+		try{
+			json.put("flashcardsForTest", new JSONArray(fcs));
+		}catch(org.json.JSONException exception){
+			exception.printStackTrace();
+		}
+
+		String flashcards = json.toString();
+		return database.insertTestData(nameOfTest, flashcards);
 	}
 
 	// Ignore for now, for testing purposes

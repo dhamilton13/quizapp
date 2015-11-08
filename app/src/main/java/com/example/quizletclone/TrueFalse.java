@@ -20,6 +20,7 @@ public class TrueFalse extends AppCompatActivity {
     private TextView trueField, falseField;
     private RadioButton answerFieldT, answerFieldF;
     private Spinner spinner;
+    public static final String CATEGORY = "True Or False";
 
 
     @Override
@@ -87,11 +88,13 @@ public class TrueFalse extends AppCompatActivity {
                         boolean successfulInsertion;
                         if (answerFieldT.isChecked()) {
                             successfulInsertion = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. True B. False","True", "Test", "UCSD");
+                                            toString() + " A. True B. False","True", CATEGORY,
+                                            spinner.getSelectedItem().toString());
                             answerFieldF.setChecked(false);
                         } else {
                             successfulInsertion = mvc.createFlashcard(questionField.getText().
-                                    toString() + " A. True B. False ", "False", "Test", "UCSD");
+                                            toString() + " A. True B. False ", "False", CATEGORY,
+                                            spinner.getSelectedItem().toString());
                             answerFieldF.setChecked(false);
                         }
 

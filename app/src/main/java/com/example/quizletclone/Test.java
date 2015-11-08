@@ -5,20 +5,22 @@ import android.os.Parcelable;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Created by sunnysarow on 11/4/15.
- */
 public class Test {
-    private boolean isTestDynamic, multipleChoice, shortAnswer, checkAllThatApply, trueFalse;
-    private List<Flashcard> flashcards;
+    private boolean isTestDynamic, isMultipleChoice, isShortAnswer, isCheckAllThatApply,
+            isTrueFalse;
     private String name;
+    private ModelViewController mvc;
+    private ArrayList<Flashcard> setOfFlashcards;
 
 
-    Test(String name, boolean isTestDynamic) {
+    Test(String name, boolean isTestDynamic, boolean isShortAnswer,
+         boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll) {
         this.name = name;
         this.isTestDynamic = isTestDynamic;
-
-        //setFlags(isTestDynamic);
+        this.isShortAnswer = isShortAnswer;
+        this.isMultipleChoice = isMultipleChoice;
+        this.isTrueFalse = isTrueFalse;
+        this.isCheckAllThatApply = isCheckAll;
     }
 
     /* Build a test with proper formatting. The test structure depends on whether the user
@@ -26,42 +28,28 @@ public class Test {
          implementation of choosing individual cards. This method currently only displays
          a title and does not build the test .
      */
-    public ArrayList<String> generateTest(ArrayList<Flashcard> fcs){
-        ArrayList<String> questions = new ArrayList<String>();
-        this.flashcards = fcs;
+    public ArrayList<Flashcard> generateQuestions (ArrayList<Flashcard> fcs){
+        setOfFlashcards = new ArrayList<Flashcard>();
 
-        for (int i = 0; i < flashcards.size(); ++i) {
-            questions.add(flashcards.get(i).getQuestion());
-        }
-
-        return questions;
+        if (isTestDynamic) {
+            //do something
+        } else {
+            for (int i = 0; i < fcs.size(); ++i) {
+                String category = fcs.get(i).getCategory();
+                if (isShortAnswer && category.equals(ShortAnswer.CATEGORY)) {
+                    setOfFlashcards.add(fcs.get(i));
+                } else if (isMultipleChoice && category.equals(MultipleChoice.CATEGORY)) {
+                    setOfFlashcards.add(fcs.get(i));
+                } else if (isTrueFalse && category.equals(TrueFalse.CATEGORY)) {
+                    setOfFlashcards.add(fcs.get(i));
+                } else if (isCheckAllThatApply && category.equals(CheckAllThatApply.CATEGORY)){
+                    setOfFlashcards.add(fcs.get(i));
+                }
+            }
+        } return setOfFlashcards;
     }
 
-    public void addFlashcards(ArrayList<Flashcard> cards) {}
-
-    public void addFlashcard(Flashcard card) {
-        this.flashcards.add(card);
-    }
-
-    public int getNumberOfQuestions() {
-        return flashcards.size();
-    }
 
     public String getName() { return this.name; }
 
-    /* Set certain flags as true depending on which tags the user specifies to be added to the test
-    * */
-    private void setFlags(boolean flag) {
-        if (flag) {
-            multipleChoice = true;
-            shortAnswer = true;
-            checkAllThatApply = true;
-            trueFalse = true;
-        } else {
-            multipleChoice = false;
-            shortAnswer = false;
-            checkAllThatApply = false;
-            trueFalse = false;
-        }
-    }
 }

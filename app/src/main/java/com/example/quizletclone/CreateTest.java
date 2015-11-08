@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 public class CreateTest extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
     private EditText nameField;
+    private CheckBox shortAnswer, multipleChoice, trueFalse, checkAll, random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +26,37 @@ public class CreateTest extends AppCompatActivity {
 
         setTitle("Create a test");
 
-        /* Initialize the GUI elements */
+        initializeGUIComponents();
+        createTestObject();
+    }
+
+    private void initializeGUIComponents() {
         createQuestion = (Button)findViewById(R.id.createTest);
         nameField = (EditText)findViewById(R.id.nameField);
+        shortAnswer = (CheckBox)findViewById(R.id.shortAnswerCB);
+        multipleChoice = (CheckBox)findViewById(R.id.multipleChoiceCB);
+        trueFalse = (CheckBox)findViewById(R.id.trueFalseCB);
+        checkAll = (CheckBox)findViewById(R.id.checkAllCB);
+        random = (CheckBox)findViewById(R.id.randomCB);
 
-        /* When the user clicks 'Create Test', use the ModelViewController object to create the
-            test.
-         */
+    }
+
+    private void createTestObject() {
         createQuestion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                        mvc.createTest(nameField.getText().toString(), true);
+                        if (random.isChecked()) {
+                            mvc.createTest(nameField.getText().toString(), true, false, false, false, false);
+                        } else {
+                            mvc.createTest(nameField.getText().toString(), false, shortAnswer.isChecked(),
+                                    multipleChoice.isChecked(), trueFalse.isChecked(), checkAll.isChecked());
+                        }
+
                         nameField.setText("");
 
                         /* Acknowledge the test was created by displaying a small message */
-                        Toast toast = Toast.makeText(getApplicationContext(), "Test created", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Test created",
+                                Toast.LENGTH_SHORT);
                         //TODO: need a better way of calling toast (instead of creating an object everytime).
                         toast.show();
 
@@ -55,6 +73,7 @@ public class CreateTest extends AppCompatActivity {
                     }
                 });
 
-
     }
+
+
 }

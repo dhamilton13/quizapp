@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Flashcard {
 	private String question, answer, category, tag;
 	
-	Flashcard(String question, String answer, String tag, String category) {
+	Flashcard(String question, String answer, String category, String tag) {
 		this.question = question;
 		this.answer = answer;
 		this.category = category;
@@ -22,13 +22,8 @@ public class Flashcard {
 		return this.answer;
 	}
 	
-	public String getCategory() {
-		return this.category;
-	}
+	public String getCategory() { return this.category; }
 
     public String getTag() { return this.tag; }
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
 }

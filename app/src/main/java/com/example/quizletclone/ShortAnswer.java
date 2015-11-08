@@ -18,6 +18,8 @@ public class ShortAnswer extends ActionBarActivity {
 	private EditText questionField, answerField;
 	private ModelViewController mvc;
 	private Spinner spinner;
+	public static final String CATEGORY = "Short Answer";
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,8 @@ public class ShortAnswer extends ActionBarActivity {
 						//The flashcard creation
 						boolean successfulCreation = mvc.createFlashcard(questionField.getText()
 										.toString(),
-								answerField.getText().toString(), "Test", "UCSD");
+								answerField.getText().toString(), CATEGORY,
+								spinner.getSelectedItem().toString());
 						questionField.setText("");
 						answerField.setText("");
 

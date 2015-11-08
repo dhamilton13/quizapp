@@ -18,6 +18,7 @@ public class CheckAllThatApply extends AppCompatActivity {
     private EditText questionField, fieldA, fieldB, fieldC, fieldD, fieldE;
     private CheckBox checkBoxA, checkBoxB, checkBoxC, checkBoxD, checkBoxE;
     private Spinner spinner;
+    public static final String CATEGORY = "Check All That Apply";
 
 
     @Override
@@ -112,7 +113,8 @@ public class CheckAllThatApply extends AppCompatActivity {
                                         + fieldB.getText().toString() + " "
                                         + fieldC.getText().toString() + " "
                                         + fieldD.getText().toString() + " "
-                                        + fieldE.getText().toString(), answer, "Test", "UCSD");
+                                        + fieldE.getText().toString(), answer, CATEGORY,
+                                spinner.getSelectedItem().toString());
 
                         questionField.setText("");
                         fieldA.setText("");

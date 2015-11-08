@@ -18,6 +18,7 @@ public class MultipleChoice extends AppCompatActivity {
     private EditText questionField, fieldA, fieldB, fieldC, fieldD, fieldE;
     private RadioButton answerFieldA, answerFieldB, answerFieldC, answerFieldD, answerFieldE;
     private Spinner spinner;
+    public static final String CATEGORY = "Multiple Choice";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,8 @@ public class MultipleChoice extends AppCompatActivity {
                                             + fieldC.getText().toString() + " D. "
                                             + fieldD.getText().toString() + " E. "
                                             + fieldE.getText().toString(),
-                                    fieldA.getText().toString(), "Test", "UCSD");
+                                    fieldA.getText().toString(), CATEGORY,
+                                    spinner.getSelectedItem().toString());
                             answerFieldA.setChecked(false);
                         } else if (answerFieldB.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
@@ -108,7 +110,8 @@ public class MultipleChoice extends AppCompatActivity {
                                             + fieldC.getText().toString() + " D. "
                                             + fieldD.getText().toString() + " E. "
                                             + fieldE.getText().toString(),
-                                    fieldB.getText().toString(), "Test", "UCSD");
+                                    fieldB.getText().toString(), CATEGORY,
+                                    spinner.getSelectedItem().toString());
                             answerFieldB.setChecked(false);
                         } else if (answerFieldC.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
@@ -118,7 +121,8 @@ public class MultipleChoice extends AppCompatActivity {
                                             + fieldC.getText().toString() + " D. "
                                             + fieldD.getText().toString() + " E. "
                                             + fieldE.getText().toString(),
-                                    fieldC.getText().toString(), "Test", "UCSD");
+                                    fieldC.getText().toString(), CATEGORY,
+                                    spinner.getSelectedItem().toString());
                             answerFieldC.setChecked(false);
                         } else {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
@@ -128,7 +132,8 @@ public class MultipleChoice extends AppCompatActivity {
                                             + fieldC.getText().toString() + " D. "
                                             + fieldD.getText().toString() + " E. "
                                             + fieldE.getText().toString(),
-                                    fieldD.getText().toString(), "Test",  "UCSD");
+                                    fieldD.getText().toString(), CATEGORY,
+                                    spinner.getSelectedItem().toString());
                             answerFieldD.setChecked(false);
                         }
                         questionField.setText("");
