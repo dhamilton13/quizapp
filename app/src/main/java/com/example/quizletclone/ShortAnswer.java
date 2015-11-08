@@ -28,55 +28,9 @@ public class ShortAnswer extends ActionBarActivity {
 		/* Retrieve the ModelViewController object from the calling class */
 		mvc = intent.getExtras().getParcelable("MVCObj");
 		setTitle("Short answer");
+		initializeGUIComponents();
+		createFlashcardObject();
 
-		/* Initialize all the graphical user interface elements. */
-		createQuestion = (Button)findViewById(R.id.createFlashcard);
-		questionField = (EditText)findViewById(R.id.questionField);
-		answerField = (EditText)findViewById(R.id.answerTextField);
-
-		/* Initialize the spinner, create an array adapter that stores array data from
-            res/strings.xml. All array modifications are performed in that file. After
-            creating the adapter to represent the array objects, specify the layout type
-            for the spinner.
-         */
-		spinner = (Spinner)findViewById(R.id.spinner);
-
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-				R.array.categories, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
-		
-		/* Creates a question when the user presses the 'Create
-		 Question button */
-		createQuestion.setOnClickListener(
-			new View.OnClickListener() {
-				public void onClick(View view) {
-						//The flashcard creation
-						mvc.createFlashcard(questionField.getText().toString(),
-								answerField.getText().toString(), "UCSD");
-						questionField.setText("");
-						answerField.setText("");
-
-					/* Acknowledge the card was created by using a Toast object to display a
-                            message.
-                        */
-						Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created", Toast.LENGTH_SHORT);
-						//TODO: need a better way of calling toast (instead of creating an object everytime).
-						toast.show();
-
-					/* After a 2000 ms delay, return to the list of flashcards */
-						new Handler().postDelayed(new Runnable() {
-							@Override
-						public void run() {
-								Intent intent = new Intent(getApplicationContext(),ListActivity.class);
-								intent.putExtra("MVCObj", mvc);
-								startActivity(intent);
-								finish();
-							}
-						}, 2000);
-
-					}
-				});		
 	}
 
 
@@ -102,21 +56,83 @@ public class ShortAnswer extends ActionBarActivity {
 
 	/* The below methods save flashcard data whenever the activity is paused, or terminated */
 	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
+	protected void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
 		mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
-	public void onPause() {
+	protected void onPause() {
 		super.onPause();
 		mvc.storeFlashcards(getApplicationContext());
 	}
 	
 	@Override
-	public void onStop() {
+	protected void onStop() {
 		super.onStop();
 		mvc.storeFlashcards(getApplicationContext());
+	}
+
+	private void initializeGUIComponents() {
+		/* Initialize all the graphical user interface elements. */
+		createQuestion = (Button)findViewById(R.id.createFlashcard);
+		questionField = (EditText)findViewById(R.id.questionField);
+		answerField = (EditText)findViewById(R.id.answerTextField);
+
+		/* Initialize the spinner, create an array adapter that stores array data from
+            res/strings.xml. All array modifications are performed in that file. After
+            creating the adapter to represent the array objects, specify the layout type
+            for the spinner.
+         */
+		spinner = (Spinner)findViewById(R.id.spinner);
+
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+				R.array.categories, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+	}
+
+	/* Creates a question when the user presses the 'Create
+ 		Question button */
+	private void createFlashcardObject() {
+		createQuestion.setOnClickListener(
+				new View.OnClickListener() {
+					public void onClick(View view) {
+						//The flashcard creation
+						boolean successfulCreation = mvc.createFlashcard(questionField.getText()
+										.toString(),
+								answerField.getText().toString(), "Test", "UCSD");
+						questionField.setText("");
+						answerField.setText("");
+
+					/* Acknowledge the card was created by using a Toast object to display a
+                            message.
+                        */
+						if (successfulCreation ) {
+							Toast toast = Toast.makeText(getApplicationContext(),
+										"Flashcard created", Toast.LENGTH_SHORT);
+							//TODO: need a better way of calling toast (instead of creating an object everytime).
+							toast.show();
+
+					/* After a 2000 ms delay, return to the list of flashcards */
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+									intent.putExtra("MVCObj", mvc);
+									startActivity(intent);
+									finish();
+								}
+							}, 2000);
+						} else {
+							Toast toast = Toast.makeText(getApplicationContext(),
+										"Error creating flashcard", Toast.LENGTH_SHORT);
+							//TODO: need a better way of calling toast (instead of creating an object everytime).
+							toast.show();
+						}
+
+					}
+				});
 	}
 
 }

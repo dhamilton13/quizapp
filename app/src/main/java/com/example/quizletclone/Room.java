@@ -14,8 +14,8 @@ public class Room {
 	}
 	
 	public void createFlashcard(String question, String answer, String category) {
-		Flashcard fc = new Flashcard(question, answer, category);
-		setOfFlashcards.add(fc);
+		//Flashcard fc = new Flashcard(question, answer, category);
+		//setOfFlashcards.add(fc);
 	}
 	
 	public void deleteFlashcard(String question) {
