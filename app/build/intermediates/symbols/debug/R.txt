@@ -482,11 +482,7 @@ int id caLabel 0x7f0c0069
 int id cancel_action 0x7f0c007a
 int id card_question 0x7f0c0078
 int id categoryLabel 0x7f0c005b
-int id checkBox 0x7f0c0061
-int id checkBox2 0x7f0c0062
-int id checkBox3 0x7f0c0063
-int id checkBox4 0x7f0c0064
-int id checkBox5 0x7f0c0065
+int id checkAllCB 0x7f0c0064
 int id checkbox 0x7f0c0036
 int id checkboxA 0x7f0c0053
 int id checkboxB 0x7f0c0054
@@ -531,6 +527,7 @@ int id list_item 0x7f0c0028
 int id mcLabel 0x7f0c0067
 int id media_actions 0x7f0c007c
 int id middle 0x7f0c001a
+int id multipleChoiceCB 0x7f0c0062
 int id multiply 0x7f0c0013
 int id myrecyclerview 0x7f0c006c
 int id nameField 0x7f0c005f
@@ -542,6 +539,7 @@ int id progress_circular 0x7f0c0005
 int id progress_horizontal 0x7f0c0006
 int id questionField 0x7f0c0051
 int id radio 0x7f0c0038
+int id randomCB 0x7f0c0065
 int id randomLabel 0x7f0c006a
 int id saLabel 0x7f0c0066
 int id screen 0x7f0c0014
@@ -557,6 +555,7 @@ int id search_plate 0x7f0c0046
 int id search_src_text 0x7f0c0047
 int id search_voice_btn 0x7f0c004b
 int id select_dialog_listview 0x7f0c004c
+int id shortAnswerCB 0x7f0c0061
 int id shortcut 0x7f0c0037
 int id showCustom 0x7f0c000f
 int id showHome 0x7f0c0010
@@ -579,6 +578,7 @@ int id time 0x7f0c007f
 int id title 0x7f0c002a
 int id title_template 0x7f0c002d
 int id topPanel 0x7f0c002c
+int id trueFalseCB 0x7f0c0063
 int id trueField 0x7f0c0075
 int id up 0x7f0c0008
 int id useLogo 0x7f0c0012

@@ -12,12 +12,16 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "QuizMe.db";
     private static final String TABLE_NAME = "flashcard_table";
     private static final String TABLE_2_NAME = "test_table";
-    private static final String COL_1_T = "NAME";
-    private static final String COL_2_T = "FLASHCARDS";
-    private static final String COL_1 = "QUESTION";
-    private static final String COL_2 = "ANSWER";
-    private static final String COL_3 = "TAG";
-    private static final String COL_4 = "CATEGORY";
+    private static final String COL_1_T2 = "NAME";
+    private static final String COL_2_T2 = "DYNAMIC";
+    private static final String COL_3_T2 = "SA";
+    private static final String COL_4_T2 = "MC";
+    private static final String COL_5_T2 = "TF";
+    private static final String COL_6_T2 = "CA";
+    private static final String COL_1_T1 = "QUESTION";
+    private static final String COL_2_T1 = "ANSWER";
+    private static final String COL_3_T1 = "TAG";
+    private static final String COL_4_T1 = "CATEGORY";
 
 
     public ApplicationDatabase(Context context) {
@@ -44,10 +48,10 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
                             String flashcardCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1, flashcardQuestion);
-        contentValues.put(COL_2, flashcardAnswer);
-        contentValues.put(COL_3, flashcardTag);
-        contentValues.put(COL_4, flashcardCategory);
+        contentValues.put(COL_1_T1, flashcardQuestion);
+        contentValues.put(COL_2_T1, flashcardAnswer);
+        contentValues.put(COL_3_T1, flashcardTag);
+        contentValues.put(COL_4_T1, flashcardCategory);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if(result == -1)
@@ -55,11 +59,16 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertTestData(String testName, String flashcards) {
+    public boolean insertTestData(String testName, boolean isDynamic, boolean isSA, boolean isMC,
+                                  boolean isTF, boolean isCA) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1_T, testName);
-        contentValues.put(COL_2_T, flashcards);
+        contentValues.put(COL_1_T2, testName);
+        contentValues.put(COL_2_T2, isDynamic);
+        contentValues.put(COL_3_T2, isSA);
+        contentValues.put(COL_4_T2, isMC);
+        contentValues.put(COL_5_T2, isTF);
+        contentValues.put(COL_6_T2, isCA);
 
         long result = db.insert(TABLE_2_NAME, null, contentValues);
 
@@ -68,9 +77,15 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getData() {
+    public Cursor getFlashcardData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
+    }
+
+    public Cursor getTestData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_2_NAME, null);
         return res;
     }
 }

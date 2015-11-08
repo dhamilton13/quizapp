@@ -1719,11 +1719,7 @@ containing a value of this type.
         public static final int cancel_action=0x7f0c007a;
         public static final int card_question=0x7f0c0078;
         public static final int categoryLabel=0x7f0c005b;
-        public static final int shortAnswerCB =0x7f0c0061;
-        public static final int multipleChoiceCB =0x7f0c0062;
-        public static final int trueFalseCB =0x7f0c0063;
-        public static final int checkAllCB =0x7f0c0064;
-        public static final int randomCB =0x7f0c0065;
+        public static final int checkAllCB=0x7f0c0064;
         public static final int checkbox=0x7f0c0036;
         public static final int checkboxA=0x7f0c0053;
         public static final int checkboxB=0x7f0c0054;
@@ -1768,6 +1764,7 @@ containing a value of this type.
         public static final int mcLabel=0x7f0c0067;
         public static final int media_actions=0x7f0c007c;
         public static final int middle=0x7f0c001a;
+        public static final int multipleChoiceCB=0x7f0c0062;
         public static final int multiply=0x7f0c0013;
         public static final int myrecyclerview=0x7f0c006c;
         public static final int nameField=0x7f0c005f;
@@ -1779,6 +1776,7 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f0c0006;
         public static final int questionField=0x7f0c0051;
         public static final int radio=0x7f0c0038;
+        public static final int randomCB=0x7f0c0065;
         public static final int randomLabel=0x7f0c006a;
         public static final int saLabel=0x7f0c0066;
         public static final int screen=0x7f0c0014;
@@ -1794,6 +1792,7 @@ containing a value of this type.
         public static final int search_src_text=0x7f0c0047;
         public static final int search_voice_btn=0x7f0c004b;
         public static final int select_dialog_listview=0x7f0c004c;
+        public static final int shortAnswerCB=0x7f0c0061;
         public static final int shortcut=0x7f0c0037;
         public static final int showCustom=0x7f0c000f;
         public static final int showHome=0x7f0c0010;
@@ -1816,6 +1815,7 @@ containing a value of this type.
         public static final int title=0x7f0c002a;
         public static final int title_template=0x7f0c002d;
         public static final int topPanel=0x7f0c002c;
+        public static final int trueFalseCB=0x7f0c0063;
         public static final int trueField=0x7f0c0075;
         public static final int up=0x7f0c0008;
         public static final int useLogo=0x7f0c0012;

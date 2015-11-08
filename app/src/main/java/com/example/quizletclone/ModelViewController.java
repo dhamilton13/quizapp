@@ -16,7 +16,7 @@ public class ModelViewController {
 	private ArrayList<Test> setOfTests;
 	static ApplicationDatabase database;
 	private static ModelViewController mvc = new ModelViewController();
-	private boolean dataIsLoaded = false;
+	private boolean fcsAreLoaded = false, testsAreLoaded = false;
 
 
 	private ModelViewController() {
@@ -58,7 +58,8 @@ public class ModelViewController {
 		}
 
 		String flashcards = json.toString();
-		return database.insertTestData(nameOfTest, flashcards);
+		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
+				isTrueFalse, isCheckAll);
 	}
 
 	// Ignore for now, for testing purposes
@@ -68,9 +69,9 @@ public class ModelViewController {
 
 	/** Loads the flashcard data from SQLite database. */
 	public void loadFlashcards(Context context) {
-		Cursor res = database.getData();
+		Cursor res = database.getFlashcardData();
 
-		if(dataIsLoaded)
+		if(fcsAreLoaded)
 			setOfFlashcards.clear();
 
 		while(res.moveToNext()) {
@@ -78,8 +79,24 @@ public class ModelViewController {
 											res.getString(3)));
 		}
 
-		dataIsLoaded = true;
+		fcsAreLoaded = true;
 	}
+
+	public void loadTests(Context context) {
+		Cursor res = database.getTestData();
+
+		if(testsAreLoaded)
+			setOfTests.clear();
+
+		while(res.moveToNext()) {
+			setOfTests.add(new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
+					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0));
+		}
+
+		testsAreLoaded = true;
+	}
+
+
 
 	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {

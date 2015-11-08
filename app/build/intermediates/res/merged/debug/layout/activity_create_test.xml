@@ -42,7 +42,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/shortAnswerCB"
         android:layout_below="@+id/nameField"
         android:layout_alignLeft="@+id/nameField"
         android:layout_alignStart="@+id/nameField"
@@ -52,10 +52,10 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox2"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignLeft="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox"
+        android:id="@+id/multipleChoiceCB"
+        android:layout_below="@+id/shortAnswerCB"
+        android:layout_alignLeft="@+id/shortAnswerCB"
+        android:layout_alignStart="@+id/shortAnswerCB"
         android:layout_alignRight="@+id/createTest"
         android:layout_alignEnd="@+id/createTest"
         android:checked="false" />
@@ -63,28 +63,28 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox3"
-        android:layout_below="@+id/checkBox2"
-        android:layout_alignLeft="@+id/checkBox2"
-        android:layout_alignStart="@+id/checkBox2"
+        android:id="@+id/trueFalseCB"
+        android:layout_below="@+id/multipleChoiceCB"
+        android:layout_alignLeft="@+id/multipleChoiceCB"
+        android:layout_alignStart="@+id/multipleChoiceCB"
         android:checked="false" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox4"
-        android:layout_below="@+id/checkBox3"
-        android:layout_alignLeft="@+id/checkBox3"
-        android:layout_alignStart="@+id/checkBox3"
+        android:id="@+id/checkAllCB"
+        android:layout_below="@+id/trueFalseCB"
+        android:layout_alignLeft="@+id/trueFalseCB"
+        android:layout_alignStart="@+id/trueFalseCB"
         android:checked="false" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox5"
-        android:layout_below="@+id/checkBox4"
-        android:layout_alignLeft="@+id/checkBox4"
-        android:layout_alignStart="@+id/checkBox4"
+        android:id="@+id/randomCB"
+        android:layout_below="@+id/checkAllCB"
+        android:layout_alignLeft="@+id/checkAllCB"
+        android:layout_alignStart="@+id/checkAllCB"
         android:checked="false" />
 
     <TextView
@@ -93,9 +93,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Short answer"
         android:id="@+id/saLabel"
-        android:layout_above="@+id/checkBox2"
-        android:layout_toRightOf="@+id/checkBox"
-        android:layout_toEndOf="@+id/checkBox" />
+        android:layout_above="@+id/multipleChoiceCB"
+        android:layout_toRightOf="@+id/shortAnswerCB"
+        android:layout_toEndOf="@+id/shortAnswerCB" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,9 +103,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Multiple choice"
         android:id="@+id/mcLabel"
-        android:layout_above="@+id/checkBox3"
-        android:layout_toRightOf="@+id/checkBox"
-        android:layout_toEndOf="@+id/checkBox" />
+        android:layout_above="@+id/trueFalseCB"
+        android:layout_toRightOf="@+id/shortAnswerCB"
+        android:layout_toEndOf="@+id/shortAnswerCB" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -113,9 +113,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="True and False"
         android:id="@+id/tfLabel"
-        android:layout_alignBottom="@+id/checkBox3"
-        android:layout_toRightOf="@+id/checkBox3"
-        android:layout_toEndOf="@+id/checkBox3" />
+        android:layout_alignBottom="@+id/trueFalseCB"
+        android:layout_toRightOf="@+id/trueFalseCB"
+        android:layout_toEndOf="@+id/trueFalseCB" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -123,9 +123,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Check all"
         android:id="@+id/caLabel"
-        android:layout_above="@+id/checkBox5"
-        android:layout_toRightOf="@+id/checkBox3"
-        android:layout_toEndOf="@+id/checkBox3" />
+        android:layout_above="@+id/randomCB"
+        android:layout_toRightOf="@+id/trueFalseCB"
+        android:layout_toEndOf="@+id/trueFalseCB" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -133,9 +133,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Random"
         android:id="@+id/randomLabel"
-        android:layout_alignBottom="@+id/checkBox5"
-        android:layout_toRightOf="@+id/checkBox4"
-        android:layout_toEndOf="@+id/checkBox4" />
+        android:layout_alignBottom="@+id/randomCB"
+        android:layout_toRightOf="@+id/checkAllCB"
+        android:layout_toEndOf="@+id/checkAllCB" />
 
 </RelativeLayout>
 <!-- From: file:/Users/sunnysarow/Desktop/Quiz%20App/app/src/main/res/layout/activity_create_test.xml -->
