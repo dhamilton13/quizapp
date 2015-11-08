@@ -1,9 +1,5 @@
 package com.example.quizletclone;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,18 +34,13 @@ public class ModelViewController {
 		see createFlashcard(); */
 	}
 
-	/* createFlashcard() will be moved to the Room class */
-
-	/* For the first iteration, since we are not implementing
-	 * rooms, flashcards will be created directly
-	 */
+	/** Create a flashcard and store into SQLite database */
 	public boolean createFlashcard(String question, String answer, String tag, String category) {
-		//This method will be removed during the second iteration
+		setOfFlashcards.add(new Flashcard(question, answer, tag, category));
 		return database.insertData(question, answer, tag, category);
-		//setOfFlashcards.add(fc);
 	}
 
-	/* Create a new Test object and add it to the Test ArrayList */
+	/** Create a new Test object and add it to the Test ArrayList */
 	public void createTest(String nameOfTest, boolean testType) {
 		Test test = new Test(nameOfTest, testType);
 		test.generateTest(setOfFlashcards);
@@ -61,9 +52,7 @@ public class ModelViewController {
 		setOfFlashcards.remove(position);
 	}
 
-	/**
-	 * Loads the flashcard data from internal phone memory.
-	 */
+	/** Loads the flashcard data from SQLite database. */
 	public void loadFlashcards(Context context) {
 		Cursor res = database.getData();
 

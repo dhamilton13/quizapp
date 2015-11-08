@@ -50,7 +50,7 @@ public class CheckAllThatApply extends AppCompatActivity {
         super.onStop();
     }
 
-    /* Initialize all the graphical user interface elements. */
+    /** Initialize all the graphical user interface elements. */
     private void initializeGUIComponents() {
         createQuestion = (Button)findViewById(R.id.createFlashcard);
         questionField = (EditText)findViewById(R.id.questionField);
@@ -79,7 +79,7 @@ public class CheckAllThatApply extends AppCompatActivity {
         spinner.setAdapter(adapter);
     }
 
-    /* When the user clicks create question, create a flashcard using the ModelViewController
+    /** When the user clicks create question, create a flashcard using the ModelViewController
         object.
     */
     private void createFlashcardObject() {
