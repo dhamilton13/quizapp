@@ -27,7 +27,6 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
 
     public ApplicationDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
-
     }
 
 
@@ -42,7 +41,6 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         db.execSQL(TABLE_NAME);
         db.execSQL(TABLE_2_NAME);
         onCreate(db);
-
     }
 
     public boolean insertFlashcardData(String flashcardQuestion, String flashcardAnswer, String flashcardTag,

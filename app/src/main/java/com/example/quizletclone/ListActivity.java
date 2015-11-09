@@ -57,7 +57,8 @@ public class ListActivity extends AppCompatActivity {
                 builder.setTitle("Question Type");
                 // The flashcard creation options
                 builder.setItems(new CharSequence[]
-                                {"Multiple Choice", "Short Answer", "True/False", "Check All That Apply"},
+                                {"Multiple Choice", "Short Answer", "True/False",
+                                        "Check All That Apply"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
@@ -79,7 +80,6 @@ public class ListActivity extends AppCompatActivity {
                             }
                         });
                 builder.create().show();
-
 			}
 		});
 
@@ -163,11 +163,8 @@ public class ListActivity extends AppCompatActivity {
             String propName = cards.get(i);
             i++;
             myRecyclerViewAdapter.add(
-                    myRecyclerViewAdapter.getItemCount(),
-                    propName,
-                    System.getProperty(propName));
+                myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
         }
-
     }
 
     /* The following private methods are responsible for passing control to the respective

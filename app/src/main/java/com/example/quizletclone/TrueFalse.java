@@ -56,7 +56,7 @@ public class TrueFalse extends AppCompatActivity {
     }
 
     private void initializeGUIComponents() {
-                /* Initialize all the graphical user interface elements. */
+        /* Initialize all the graphical user interface elements. */
         createQuestion = (Button)findViewById(R.id.createFlashcard);
         questionField = (EditText)findViewById(R.id.questionField);
         trueField = (TextView)findViewById(R.id.trueField);
@@ -82,49 +82,48 @@ public class TrueFalse extends AppCompatActivity {
             object.
          */
         createQuestion.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
+            new View.OnClickListener() {
+                public void onClick(View view) {
                         //The flashcard creation
-                        boolean successfulInsertion;
-                        if (answerFieldT.isChecked()) {
-                            successfulInsertion = mvc.createFlashcard(questionField.getText().
+                    boolean successfulInsertion;
+                    if (answerFieldT.isChecked()) {
+                        successfulInsertion = mvc.createFlashcard(questionField.getText().
                                             toString() + " A. True B. False","True", CATEGORY,
                                             spinner.getSelectedItem().toString());
-                            answerFieldF.setChecked(false);
-                        } else {
-                            successfulInsertion = mvc.createFlashcard(questionField.getText().
+                        answerFieldF.setChecked(false);
+                    } else {
+                        successfulInsertion = mvc.createFlashcard(questionField.getText().
                                             toString() + " A. True B. False ", "False", CATEGORY,
                                             spinner.getSelectedItem().toString());
-                            answerFieldF.setChecked(false);
-                        }
+                        answerFieldF.setChecked(false);
+                    }
 
-                        questionField.setText("");
+                    questionField.setText("");
 
-                        /* Acknowledge the card was created by using a Toast object to display a
-                            message.
-                        */
-                        if (successfulInsertion) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created", Toast.LENGTH_SHORT);
-                            //TODO: need a better way of calling toast (instead of creating an object everytime).
-                            toast.show();
+                    /* Acknowledge the card was created by using a Toast object to display a
+                       message.
+                    */
+                    if (successfulInsertion) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
 
                         /* After a 2000 ms delay, return to the list of flashcards */
-                            new Handler().postDelayed(new Runnable() {
+                        new Handler().postDelayed(new Runnable() {
                                 @Override
-                                public void run() {
-                                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }, 2000);
-                        } else {
-                            Toast toast = Toast.makeText(getApplicationContext(),
+                            public void run() {
+                                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 2000);
+                    } else {
+                        Toast toast = Toast.makeText(getApplicationContext(),
                                         "Error creating flashcard", Toast.LENGTH_SHORT);
-                            //TODO: need a better way of calling toast (instead of creating an object everytime).
-                            toast.show();
-                        }
-
+                        toast.show();
                     }
-                });
+
+                }
+            });
     }
 }

@@ -38,19 +38,20 @@ public class CreateTest extends AppCompatActivity {
         trueFalse = (CheckBox)findViewById(R.id.trueFalseCB);
         checkAll = (CheckBox)findViewById(R.id.checkAllCB);
         random = (CheckBox)findViewById(R.id.randomCB);
-
     }
 
     private void createTestObject() {
         createQuestion.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
-                        boolean successfulCreation;
-                        if (random.isChecked()) {
-                            successfulCreation = mvc.createTest(nameField.getText().toString(), true, false, false, false, false);
-                        } else {
-                            successfulCreation = mvc.createTest(nameField.getText().toString(), false, shortAnswer.isChecked(),
-                                    multipleChoice.isChecked(), trueFalse.isChecked(), checkAll.isChecked());
+            new View.OnClickListener() {
+                public void onClick(View view) {
+                    boolean successfulCreation;
+                    if (random.isChecked()) {
+                        successfulCreation = mvc.createTest(nameField.getText().toString(),
+                                true, false, false, false, false);
+                    } else {
+                        successfulCreation = mvc.createTest(nameField.getText().toString(), false,
+                                shortAnswer.isChecked(), multipleChoice.isChecked(),
+                                trueFalse.isChecked(), checkAll.isChecked());
                         }
 
                         nameField.setText("");
@@ -59,24 +60,24 @@ public class CreateTest extends AppCompatActivity {
                         if (successfulCreation) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Test created",
                                     Toast.LENGTH_SHORT);
-                            //TODO: need a better way of calling toast (instead of creating an object everytime).
                             toast.show();
-                        }
+
 
                         /* After a 2000ms delay, return to the list of tests */
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(getApplicationContext(),ListTest.class);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                Intent intent = new Intent(getApplicationContext(), ListTest.class);
                                 startActivity(intent);
                                 finish();
-                            }
-                        }, 2000);
-
+                                }
+                            }, 2000);
+                        } else {
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "Failed to create test", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
                 });
-
     }
-
-
 }

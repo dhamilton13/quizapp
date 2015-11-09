@@ -91,15 +91,11 @@ public class ListTest extends AppCompatActivity {
             String propName = cards.get(i).getName();
             i++;
             myRecyclerViewAdapter.add(
-                    myRecyclerViewAdapter.getItemCount(),
-                    propName,
-                    System.getProperty(propName));
+                myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
         }
     }
 
-    /* Passes control to the CreateTest class when the user selects create test. Also passes the
-        ModelViewController object */
-
+    /** Passes control to the CreateTest class when the user selects create test. */
     private void goToTest(){
         Intent intent = new Intent(this, CreateTest.class);
         startActivity(intent);

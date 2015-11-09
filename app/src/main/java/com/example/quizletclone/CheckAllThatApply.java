@@ -20,7 +20,6 @@ public class CheckAllThatApply extends AppCompatActivity {
     private Spinner spinner;
     public static final String CATEGORY = "Check All That Apply";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,7 @@ public class CheckAllThatApply extends AppCompatActivity {
         createFlashcardObject();
     }
 
-    /* The below methods save flashcard data whenever the activity is paused, or terminated */
+    /* The below methods operate whenever the activity is paused, or terminated */
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -85,36 +84,35 @@ public class CheckAllThatApply extends AppCompatActivity {
     */
     private void createFlashcardObject() {
         createQuestion.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
-                        String answer = "";
+            new View.OnClickListener() {
+                public void onClick(View view) {
+                    String answer = "";
 
-                        if (checkBoxA.isChecked()) {
-                            answer += "A. " + fieldA + " ";
-                        }
-
-                        if (checkBoxB.isChecked()) {
-                            answer += "B. " + fieldB + " ";
-                        }
-                        if (checkBoxC.isChecked()) {
-                            answer += "C. " + fieldC + " ";
-                        }
-                        if (checkBoxD.isChecked()) {
-                            answer += "D. " + fieldD + " ";
-                        }
-                        if (checkBoxE.isChecked()) {
-                            answer += "E. " + fieldE + " ";
-                        }
+                    if (checkBoxA.isChecked()) {
+                        answer += "A. " + fieldA + " ";
+                    }
+                    if (checkBoxB.isChecked()) {
+                        answer += "B. " + fieldB + " ";
+                    }
+                    if (checkBoxC.isChecked()) {
+                        answer += "C. " + fieldC + " ";
+                    }
+                    if (checkBoxD.isChecked()) {
+                        answer += "D. " + fieldD + " ";
+                    }
+                    if (checkBoxE.isChecked()) {
+                        answer += "E. " + fieldE + " ";
+                    }
 
                         //The flashcard creation
-                        boolean successfulCreation = mvc.createFlashcard(
-                                questionField.getText().toString() + " "
-                                        + fieldA.getText().toString() + " "
-                                        + fieldB.getText().toString() + " "
-                                        + fieldC.getText().toString() + " "
-                                        + fieldD.getText().toString() + " "
-                                        + fieldE.getText().toString(), answer, CATEGORY,
-                                spinner.getSelectedItem().toString());
+                    boolean successfulCreation = mvc.createFlashcard(
+                        questionField.getText().toString() + " "
+                            + fieldA.getText().toString() + " "
+                            + fieldB.getText().toString() + " "
+                            + fieldC.getText().toString() + " "
+                            + fieldD.getText().toString() + " "
+                            + fieldE.getText().toString(), answer, CATEGORY,
+                            spinner.getSelectedItem().toString());
 
                         questionField.setText("");
                         fieldA.setText("");
@@ -146,9 +144,7 @@ public class CheckAllThatApply extends AppCompatActivity {
                                     Toast.LENGTH_SHORT);
                             toast.show();
                         }
-                        //TODO: need a better way of calling toast (instead of creating an object everytime)
                     }
                 });
-
     }
 }

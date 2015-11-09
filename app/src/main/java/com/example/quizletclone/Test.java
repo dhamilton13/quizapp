@@ -32,7 +32,7 @@ public class Test {
         setOfFlashcards = new ArrayList<Flashcard>();
 
         if (isTestDynamic) {
-            //do something
+            //do something, this will be implemented later
         } else {
             for (int i = 0; i < fcs.size(); ++i) {
                 String category = fcs.get(i).getCategory();
@@ -52,9 +52,10 @@ public class Test {
 
     public String getName() { return this.name; }
 
+    public ArrayList<Flashcard> getSetOfFlashcards(){ return this.setOfFlashcards; }
+
     public void setFlashcards(ArrayList<Flashcard> fcs) {
         setOfFlashcards = fcs;
-
     }
 
 }

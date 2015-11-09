@@ -87,68 +87,70 @@ public class MultipleChoice extends AppCompatActivity {
     */
     private void createFlashcardObject() {
         createQuestion.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View view) {
-                        boolean successfulCreation;
-                        if (answerFieldA.isChecked()) {
+            new View.OnClickListener() {
+                public void onClick(View view) {
+                    boolean successfulCreation;
+                    if (answerFieldA.isChecked()) {
                             //TODO: Find a better way of creating these cards
-                            successfulCreation = mvc.createFlashcard(questionField.getText()
-                                           .toString() + " A. "
-                                            + fieldA.getText().toString() + " B. "
-                                            + fieldB.getText().toString() + " C. "
-                                            + fieldC.getText().toString() + " D. "
-                                            + fieldD.getText().toString() + " E. "
-                                            + fieldE.getText().toString(),
-                                    fieldA.getText().toString(), CATEGORY,
-                                    spinner.getSelectedItem().toString());
+                        successfulCreation = mvc.createFlashcard(questionField.getText().toString()
+                                        + " A. " + fieldA.getText().toString() + " B. "
+                                        + fieldB.getText().toString() + " C. "
+                                        + fieldC.getText().toString() + " D. "
+                                        + fieldD.getText().toString() + " E. "
+                                        + fieldE.getText().toString(), fieldA.getText().toString(),
+                                        CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldA.setChecked(false);
                         } else if (answerFieldB.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. "
-                                            + fieldA.getText().toString() + " B. "
-                                            + fieldB.getText().toString() + " C. "
-                                            + fieldC.getText().toString() + " D. "
-                                            + fieldD.getText().toString() + " E. "
-                                            + fieldE.getText().toString(),
-                                    fieldB.getText().toString(), CATEGORY,
-                                    spinner.getSelectedItem().toString());
+                                        toString() + " A. " + fieldA.getText().toString() + " B. "
+                                        + fieldB.getText().toString() + " C. "
+                                        + fieldC.getText().toString() + " D. "
+                                        + fieldD.getText().toString() + " E. "
+                                        + fieldE.getText().toString(), fieldB.getText().toString(),
+                                        CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldB.setChecked(false);
                         } else if (answerFieldC.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. "
-                                            + fieldA.getText().toString() + " B. "
-                                            + fieldB.getText().toString() + " C. "
-                                            + fieldC.getText().toString() + " D. "
-                                            + fieldD.getText().toString() + " E. "
-                                            + fieldE.getText().toString(),
-                                    fieldC.getText().toString(), CATEGORY,
-                                    spinner.getSelectedItem().toString());
+                                        toString() + " A. " + fieldA.getText().toString() + " B. "
+                                        + fieldB.getText().toString() + " C. "
+                                        + fieldC.getText().toString() + " D. "
+                                        + fieldD.getText().toString() + " E. "
+                                        + fieldE.getText().toString(), fieldC.getText().toString(),
+                                        CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldC.setChecked(false);
-                        } else {
+                        } else if (answerFieldD.isChecked()){
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. "
-                                            + fieldA.getText().toString() + " B. "
-                                            + fieldB.getText().toString() + " C. "
-                                            + fieldC.getText().toString() + " D. "
-                                            + fieldD.getText().toString() + " E. "
-                                            + fieldE.getText().toString(),
-                                    fieldD.getText().toString(), CATEGORY,
-                                    spinner.getSelectedItem().toString());
+                                        toString() + " A. " + fieldA.getText().toString() + " B. "
+                                        + fieldB.getText().toString() + " C. "
+                                        + fieldC.getText().toString() + " D. "
+                                        + fieldD.getText().toString() + " E. "
+                                        + fieldE.getText().toString(), fieldD.getText().toString(),
+                                    CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldD.setChecked(false);
+                        } else {
+                        successfulCreation = mvc.createFlashcard(questionField.getText().
+                                        toString() + " A. " + fieldA.getText().toString() + " B. "
+                                        + fieldB.getText().toString() + " C. "
+                                        + fieldC.getText().toString() + " D. "
+                                        + fieldD.getText().toString() + " E. "
+                                        + fieldE.getText().toString(), fieldE.getText().toString(),
+                                CATEGORY, spinner.getSelectedItem().toString());
+                            answerFieldE.setChecked(false);
                         }
                         questionField.setText("");
                         fieldA.setText("");
                         fieldB.setText("");
                         fieldC.setText("");
                         fieldD.setText("");
+                        fieldE.setText("");
 
                         /* Acknowledge the card was created by using a Toast object to display a
                             message.
                         */
 
-                        if (successfulCreation) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created", Toast.LENGTH_SHORT);
-                            //TODO: need a better way of calling toast (instead of creating an object everytime).
+                    if (successfulCreation) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created", Toast.LENGTH_SHORT);
+                        //TODO: need a better way of calling toast (instead of creating an object everytime).
                             toast.show();
 
                         /* After a 2000 ms delay, return to the list of flashcards */
@@ -165,7 +167,6 @@ public class MultipleChoice extends AppCompatActivity {
                             //TODO: need a better way of calling toast (instead of creating an object everytime).
                             toast.show();
                         }
-
                     }
                 });
     }

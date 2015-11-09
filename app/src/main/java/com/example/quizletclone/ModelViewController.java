@@ -6,12 +6,9 @@ import java.lang.reflect.Type;
 
 import android.database.Cursor;
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-
 
 public class ModelViewController {
 	private ArrayList<Flashcard> setOfFlashcards;
@@ -31,20 +28,20 @@ public class ModelViewController {
 		return mvc;
 	}
 
-
 	/** Create a flashcard and store into SQLite database */
 	public boolean createFlashcard(String question, String answer, String tag, String category) {
 		setOfFlashcards.add(new Flashcard(question, answer, tag, category));
 		return database.insertFlashcardData(question, answer, tag, category);
 	}
 
-	/** Create a new Test object and add it to the Test ArrayList */
+	/** Create a new Test object and store into SQLite database */
 	public boolean createTest(String nameOfTest, boolean isDynamic, boolean isShortAnswer,
 						   boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll) {
 		Test test = new Test(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice, isTrueFalse, isCheckAll);
 		ArrayList<Flashcard> fcs = test.generateQuestions(setOfFlashcards);
 		setOfTests.add(test);
 
+		/* Create a gson object to hold the set of flashcards for each test */
 		Gson gson = new Gson();
 		String flashcards = gson.toJson(fcs);
 
@@ -62,12 +59,11 @@ public class ModelViewController {
 		while(res.moveToNext()) {
 			setOfFlashcards.add(new Flashcard(res.getString(0), res.getString(1), res.getString(2),
 											res.getString(3)));
-
 		}
-
 		fcsAreLoaded = true;
 	}
 
+    /** Loads the Test data from SQLite database. */
 	public void loadTests(Context context) {
 		Cursor res = database.getTestData();
 
@@ -76,23 +72,16 @@ public class ModelViewController {
 
 		while(res.moveToNext()) {
 			Gson gson = new Gson();
-
-			Type type = new TypeToken<ArrayList<Flashcard>>() {
-			}.getType();
+			Type type = new TypeToken<ArrayList<Flashcard>>() {}.getType();
 			ArrayList<Flashcard> cards = gson.fromJson(res.getString(6), type);
-
-			Log.v("ARRAYLIST SIZE", String.valueOf(cards.size()));
 
 			Test test = new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
 					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0);
 			test.setFlashcards(cards);
 			setOfTests.add(test);
 		}
-
 		testsAreLoaded = true;
 	}
-
-
 
 	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {

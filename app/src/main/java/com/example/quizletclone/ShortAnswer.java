@@ -30,7 +30,6 @@ public class ShortAnswer extends ActionBarActivity {
 		setTitle("Short answer");
 		initializeGUIComponents();
 		createFlashcardObject();
-
 	}
 
 
@@ -93,43 +92,39 @@ public class ShortAnswer extends ActionBarActivity {
  		Question button */
 	private void createFlashcardObject() {
 		createQuestion.setOnClickListener(
-				new View.OnClickListener() {
-					public void onClick(View view) {
-						//The flashcard creation
-						boolean successfulCreation = mvc.createFlashcard(questionField.getText()
-										.toString(),
-								answerField.getText().toString(), CATEGORY,
-								spinner.getSelectedItem().toString());
-						questionField.setText("");
-						answerField.setText("");
+		    new View.OnClickListener() {
+			    public void onClick(View view) {
+				    //The flashcard creation
+				    boolean successfulCreation = mvc.createFlashcard(questionField.getText()
+										.toString(), answerField.getText().toString(), CATEGORY,
+										spinner.getSelectedItem().toString());
+					questionField.setText("");
+					answerField.setText("");
 
 					/* Acknowledge the card was created by using a Toast object to display a
                             message.
                         */
-						if (successfulCreation ) {
-							Toast toast = Toast.makeText(getApplicationContext(),
-										"Flashcard created", Toast.LENGTH_SHORT);
-							//TODO: need a better way of calling toast (instead of creating an object everytime).
+					if (successfulCreation ) {
+						Toast toast = Toast.makeText(getApplicationContext(), "Flashcard created",
+								Toast.LENGTH_SHORT);
 							toast.show();
 
 					/* After a 2000 ms delay, return to the list of flashcards */
-							new Handler().postDelayed(new Runnable() {
+					new Handler().postDelayed(new Runnable() {
 								@Override
 								public void run() {
-									Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-									startActivity(intent);
-									finish();
-								}
-							}, 2000);
-						} else {
-							Toast toast = Toast.makeText(getApplicationContext(),
-										"Error creating flashcard", Toast.LENGTH_SHORT);
-							//TODO: need a better way of calling toast (instead of creating an object everytime).
-							toast.show();
+                        Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+						startActivity(intent);
+						finish();
 						}
-
+							}, 2000);
+					} else {
+						Toast toast = Toast.makeText(getApplicationContext(),
+                                "Error creating flashcard", Toast.LENGTH_SHORT);
+						toast.show();
 					}
-				});
-	}
 
+				}
+			});
+	}
 }
