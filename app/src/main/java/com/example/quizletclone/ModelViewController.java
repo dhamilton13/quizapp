@@ -5,13 +5,13 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 
 public class ModelViewController {
-	//private List<Room> rooms;
 	private ArrayList<Flashcard> setOfFlashcards;
 	private ArrayList<Test> setOfTests;
 	static ApplicationDatabase database;
@@ -29,12 +29,6 @@ public class ModelViewController {
 		return mvc;
 	}
 
-
-
-	public void createRoom() {
-		/* bypass for now, directly create flashcard instead
-		see createFlashcard(); */
-	}
 
 	/** Create a flashcard and store into SQLite database */
 	public boolean createFlashcard(String question, String answer, String tag, String category) {
@@ -59,12 +53,7 @@ public class ModelViewController {
 
 		String flashcards = json.toString();
 		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
-				isTrueFalse, isCheckAll);
-	}
-
-	// Ignore for now, for testing purposes
-	public void deleteFlashcard(int position) {
-		setOfFlashcards.remove(position);
+				isTrueFalse, isCheckAll, flashcards);
 	}
 
 	/** Loads the flashcard data from SQLite database. */
@@ -77,6 +66,7 @@ public class ModelViewController {
 		while(res.moveToNext()) {
 			setOfFlashcards.add(new Flashcard(res.getString(0), res.getString(1), res.getString(2),
 											res.getString(3)));
+
 		}
 
 		fcsAreLoaded = true;
@@ -89,8 +79,27 @@ public class ModelViewController {
 			setOfTests.clear();
 
 		while(res.moveToNext()) {
-			setOfTests.add(new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
-					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0));
+
+			JSONObject obj;
+			JSONArray jArray;
+			ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
+			try {
+				obj = new JSONObject(res.getString(6));
+				jArray = obj.optJSONArray("flashcardsForTest");
+
+				for (int i = 0; i < jArray.length(); ++i) {
+					cards.add((Flashcard) jArray.get(i));
+				}
+			} catch (org.json.JSONException exception) {
+				exception.printStackTrace();
+			}
+
+			Log.i("TEST NAME", res.getString(0));
+
+			Test test = new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
+					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0);
+			test.setFlashcards(cards);
+			setOfTests.add(test);
 		}
 
 		testsAreLoaded = true;

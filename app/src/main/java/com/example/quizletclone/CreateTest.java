@@ -45,20 +45,23 @@ public class CreateTest extends AppCompatActivity {
         createQuestion.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
+                        boolean successfulCreation;
                         if (random.isChecked()) {
-                            mvc.createTest(nameField.getText().toString(), true, false, false, false, false);
+                            successfulCreation = mvc.createTest(nameField.getText().toString(), true, false, false, false, false);
                         } else {
-                            mvc.createTest(nameField.getText().toString(), false, shortAnswer.isChecked(),
+                            successfulCreation = mvc.createTest(nameField.getText().toString(), false, shortAnswer.isChecked(),
                                     multipleChoice.isChecked(), trueFalse.isChecked(), checkAll.isChecked());
                         }
 
                         nameField.setText("");
 
                         /* Acknowledge the test was created by displaying a small message */
-                        Toast toast = Toast.makeText(getApplicationContext(), "Test created",
-                                Toast.LENGTH_SHORT);
-                        //TODO: need a better way of calling toast (instead of creating an object everytime).
-                        toast.show();
+                        if (successfulCreation) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Test created",
+                                    Toast.LENGTH_SHORT);
+                            //TODO: need a better way of calling toast (instead of creating an object everytime).
+                            toast.show();
+                        }
 
                         /* After a 2000ms delay, return to the list of tests */
                         new Handler().postDelayed(new Runnable() {

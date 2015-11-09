@@ -27,6 +27,7 @@ public class ListTest extends AppCompatActivity {
 
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
+        mvc.loadTests(this);
 
         setTitle("View tests");
 
