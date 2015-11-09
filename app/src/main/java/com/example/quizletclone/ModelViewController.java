@@ -2,13 +2,15 @@ package com.example.quizletclone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.reflect.Type;
 
 import android.database.Cursor;
 import android.content.Context;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 
 
 public class ModelViewController {
@@ -43,15 +45,9 @@ public class ModelViewController {
 		ArrayList<Flashcard> fcs = test.generateQuestions(setOfFlashcards);
 		setOfTests.add(test);
 
-		JSONObject json = new JSONObject();
+		Gson gson = new Gson();
+		String flashcards = gson.toJson(fcs);
 
-		try{
-			json.put("flashcardsForTest", new JSONArray(fcs));
-		}catch(org.json.JSONException exception){
-			exception.printStackTrace();
-		}
-
-		String flashcards = json.toString();
 		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
 				isTrueFalse, isCheckAll, flashcards);
 	}
@@ -79,22 +75,13 @@ public class ModelViewController {
 			setOfTests.clear();
 
 		while(res.moveToNext()) {
+			Gson gson = new Gson();
 
-			JSONObject obj;
-			JSONArray jArray;
-			ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
-			try {
-				obj = new JSONObject(res.getString(6));
-				jArray = obj.optJSONArray("flashcardsForTest");
+			Type type = new TypeToken<ArrayList<Flashcard>>() {
+			}.getType();
+			ArrayList<Flashcard> cards = gson.fromJson(res.getString(6), type);
 
-				for (int i = 0; i < jArray.length(); ++i) {
-					cards.add((Flashcard) jArray.get(i));
-				}
-			} catch (org.json.JSONException exception) {
-				exception.printStackTrace();
-			}
-
-			Log.i("TEST NAME", res.getString(0));
+			Log.v("ARRAYLIST SIZE", String.valueOf(cards.size()));
 
 			Test test = new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
 					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0);

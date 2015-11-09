@@ -3,6 +3,8 @@ package com.example.quizletclone;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONObject;
+
 public class Flashcard {
 	private String question, answer, category, tag;
 	
@@ -18,9 +20,7 @@ public class Flashcard {
 		return this.question;
 	}
 	
-	public String getAnswer() {
-		return this.answer;
-	}
+	public String getAnswer() { return this.answer; }
 	
 	public String getCategory() { return this.category; }
 
