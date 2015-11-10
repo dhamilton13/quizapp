@@ -5,9 +5,11 @@ package com.example.quizletclone;
  */
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -86,7 +88,6 @@ public class MyRecyclerViewAdapter extends
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-
                     Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
                     intent.putExtra("POS", position);
                     v.getContext().startActivity(intent);
