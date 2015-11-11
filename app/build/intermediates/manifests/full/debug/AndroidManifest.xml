@@ -43,6 +43,10 @@
             android:name="com.example.quizletclone.FlashcardActivity"
             android:label="@string/title_activity_flashcard" >
         </activity>
+        <activity
+            android:name="com.example.quizletclone.TestListActivity"
+            android:label="@string/title_activity_test_flashcard" >
+        </activity>
         <activity android:name="com.example.quizletclone.MultipleChoice" >
         </activity>
         <activity android:name="com.example.quizletclone.TrueFalse" >

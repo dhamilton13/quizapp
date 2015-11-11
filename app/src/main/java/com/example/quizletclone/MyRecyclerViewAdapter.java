@@ -88,9 +88,8 @@ public class MyRecyclerViewAdapter extends
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
-                    intent.putExtra("POS", position);
-                    v.getContext().startActivity(intent);
+                    movePosition(position, v);
+
                 }
             });
         }
@@ -101,6 +100,21 @@ public class MyRecyclerViewAdapter extends
 
         public CharSequence getItemName(){
             return textItemName.getText();
+        }
+
+        /** Method moves the position of the cardview to the appropriate activity **/
+        public void movePosition(int position, View v) {
+            // See if the onclick is called in the ListActivity
+            if(v.getContext() instanceof ListActivity) {
+                Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+            } else if(v.getContext() instanceof ListTest){ //From Test Activity
+                System.out.println(position);
+                Intent intent = new Intent(v.getContext(), TestListActivity.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+            }
         }
     }
 }

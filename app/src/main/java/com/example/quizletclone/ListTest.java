@@ -85,7 +85,8 @@ public class ListTest extends AppCompatActivity {
     private void populateTests() {
         List<Test> cards = mvc.getTests();
 
-        // populates the questions to the recyclerview to be displayed on cardview
+
+        // populates the tests to the recyclerview to be displayed on cardview
         int i = 0;
         while(i < cards.size()){
             String propName = cards.get(i).getName();

@@ -252,6 +252,7 @@
     <string name="title_activity_create">CreateActivity</string>
     <string name="title_activity_flashcard">Flashcard</string>
     <string name="title_activity_list">List</string>
+    <string name="title_activity_test_flashcard">Test Flashcards</string>
     <!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>

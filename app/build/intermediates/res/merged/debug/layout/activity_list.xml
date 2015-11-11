@@ -12,9 +12,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"/>
 
-                <FrameLayout android:id="@+id/overlay_fragment_container"
-                             android:layout_width="match_parent"
-                             android:layout_height="match_parent"/>
 
 
 
@@ -27,6 +24,7 @@
                     android:layout_gravity="bottom|right"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    />
 
 </RelativeLayout><!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/src/main/res/layout/activity_list.xml -->

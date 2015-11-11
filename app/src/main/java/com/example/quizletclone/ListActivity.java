@@ -18,7 +18,6 @@ import android.widget.ImageButton;
 
 public class ListActivity extends AppCompatActivity {
 	private ModelViewController mvc;
-	private final int FC_HEIGHT = 600, FC_WIDTH = 1000;
 	private ImageButton FAB; //floating action button
     private RecyclerView myRecyclerView;
     LinearLayoutManager linearLayoutManager;
@@ -33,7 +32,7 @@ public class ListActivity extends AppCompatActivity {
         mvc = ModelViewController.getInstance(this);
         mvc.loadFlashcards(this);
 
-        setTitle("View flashcards");
+        setTitle("View Flashcards");
 
         // recycler view
         myRecyclerView = (RecyclerView)findViewById(R.id.myrecyclerview);
@@ -148,7 +147,6 @@ public class ListActivity extends AppCompatActivity {
 			questions.add(fc.get(i).getQuestion());
 		}
 		return questions;
-		
 	}
 
 
