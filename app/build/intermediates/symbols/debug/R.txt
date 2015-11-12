@@ -621,8 +621,8 @@ int layout activity_check_all_that_apply 0x7f030018
 int layout activity_create 0x7f030019
 int layout activity_create_test 0x7f03001a
 int layout activity_flashcard 0x7f03001b
-int layout activity_list 0x7f03001c
-int layout activity_list_test 0x7f03001d
+int layout activity_flashcard_list_for_tests 0x7f03001c
+int layout activity_list 0x7f03001d
 int layout activity_list_test_flashcards 0x7f03001e
 int layout activity_main 0x7f03001f
 int layout activity_multiple_choice 0x7f030020

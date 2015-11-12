@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:2:1-60:12
+ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:2:1-58:12
 	package
 		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml
@@ -42,7 +42,7 @@ ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifes
 	android:name
 		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:13:30-85
 application
-ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:15:5-58:19
+ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:15:5-56:19
 MERGED from [com.android.support:appcompat-v7:23.0.1] /Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.1] /Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.1] /Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
@@ -85,40 +85,38 @@ ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifes
 		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:36:13-56
 	android:name
 		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:35:13-41
-activity#com.example.quizletclone.ListTest
+activity#com.example.quizletclone.FlashcardActivity
 ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:38:9-41:20
 	android:label
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:40:13-37
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:40:13-61
 	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:39:13-37
-activity#com.example.quizletclone.FlashcardActivity
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:39:13-46
+activity#com.example.quizletclone.TestListActivity
 ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:42:9-45:20
 	android:label
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:44:13-61
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:44:13-66
 	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:43:13-46
-activity#com.example.quizletclone.TestListActivity
-ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:46:9-49:20
-	android:label
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:48:13-66
-	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:47:13-45
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:43:13-45
 activity#com.example.quizletclone.MultipleChoice
+ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:46:9-47:20
+	android:name
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:46:19-49
+activity#com.example.quizletclone.TrueFalse
+ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:48:9-49:20
+	android:name
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:48:19-44
+activity#com.example.quizletclone.CheckAllThatApply
 ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:50:9-51:20
 	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:50:19-49
-activity#com.example.quizletclone.TrueFalse
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:50:19-52
+activity#com.example.quizletclone.CreateTest
 ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:52:9-53:20
 	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:52:19-44
-activity#com.example.quizletclone.CheckAllThatApply
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:52:19-45
+activity#com.example.quizletclone.FlashcardListForTestsActivity
 ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:54:9-55:20
 	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:54:19-52
-activity#com.example.quizletclone.CreateTest
-ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:56:9-57:20
-	android:name
-		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:56:19-45
+		ADDED from /Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/AndroidManifest.xml:54:19-64
 activity#android.support.v7.widget.TestActivity
 ADDED from [com.android.support:recyclerview-v7:22.0.0] /Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:23:9-25:56
 	android:label

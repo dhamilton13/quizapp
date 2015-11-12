@@ -51,6 +51,8 @@
         </activity>
         <activity android:name=".CreateTest" >
         </activity>
+        <activity android:name=".FlashcardListForTestsActivity" >
+        </activity>
     </application>
 
 </manifest>

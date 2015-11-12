@@ -36,10 +36,6 @@
             android:label="@string/title_activity_list" >
         </activity>
         <activity
-            android:name="com.example.quizletclone.ListTest"
-            android:label="ListTest" >
-        </activity>
-        <activity
             android:name="com.example.quizletclone.FlashcardActivity"
             android:label="@string/title_activity_flashcard" >
         </activity>
@@ -54,6 +50,8 @@
         <activity android:name="com.example.quizletclone.CheckAllThatApply" >
         </activity>
         <activity android:name="com.example.quizletclone.CreateTest" >
+        </activity>
+        <activity android:name="com.example.quizletclone.FlashcardListForTestsActivity" >
         </activity>
         <activity
             android:name="android.support.v7.widget.TestActivity"

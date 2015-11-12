@@ -69,10 +69,7 @@ public class FlashcardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Transfers ownership to the ListActivity class when the
-     * user presses "View Flashcards".
-     */
+
     public void showAnswer(View v) {
         if(tapped == true) {
             testTextView.setText(mvc.getFlashcards().get(position).getAnswer());

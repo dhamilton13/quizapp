@@ -1862,8 +1862,8 @@ containing a value of this type.
         public static final int activity_create=0x7f030019;
         public static final int activity_create_test=0x7f03001a;
         public static final int activity_flashcard=0x7f03001b;
-        public static final int activity_list=0x7f03001c;
-        public static final int activity_list_test=0x7f03001d;
+        public static final int activity_flashcard_list_for_tests=0x7f03001c;
+        public static final int activity_list=0x7f03001d;
         public static final int activity_list_test_flashcards=0x7f03001e;
         public static final int activity_main=0x7f03001f;
         public static final int activity_multiple_choice=0x7f030020;
