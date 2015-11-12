@@ -47,10 +47,18 @@ public class ListActivity extends AppCompatActivity {
 		/* Construction of the floating action button which presents the user with various
 		    flashcard creation types.
 		 */
-		FAB = (ImageButton) findViewById(R.id.imageButton);
-		FAB.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+
+
+
+		setTitle("View flashcards");
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {FAB = (ImageButton) findViewById(R.id.imageButton);
+        FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Question Type");
@@ -79,16 +87,8 @@ public class ListActivity extends AppCompatActivity {
                             }
                         });
                 builder.create().show();
-			}
-		});
-
-
-		setTitle("View flashcards");
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+            }
+        });
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.list, menu);
 		return true;
@@ -99,6 +99,7 @@ public class ListActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
         return;
     }
 

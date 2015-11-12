@@ -47,6 +47,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, TestListActivity.class);
         startActivity(intent);
+        finish();
         return;
     }
 

@@ -22,6 +22,7 @@ import java.util.List;
 public class TestListActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private RecyclerView myRecyclerView;
+    private ImageButton fab; //floating action button
     LinearLayoutManager linearLayoutManager;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private int position;
@@ -51,6 +52,30 @@ public class TestListActivity extends AppCompatActivity {
         myRecyclerView.setLayoutManager(linearLayoutManager);
         populateTests(); // Populate the recyclerView with flashcard data
 
+        fab = (ImageButton) findViewById(R.id.imageButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Create test?");
+                // The flashcard creation options
+                builder.setItems(new CharSequence[]
+                                {"Create test"},
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                switch (which) {
+                                    case 0:
+                                     createTest();
+                                     break;
+                                }
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+
     }
 
     @Override
@@ -65,6 +90,7 @@ public class TestListActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
         return;
     }
 
@@ -113,5 +139,10 @@ public class TestListActivity extends AppCompatActivity {
             myRecyclerViewAdapter.add(
                     myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
         }
+    }
+
+    private void createTest() {
+        Intent intent = new Intent(this, CreateTest.class);
+        startActivity(intent);
     }
 }
