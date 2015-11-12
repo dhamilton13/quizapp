@@ -17,6 +17,8 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		setTitle("Quiz App"); //Can be modified to match APP name
 		mvc = ModelViewController.getInstance(this);
+		mvc.loadTests(this);
+		mvc.loadFlashcards(this);
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void goToCreateTest(View view) {
-		Intent intent = new Intent(this, ListTest.class);
+		Intent intent = new Intent(this, TestListActivity.class);
 		startActivity(intent);
 	}
 

@@ -2,11 +2,53 @@
 <items version="2" >
 
     <item
+        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-b4fc433ab37e9f4e9546840e950cd764ec103144.jar" />
+    </item>
+    <item
+        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-0b78f75b63b092254b2d88df926bd10d4e2e6edb.jar" />
+    </item>
+    <item
+        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c6d79137693d494dee16372d3921f919eb724ced">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-78ee75edecf83eee97971ec5a0d68b499021105a.jar" />
+    </item>
+    <item
+        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-21ee274ee00c8537d69480907fcd26dc097913b5.jar" />
+    </item>
+    <item
         jar="/Users/sunnysarow/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="/Users/sunnysarow/Desktop/Quiz App/app/build/intermediates/pre-dexed/debug/gson-2.2.4-bf77c6925ace0591d5228d43f62fc8be7166a275.jar" />
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/gson-2.2.4-bf77c6925ace0591d5228d43f62fc8be7166a275.jar" />
+    </item>
+    <item
+        jar="/Users/sunnysarow/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-ecbdea6c320649ab717f6d875cb955231f80c7c9.jar" />
+    </item>
+    <item
+        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-5fba89a2ce4cd992810edb1b32f38ef4d85bf3d8.jar" />
     </item>
 
 </items>

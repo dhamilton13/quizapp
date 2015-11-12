@@ -38,10 +38,9 @@ public class TestListActivity extends AppCompatActivity {
 
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
+
         // Retrieves Tests
         List<Test> cards = mvc.getTests();
-        // Retrieve Flashcards
-        ArrayList<Flashcard> testFlashcards = cards.get(position).getSetOfFlashcards();
 
         // recycler view
         myRecyclerView = (RecyclerView)findViewById(R.id.testrecyclerview);
@@ -50,7 +49,7 @@ public class TestListActivity extends AppCompatActivity {
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
-        populateCards(testFlashcards); // Populate the recyclerView with flashcard data
+        populateTests(); // Populate the recyclerView with flashcard data
 
     }
 
@@ -102,32 +101,14 @@ public class TestListActivity extends AppCompatActivity {
         //mvc.storeFlashcards(getApplicationContext());
     }
 
-    /**
-     * Build an ArrayList of flashcard questions from a  flashcard ArrayList.
-     * @param fc 	The flashcard ArrayList.
-     * @return 		An ArrayList of flashcard questions.
-     */
-    //TODO: Move to another class, violates SRP
-    private List<String> buildFlashcardsToStrings(List<Flashcard> fc) {
-        List<String> questions = new ArrayList<String>();
-        for (int i = 0; i < fc.size(); ++i) {
-            questions.add(fc.get(i).getQuestion());
-        }
-        return questions;
-    }
+    private void populateTests() {
+        List<Test> cards = mvc.getTests();
 
 
-    /* Populate the RecyclerView with flashcard questions */
-    private void populateCards(ArrayList<Flashcard> testFlashcards){
-        //Retrieve flashcard questions and convert to Strings
-        List<String> cards = buildFlashcardsToStrings(testFlashcards);
-//        List<String> cards = Arrays.asList("sup1", "sup2", "sup3");
-        //TODO: Currently, the test's is empty. Can't view flashcards
-
-        // populates the questions to the recyclerview to be displayed on cardview
+        // populates the tests to the recyclerview to be displayed on cardview
         int i = 0;
         while(i < cards.size()){
-            String propName = cards.get(i);
+            String propName = cards.get(i).getName();
             i++;
             myRecyclerViewAdapter.add(
                     myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
