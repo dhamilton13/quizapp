@@ -62,7 +62,6 @@ public class TagActivity extends AppCompatActivity {
 
         populateCards(tag_type);
     }
-
     /* If 'back' is pressed on the device, return home. */
     @Override
     public void onBackPressed() {
@@ -70,13 +69,6 @@ public class TagActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
         return;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.create, menu);
-        return true;
     }
 
     @Override
@@ -91,22 +83,27 @@ public class TagActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /* The below methods save flashcard data whenever the activity is paused, or terminated */
+    /* The next three methods save flashcard data whenever the current activity is paused or
+        terminated.
+     */
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
+        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
+        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
+        //mvc.storeFlashcards(getApplicationContext());
     }
+
 
     private List<String> buildFlashcardsToStrings(List<Flashcard> fc, String str) {
         List<String> questions = new ArrayList<String>();

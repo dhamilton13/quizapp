@@ -48,8 +48,6 @@ public class ListActivity extends AppCompatActivity {
 		    flashcard creation types.
 		 */
 
-
-
 		setTitle("View flashcards");
 
 	}
