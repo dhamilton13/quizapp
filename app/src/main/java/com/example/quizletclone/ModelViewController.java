@@ -28,11 +28,13 @@ public class ModelViewController {
 		return mvc;
 	}
 
+	//TODO: Thi is a note, Kevin switch the position of category and tag in this function
 	/** Create a flashcard and store into SQLite database */
-	public boolean createFlashcard(String question, String answer, String tag, String category) {
-		setOfFlashcards.add(new Flashcard(question, answer, tag, category));
-		return database.insertFlashcardData(question, answer, tag, category);
+	public boolean createFlashcard(String question, String answer, String category, String tag) {
+		setOfFlashcards.add(new Flashcard(question, answer, category, tag));
+		return database.insertFlashcardData(question, answer, category, tag);
 	}
+
 
 	/** Create a new Test object and store into SQLite database */
 	public boolean createTest(String nameOfTest, boolean isDynamic, boolean isShortAnswer,

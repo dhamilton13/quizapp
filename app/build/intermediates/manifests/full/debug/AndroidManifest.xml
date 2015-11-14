@@ -54,8 +54,10 @@
         <activity android:name="com.example.quizletclone.FlashcardListForTestsActivity" >
         </activity>
         <activity
-            android:name="android.support.v7.widget.TestActivity"
-            android:label="RecyclerViewTestActivity" />
+            android:name="com.example.quizletclone.TagActivity"
+            android:label="@string/title_activity_tag"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
