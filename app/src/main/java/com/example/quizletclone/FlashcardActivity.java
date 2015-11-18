@@ -1,9 +1,7 @@
 package com.example.quizletclone;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.inputmethodservice.ExtractEditText;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -12,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import android.widget.LinearLayout;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ import java.util.ArrayList;
 public class FlashcardActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private int position, testPosition;
-    private boolean tapped, componentAdded = false;
+    private boolean tapped, componentAdded = false, basicLayoutExists = false;
     private String callingClass;
 
     // what is being displayed on flashcard
@@ -46,6 +43,7 @@ public class FlashcardActivity extends AppCompatActivity {
         // the position of the cardview clicked
         position = intent.getIntExtra("POS", 0);
         callingClass = intent.getStringExtra("callingClass");
+        layout = (LinearLayout) findViewById(R.id.layout);
 
 
         // set the question onto flashcard
@@ -58,7 +56,10 @@ public class FlashcardActivity extends AppCompatActivity {
         header.setTypeface(null, Typeface.BOLD); // make bold
         header.setText("QUESTION");
 
-        layout = (LinearLayout) findViewById(R.id.layout);
+        if (!callingClass.contains("FlashcardListForActivity"))
+            createBasicLayout(mvc.getFlashcards().get(position).getCategory());
+
+
 
         if (callingClass.contains("FlashcardListForTestsActivity")) {
             testPosition = intent.getIntExtra("TestPOS", 0);
@@ -87,7 +88,6 @@ public class FlashcardActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     private void createLayoutBasedOnCategory(String category) {
         if (category.equals(CheckAllThatApply.CATEGORY)) {
@@ -133,6 +133,57 @@ public class FlashcardActivity extends AppCompatActivity {
         }
     }
 
+    private void createBasicLayout(String category) {
+        if (category.equals(CheckAllThatApply.CATEGORY)) {
+            TextView t1 = new TextView(this);
+            TextView t2 = new TextView(this);
+            TextView t3 = new TextView(this);
+            TextView t4 = new TextView(this);
+            TextView t5 = new TextView(this);
+
+            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
+            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
+            t3.setText("C: " + mvc.getFlashcards().get(position).getListOfAnswers().get(2));
+            t4.setText("D: " + mvc.getFlashcards().get(position).getListOfAnswers().get(3));
+            t5.setText("E: " + mvc.getFlashcards().get(position).getListOfAnswers().get(4));
+
+            layout.addView(t1);
+            layout.addView(t2);
+            layout.addView(t3);
+            layout.addView(t4);
+            layout.addView(t5);
+
+        } else if (category.equals(MultipleChoice.CATEGORY)) {
+            TextView t1 = new TextView(this);
+            TextView t2 = new TextView(this);
+            TextView t3 = new TextView(this);
+            TextView t4 = new TextView(this);
+            TextView t5 = new TextView(this);
+
+            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
+            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
+            t3.setText("C: " + mvc.getFlashcards().get(position).getListOfAnswers().get(2));
+            t4.setText("D: " + mvc.getFlashcards().get(position).getListOfAnswers().get(3));
+            t5.setText("E: " + mvc.getFlashcards().get(position).getListOfAnswers().get(4));
+
+            layout.addView(t1);
+            layout.addView(t2);
+            layout.addView(t3);
+            layout.addView(t4);
+            layout.addView(t5);
+        } else if (category.equals(TrueFalse.CATEGORY)) {
+            TextView t1 = new TextView(this);
+            TextView t2 = new TextView(this);
+
+            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
+            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
+
+            layout.addView(t1);
+            layout.addView(t2);
+        } else {
+        }
+    }
+
     public void showAnswer(View v) {
         if(tapped == true && !callingClass.contains("FlashcardListForTestsActivity")) {
             testTextView.setText(mvc.getFlashcards().get(position).getAnswer());
@@ -142,6 +193,7 @@ public class FlashcardActivity extends AppCompatActivity {
             testTextView.setText(mvc.getFlashcards().get(position).getQuestion());
             header.setText("QUESTION");
             tapped = true;
+
         }
     }
 }
