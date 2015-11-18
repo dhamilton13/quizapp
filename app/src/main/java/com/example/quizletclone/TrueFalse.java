@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class TrueFalse extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
@@ -86,14 +88,17 @@ public class TrueFalse extends AppCompatActivity {
                 public void onClick(View view) {
                         //The flashcard creation
                     boolean successfulInsertion;
+                    ArrayList<String> listOfAnswers = new ArrayList<String>();
+                    listOfAnswers.add("True");
+                    listOfAnswers.add("False");
                     if (answerFieldT.isChecked()) {
                         successfulInsertion = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. True B. False","True", CATEGORY,
+                                            toString(),"True", listOfAnswers, CATEGORY,
                                             spinner.getSelectedItem().toString());
                         answerFieldF.setChecked(false);
                     } else {
                         successfulInsertion = mvc.createFlashcard(questionField.getText().
-                                            toString() + " A. True B. False ", "False", CATEGORY,
+                                            toString(), "False", listOfAnswers, CATEGORY,
                                             spinner.getSelectedItem().toString());
                         answerFieldF.setChecked(false);
                     }

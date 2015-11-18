@@ -23,6 +23,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String COL_2_T1 = "ANSWER";
     private static final String COL_3_T1 = "TAG";
     private static final String COL_4_T1 = "CATEGORY";
+    private static final String COL_5_T1 = "ANSWERLIST";
 
 
     public ApplicationDatabase(Context context) {
@@ -33,7 +34,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)  {
         db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, FLASHCARDS TEXT)");
-        db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT)");
+        db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT, ANSWERLIST TEXT)");
     }
 
     @Override
@@ -43,7 +44,8 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertFlashcardData(String flashcardQuestion, String flashcardAnswer, String flashcardTag,
+    public boolean insertFlashcardData(String flashcardQuestion, String flashcardAnswer, String answerList,
+                                       String flashcardTag,
                             String flashcardCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -51,6 +53,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         contentValues.put(COL_2_T1, flashcardAnswer);
         contentValues.put(COL_3_T1, flashcardTag);
         contentValues.put(COL_4_T1, flashcardCategory);
+        contentValues.put(COL_5_T1, answerList);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if(result == -1)

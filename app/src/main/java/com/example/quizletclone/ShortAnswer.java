@@ -13,6 +13,8 @@ import android.widget.Toast;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
+
 public class ShortAnswer extends ActionBarActivity {
 	private Button createQuestion;
 	private EditText questionField, answerField;
@@ -95,9 +97,11 @@ public class ShortAnswer extends ActionBarActivity {
 		    new View.OnClickListener() {
 			    public void onClick(View view) {
 				    //The flashcard creation
+					ArrayList<String> listOfAnswers = new ArrayList<String>();
+					listOfAnswers.add(answerField.getText().toString());
 				    boolean successfulCreation = mvc.createFlashcard(questionField.getText()
-										.toString(), answerField.getText().toString(), CATEGORY,
-										spinner.getSelectedItem().toString());
+										.toString(), answerField.getText().toString(), listOfAnswers,
+										CATEGORY, spinner.getSelectedItem().toString());
 					questionField.setText("");
 					answerField.setText("");
 

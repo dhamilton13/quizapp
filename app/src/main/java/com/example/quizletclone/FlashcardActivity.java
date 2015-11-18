@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.util.Log;
 
 /**
@@ -17,12 +20,14 @@ import android.util.Log;
 public class FlashcardActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private int position;
-    private boolean tapped;
+    private boolean tapped, componentAdded = false;
+    private String callingClass;
 
     // what is being displayed on flashcard
     private TextView testTextView;
     // header, either "QUESTION" or "ANSWER"
     private TextView header;
+    private LinearLayout layout;
 
 
     @Override
@@ -38,15 +43,22 @@ public class FlashcardActivity extends AppCompatActivity {
 
         // the position of the cardview clicked
         position = intent.getIntExtra("POS", 0);
+        callingClass = intent.getStringExtra("callingClass");
 
         // set the question onto flashcard
         testTextView = (TextView) findViewById(R.id.testTextView);
         testTextView.setText(mvc.getFlashcards().get(position).getQuestion());
         testTextView.setMovementMethod(new ScrollingMovementMethod()); // make scrollable
+
         // set the header onto flashcard
         header = (TextView) findViewById(R.id.header);
         header.setTypeface(null, Typeface.BOLD); // make bold
         header.setText("QUESTION");
+
+        layout = (LinearLayout) findViewById(R.id.layout);
+
+        if (callingClass.contains("FlashcardListForTestsActivity"))
+           addGuiElementsForTest();
     }
 
 
@@ -69,9 +81,15 @@ public class FlashcardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void addGuiElementsForTest() {
+        Button button = new Button(this);
+        button.setText("Test");
+        layout.addView(button);
+    }
 
     public void showAnswer(View v) {
-        if(tapped == true) {
+        Log.v("Calling Class", callingClass);
+        if(tapped == true && !callingClass.contains("FlashcardListForTestsActivity")) {
             testTextView.setText(mvc.getFlashcards().get(position).getAnswer());
             header.setText("ANSWER");
             tapped = false;

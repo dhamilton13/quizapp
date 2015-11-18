@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MultipleChoice extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
@@ -90,50 +92,37 @@ public class MultipleChoice extends AppCompatActivity {
             new View.OnClickListener() {
                 public void onClick(View view) {
                     boolean successfulCreation;
+                    ArrayList<String> listOfAnswers = new ArrayList<String>();
+                    listOfAnswers.add(fieldA.getText().toString());
+                    listOfAnswers.add(fieldB.getText().toString());
+                    listOfAnswers.add(fieldC.getText().toString());
+                    listOfAnswers.add(fieldD.getText().toString());
+                    listOfAnswers.add(fieldE.getText().toString());
+
                     if (answerFieldA.isChecked()) {
                             //TODO: Find a better way of creating these cards
-                        successfulCreation = mvc.createFlashcard(questionField.getText().toString()
-                                        + " A. " + fieldA.getText().toString() + " B. "
-                                        + fieldB.getText().toString() + " C. "
-                                        + fieldC.getText().toString() + " D. "
-                                        + fieldD.getText().toString() + " E. "
-                                        + fieldE.getText().toString(), fieldA.getText().toString(),
+                        successfulCreation = mvc.createFlashcard(questionField.getText().toString(),
+                                fieldA.getText().toString(), listOfAnswers,
                                         CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldA.setChecked(false);
                         } else if (answerFieldB.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                        toString() + " A. " + fieldA.getText().toString() + " B. "
-                                        + fieldB.getText().toString() + " C. "
-                                        + fieldC.getText().toString() + " D. "
-                                        + fieldD.getText().toString() + " E. "
-                                        + fieldE.getText().toString(), fieldB.getText().toString(),
+                                        toString(), fieldB.getText().toString(), listOfAnswers,
                                         CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldB.setChecked(false);
                         } else if (answerFieldC.isChecked()) {
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                        toString() + " A. " + fieldA.getText().toString() + " B. "
-                                        + fieldB.getText().toString() + " C. "
-                                        + fieldC.getText().toString() + " D. "
-                                        + fieldD.getText().toString() + " E. "
-                                        + fieldE.getText().toString(), fieldC.getText().toString(),
+                                        toString(), fieldC.getText().toString(), listOfAnswers,
                                         CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldC.setChecked(false);
                         } else if (answerFieldD.isChecked()){
                             successfulCreation = mvc.createFlashcard(questionField.getText().
-                                        toString() + " A. " + fieldA.getText().toString() + " B. "
-                                        + fieldB.getText().toString() + " C. "
-                                        + fieldC.getText().toString() + " D. "
-                                        + fieldD.getText().toString() + " E. "
-                                        + fieldE.getText().toString(), fieldD.getText().toString(),
+                                        toString(), fieldD.getText().toString(), listOfAnswers,
                                     CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldD.setChecked(false);
                         } else {
                         successfulCreation = mvc.createFlashcard(questionField.getText().
-                                        toString() + " A. " + fieldA.getText().toString() + " B. "
-                                        + fieldB.getText().toString() + " C. "
-                                        + fieldC.getText().toString() + " D. "
-                                        + fieldD.getText().toString() + " E. "
-                                        + fieldE.getText().toString(), fieldE.getText().toString(),
+                                        toString(), fieldE.getText().toString(), listOfAnswers,
                                 CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldE.setChecked(false);
                         }

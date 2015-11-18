@@ -15,6 +15,7 @@
 
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -39,4 +40,4 @@
 
 </android.support.v7.widget.CardView>
 
-<!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/layout/activity_flashcard.xml -->
+<!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/layout/activity_flashcard.xml -->

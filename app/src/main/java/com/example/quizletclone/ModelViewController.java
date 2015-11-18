@@ -30,9 +30,14 @@ public class ModelViewController {
 
 	//TODO: Thi is a note, Kevin switch the position of category and tag in this function
 	/** Create a flashcard and store into SQLite database */
-	public boolean createFlashcard(String question, String answer, String category, String tag) {
-		setOfFlashcards.add(new Flashcard(question, answer, category, tag));
-		return database.insertFlashcardData(question, answer, category, tag);
+	public boolean createFlashcard(String question, String answer, ArrayList<String> listOfAnswers,
+								   String category, String tag) {
+		Flashcard fc = new Flashcard(question, answer, listOfAnswers, category, tag);
+		setOfFlashcards.add(fc);
+
+		Gson gson = new Gson();
+		String answerList = gson.toJson(fc.getListOfAnswers());
+		return database.insertFlashcardData(question, answer, answerList, category, tag);
 	}
 
 
@@ -59,7 +64,12 @@ public class ModelViewController {
 			setOfFlashcards.clear();
 
 		while(res.moveToNext()) {
-			setOfFlashcards.add(new Flashcard(res.getString(0), res.getString(1), res.getString(2),
+			//add arraylist parameter
+			Gson gson = new Gson();
+			Type type = new TypeToken<ArrayList<String>>() {}.getType();
+			ArrayList<String> answerList = gson.fromJson(res.getString(4), type);
+
+			setOfFlashcards.add(new Flashcard(res.getString(0), res.getString(1), answerList, res.getString(2),
 											res.getString(3)));
 		}
 		fcsAreLoaded = true;

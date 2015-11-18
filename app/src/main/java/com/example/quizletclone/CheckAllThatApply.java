@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class CheckAllThatApply extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
@@ -86,32 +88,34 @@ public class CheckAllThatApply extends AppCompatActivity {
         createQuestion.setOnClickListener(
             new View.OnClickListener() {
                 public void onClick(View view) {
+                    ArrayList<String> listOfAnswers = new ArrayList<String>();
+                    listOfAnswers.add(fieldA.getText().toString());
+                    listOfAnswers.add(fieldB.getText().toString());
+                    listOfAnswers.add(fieldC.getText().toString());
+                    listOfAnswers.add(fieldD.getText().toString());
+                    listOfAnswers.add(fieldE.getText().toString());
+
                     String answer = "";
 
                     if (checkBoxA.isChecked()) {
-                        answer += "A. " + fieldA + " ";
+                        answer += "A. " + fieldA.getText().toString() + " ";
                     }
                     if (checkBoxB.isChecked()) {
-                        answer += "B. " + fieldB + " ";
+                        answer += "B. " + fieldB.getText().toString() + " ";
                     }
                     if (checkBoxC.isChecked()) {
-                        answer += "C. " + fieldC + " ";
+                        answer += "C. " + fieldC.getText().toString() + " ";
                     }
                     if (checkBoxD.isChecked()) {
-                        answer += "D. " + fieldD + " ";
+                        answer += "D. " + fieldD.getText().toString() + " ";
                     }
                     if (checkBoxE.isChecked()) {
-                        answer += "E. " + fieldE + " ";
+                        answer += "E. " + fieldE.getText().toString() + " ";
                     }
 
                         //The flashcard creation
                     boolean successfulCreation = mvc.createFlashcard(
-                        questionField.getText().toString() + " "
-                            + fieldA.getText().toString() + " "
-                            + fieldB.getText().toString() + " "
-                            + fieldC.getText().toString() + " "
-                            + fieldD.getText().toString() + " "
-                            + fieldE.getText().toString(), answer, CATEGORY,
+                        questionField.getText().toString(), answer, listOfAnswers, CATEGORY,
                             spinner.getSelectedItem().toString());
 
                         questionField.setText("");
