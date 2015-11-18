@@ -12,7 +12,10 @@ public class Flashcard {
 		this.question = question;
 		this.answer = answer;
 		this.category = category;
-        this.tag = tag;
+		if(tag == null)
+        	this.tag = "All";		//prevent empty tag
+		else
+			this.tag = tag;
 	}
 
     /* Getters for retrieving flashcard data */

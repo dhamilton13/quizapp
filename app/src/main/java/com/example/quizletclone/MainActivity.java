@@ -2,6 +2,7 @@ package com.example.quizletclone;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 
 import android.content.Intent;
@@ -26,16 +27,18 @@ public class MainActivity extends ActionBarActivity {
 		mvc = ModelViewController.getInstance(this);
 		mvc.loadTests(this);
 		mvc.loadFlashcards(this);
+		mvc.loadTag(this);
 	}
 
-	/*
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	*/
+
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		FAB = (Button) findViewById(R.id.viewFlashcardByTag);
@@ -81,6 +84,7 @@ public class MainActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.list, menu);
 		return true;
 	}
+	*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -133,8 +137,13 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 
-	
+	/**
+	 * Go to Tag List when user press "Create Tag" button
+	 */
+	public void createTag(View view) {
+		Intent intent = new Intent(this, CreateTag.class);
+		startActivity(intent);
+	}
 
-	
 	
 }

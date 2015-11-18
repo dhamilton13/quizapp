@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class CheckAllThatApply extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
@@ -73,8 +75,10 @@ public class CheckAllThatApply extends AppCompatActivity {
          */
         spinner = (Spinner)findViewById(R.id.spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories, android.R.layout.simple_spinner_item);
+        //make spinner consist of the available tag
+        List<String> spinnerItem = mvc.getTags();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

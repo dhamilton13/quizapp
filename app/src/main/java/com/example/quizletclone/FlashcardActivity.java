@@ -23,6 +23,7 @@ public class FlashcardActivity extends AppCompatActivity {
     private TextView testTextView;
     // header, either "QUESTION" or "ANSWER"
     private TextView header;
+    private Flashcard card;
 
 
     @Override
@@ -39,9 +40,20 @@ public class FlashcardActivity extends AppCompatActivity {
         // the position of the cardview clicked
         position = intent.getIntExtra("POS", 0);
 
+
         // set the question onto flashcard
         testTextView = (TextView) findViewById(R.id.testTextView);
-        testTextView.setText(mvc.getFlashcards().get(position).getQuestion());
+
+        if(!mvc.isTag)
+            card = mvc.getFlashcards().get(position);       //get all cards from database
+        else
+            card = mvc.sortedCard.get(position);            //only get the card sorted by tag
+
+            testTextView.setText(card.getQuestion());
+
+        mvc.isTag = false;      //toggle the bool back for other activity
+
+
         testTextView.setMovementMethod(new ScrollingMovementMethod()); // make scrollable
         // set the header onto flashcard
         header = (TextView) findViewById(R.id.header);
@@ -72,11 +84,11 @@ public class FlashcardActivity extends AppCompatActivity {
 
     public void showAnswer(View v) {
         if(tapped == true) {
-            testTextView.setText(mvc.getFlashcards().get(position).getAnswer());
+            testTextView.setText(card.getAnswer());
             header.setText("ANSWER");
             tapped = false;
         } else {
-            testTextView.setText(mvc.getFlashcards().get(position).getQuestion());
+            testTextView.setText(card.getQuestion());
             header.setText("QUESTION");
             tapped = true;
         }

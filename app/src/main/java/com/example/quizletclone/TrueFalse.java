@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class TrueFalse extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
@@ -30,6 +32,7 @@ public class TrueFalse extends AppCompatActivity {
 
         /* Retrieve the ModelViewController instance */
         mvc = ModelViewController.getInstance(this);
+        mvc.loadTag(this);
 
         setTitle("True or false");
         initializeGUIComponents();
@@ -70,9 +73,9 @@ public class TrueFalse extends AppCompatActivity {
             for the spinner.
          */
         spinner = (Spinner)findViewById(R.id.spinner);
+        List<String> spinnerItem = mvc.getTags();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

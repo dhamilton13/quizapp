@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:2:1-63:12
+ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:2:1-67:12
 	package
 		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml
@@ -48,7 +48,7 @@ ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main
 	android:name
 		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:13:30-85
 application
-ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:15:5-61:19
+ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:15:5-65:19
 MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.1.0] /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
@@ -135,3 +135,11 @@ ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main
 		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:59:13-56
 	android:name
 		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:57:13-40
+activity#com.example.quizletclone.CreateTag
+ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:61:9-62:20
+	android:name
+		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:61:19-44
+activity#com.example.quizletclone.FlashcardlistForTag
+ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:63:9-64:20
+	android:name
+		ADDED from /Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/AndroidManifest.xml:63:19-54

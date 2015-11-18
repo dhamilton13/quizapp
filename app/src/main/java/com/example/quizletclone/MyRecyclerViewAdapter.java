@@ -101,14 +101,23 @@ public class MyRecyclerViewAdapter extends
         /** Method moves the position of the cardview to the appropriate activity **/
         public void movePosition(int position, View v) {
             ModelViewController mvc = ModelViewController.getInstance(v.getContext());
-            // See if the onclick is called in the ListActivity
-            if(v.getContext() instanceof ListActivity || v.getContext() instanceof FlashcardListForTestsActivity || v.getContext() instanceof TagActivity) {
+            // See if the onclick is called in the ListActivity TODO: Kevin: delete TagActivity later
+            if(v.getContext() instanceof ListActivity || v.getContext() instanceof FlashcardListForTestsActivity){
                 Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
                 intent.putExtra("POS", position);
                 v.getContext().startActivity(intent);
             } else if(v.getContext() instanceof TestListActivity){ //From Test Activity
                 //System.out.println(position);
                 Intent intent = new Intent(v.getContext(), FlashcardListForTestsActivity.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+            } else if(v.getContext() instanceof  CreateTag){
+                Intent intent = new Intent(v.getContext(), FlashcardlistForTag.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+            } else if(v.getContext() instanceof FlashcardlistForTag){
+                mvc.isTag = true;
+                Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
                 intent.putExtra("POS", position);
                 v.getContext().startActivity(intent);
             }
