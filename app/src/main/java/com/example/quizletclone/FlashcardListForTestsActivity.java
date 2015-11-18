@@ -1,10 +1,16 @@
 package com.example.quizletclone;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageButton;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +19,10 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private RecyclerView myRecyclerView;
     LinearLayoutManager linearLayoutManager;
+    private ImageButton fab;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private int position;
+    public static int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +31,8 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         mvc = ModelViewController.getInstance(this);
 
         Intent intent = getIntent();
-        position = intent.getIntExtra("POS", 0);
+        position = intent.getIntExtra("TestPOS", 0);
+        index = intent.getIntExtra("TestPOS", 0);
 
         ArrayList<Flashcard> cards = mvc.getTests().get(position).getSetOfFlashcards();
         ArrayList<String> cardNames = buildFlashcardsToStrings(cards);
@@ -40,6 +49,35 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {fab = (ImageButton) findViewById(R.id.imageButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // alert dialog asking the user what kind of question they want to click
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Grade Test?");
+                // The flashcard creation options
+                builder.setItems(new CharSequence[]
+                                {"Yes", "No"},
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                switch (which) {
+                                    case 0:
+                                    break;
+                                }
+                            }
+                        });
+                builder.create().show();
+            }
+        });
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.list, menu);
+        return true;
     }
 
     /* If 'back' is pressed on the device, return home. */

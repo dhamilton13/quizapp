@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,15 +103,21 @@ public class MyRecyclerViewAdapter extends
         public void movePosition(int position, View v) {
             ModelViewController mvc = ModelViewController.getInstance(v.getContext());
             // See if the onclick is called in the ListActivity
-            if(v.getContext() instanceof ListActivity || v.getContext() instanceof FlashcardListForTestsActivity || v.getContext() instanceof TagActivity) {
+            if(v.getContext() instanceof ListActivity || v.getContext() instanceof FlashcardListForTestsActivity) {
                 Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+
+                if (v.getContext() instanceof FlashcardListForTestsActivity) {
+                    intent.putExtra("TestPOS", FlashcardListForTestsActivity.index);
+                    Log.v("TEST INDEX", String.valueOf(FlashcardListForTestsActivity.index));
+                }
+
                 intent.putExtra("POS", position);
                 intent.putExtra("callingClass", v.getContext().toString());
                 v.getContext().startActivity(intent);
             } else if(v.getContext() instanceof TestListActivity){ //From Test Activity
                 //System.out.println(position);
                 Intent intent = new Intent(v.getContext(), FlashcardListForTestsActivity.class);
-                intent.putExtra("POS", position);
+                intent.putExtra("TestPOS", position);
                 v.getContext().startActivity(intent);
             }
         }

@@ -3,7 +3,7 @@
                                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                     android:id="@+id/flashCardView"
                                     android:layout_width="match_parent"
-                                    android:layout_height="300dp"
+                                    android:layout_height="400dp"
                                     android:layout_margin="5dp"
                                     android:onClick="showAnswer"
                                     card_view:cardCornerRadius="1sp"
