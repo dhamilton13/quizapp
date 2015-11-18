@@ -17,5 +17,6 @@
         <item>Miscellaneous</item>
     </string-array>
     <string name="title_activity_tag">TagActivity</string>
+    <string name="title_activity_create_tag">CreateTag</string>
 
 </resources>

@@ -58,6 +58,10 @@
             android:label="@string/title_activity_tag"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".CreateTag" >
+        </activity>
+        <activity android:name=".FlashcardlistForTag" >
+        </activity>
     </application>
 
 </manifest>

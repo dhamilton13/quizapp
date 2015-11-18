@@ -12,6 +12,8 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "QuizMe.db";
     private static final String TABLE_NAME = "flashcard_table";
     private static final String TABLE_2_NAME = "test_table";
+    private static final String TABLE_3_NAME = "tag_table";
+    private static final String COL_1_T3 = "TAG";
     private static final String COL_1_T2 = "NAME";
     private static final String COL_2_T2 = "DYNAMIC";
     private static final String COL_3_T2 = "SA";
@@ -26,6 +28,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String COL_5_T1 = "ANSWERLIST";
 
 
+
     public ApplicationDatabase(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -33,6 +36,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db)  {
+        db.execSQL("create table " + TABLE_3_NAME + "(TAG TEXT)");
         db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, FLASHCARDS TEXT)");
         db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT, ANSWERLIST TEXT)");
     }
@@ -41,6 +45,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(TABLE_NAME);
         db.execSQL(TABLE_2_NAME);
+        db.execSQL(TABLE_3_NAME);
         onCreate(db);
     }
 
@@ -80,6 +85,18 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertTagData(String tag) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1_T3, tag);
+
+        long result = db.insert(TABLE_3_NAME, null, contentValues);
+
+        if(result == -1)
+            return false;
+        return true;
+    }
+
     public Cursor getFlashcardData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
@@ -91,4 +108,13 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from " + TABLE_2_NAME, null);
         return res;
     }
+
+    public Cursor getTagData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_3_NAME, null);
+        return res;
+    }
+
+
+
 }

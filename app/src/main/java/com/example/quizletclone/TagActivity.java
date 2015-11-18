@@ -1,3 +1,5 @@
+//TODO: !!!!This file is no longer in use, Kevin use the CreateTag and FlashcardlistForTag to implement tag feathure instead
+
 package com.example.quizletclone;
 
 import android.content.Intent;

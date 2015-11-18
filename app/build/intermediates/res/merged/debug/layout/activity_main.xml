@@ -33,7 +33,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Tag"
+        android:text="Create Tag"
         android:id="@+id/viewFlashcardByTag"
         android:layout_below="@+id/button"
         android:layout_marginTop="35dp"
@@ -41,7 +41,7 @@
         android:layout_alignEnd="@+id/button"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
-        android:onClick="goToTagList"/>
+        android:onClick="createTag"/>
 
 
 </RelativeLayout><!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/layout/activity_main.xml -->

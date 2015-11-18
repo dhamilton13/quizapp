@@ -345,6 +345,7 @@
     <!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_create">CreateActivity</string>
+    <string name="title_activity_create_tag">CreateTag</string>
     <string name="title_activity_flashcard">Flashcard</string>
     <string name="title_activity_list">List</string>
     <string name="title_activity_tag">TagActivity</string>

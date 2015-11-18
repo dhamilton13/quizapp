@@ -13,14 +13,25 @@ import com.google.gson.reflect.TypeToken;
 public class ModelViewController {
 	private ArrayList<Flashcard> setOfFlashcards;
 	private ArrayList<Test> setOfTests;
+	private ArrayList<String> setOfTag;
 	static ApplicationDatabase database;
 	private static ModelViewController mvc = new ModelViewController();
-	private boolean fcsAreLoaded = false, testsAreLoaded = false;
+	private boolean fcsAreLoaded = false, testsAreLoaded = false, tagAreLoaded = false;
+
+	//when you click a card in a list, the recyclerView only record and pass the position on itself
+	//we want to call a postion on a sorted list of card instead of all the card from database
+	//to store a list of card that sorted by the tag
+	public ArrayList<Flashcard> sortedCard;
+	//notify the FlashcardActivity whether it should adopt a sortedCard or all the card from database
+	public boolean isTag;
 
 
 	private ModelViewController() {
 		setOfFlashcards = new ArrayList<Flashcard>();
 		setOfTests = new ArrayList<Test>();
+		setOfTag = new ArrayList<String>();
+		sortedCard = new ArrayList<Flashcard>();
+		isTag = false;
 	}
 
 	public static ModelViewController getInstance(Context context) {
@@ -54,6 +65,15 @@ public class ModelViewController {
 
 		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
 				isTrueFalse, isCheckAll, flashcards);
+	}
+
+	/** Create a new Test object and store into SQLite database */
+	public boolean createTag(String nameOfTag) {
+
+		boolean success = database.insertTagData(nameOfTag);
+		if(success)
+			setOfTag.add(nameOfTag);
+		return success;
 	}
 
 	/** Loads the flashcard data from SQLite database. */
@@ -95,12 +115,27 @@ public class ModelViewController {
 		testsAreLoaded = true;
 	}
 
+	/** Loads the Tag data from SQLite database. */
+	public void loadTag(Context context) {
+		Cursor res = database.getTagData();
+
+		if(tagAreLoaded)
+			setOfTag.clear();
+
+		while(res.moveToNext()) {
+			setOfTag.add(res.getString(0));
+		}
+		tagAreLoaded = true;
+	}
+
 	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {
 		return this.setOfFlashcards;
 	}
 
 	public List<Test> getTests() { return this.setOfTests; }
+
+	public List<String> getTags() { return this.setOfTag; }
 
 
 }

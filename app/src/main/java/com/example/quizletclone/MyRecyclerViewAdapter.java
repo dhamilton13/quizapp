@@ -119,6 +119,15 @@ public class MyRecyclerViewAdapter extends
                 Intent intent = new Intent(v.getContext(), FlashcardListForTestsActivity.class);
                 intent.putExtra("TestPOS", position);
                 v.getContext().startActivity(intent);
+            } else if(v.getContext() instanceof  CreateTag){
+                Intent intent = new Intent(v.getContext(), FlashcardlistForTag.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+            } else if(v.getContext() instanceof FlashcardlistForTag){
+                mvc.isTag = true;
+                Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+                intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
             }
         }
     }

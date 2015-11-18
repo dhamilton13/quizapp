@@ -11,8 +11,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class MultipleChoice extends AppCompatActivity {
     private ModelViewController mvc;
@@ -77,8 +77,10 @@ public class MultipleChoice extends AppCompatActivity {
          */
         spinner = (Spinner)findViewById(R.id.spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories, android.R.layout.simple_spinner_item);
+        //make spinner consist of the available tag
+        List<String> spinnerItem = mvc.getTags();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
