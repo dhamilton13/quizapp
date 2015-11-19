@@ -125,8 +125,20 @@ public class MyRecyclerViewAdapter extends
                 v.getContext().startActivity(intent);
             } else if(v.getContext() instanceof FlashcardlistForTag){
                 mvc.isTag = true;
+                /*
                 Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
                 intent.putExtra("POS", position);
+                v.getContext().startActivity(intent);
+                */
+                Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+
+                if (v.getContext() instanceof FlashcardListForTestsActivity) {
+                    intent.putExtra("TestPOS", FlashcardListForTestsActivity.index);
+                    Log.v("TEST INDEX", String.valueOf(FlashcardListForTestsActivity.index));
+                }
+
+                intent.putExtra("POS", position);
+                intent.putExtra("callingClass", v.getContext().toString());
                 v.getContext().startActivity(intent);
             }
         }

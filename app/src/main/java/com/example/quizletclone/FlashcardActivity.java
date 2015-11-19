@@ -46,8 +46,6 @@ public class FlashcardActivity extends AppCompatActivity {
         callingClass = intent.getStringExtra("callingClass");
         layout = (LinearLayout) findViewById(R.id.layout);
 
-
-
         // set the question onto flashcard
         testTextView = (TextView) findViewById(R.id.testTextView);
 
@@ -58,7 +56,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
             testTextView.setText(card.getQuestion());
 
-        mvc.isTag = false;      //toggle the bool back for other activity
+       //toggle the bool back for tag activity
 
 
         testTextView.setMovementMethod(new ScrollingMovementMethod()); // make scrollable
@@ -68,18 +66,24 @@ public class FlashcardActivity extends AppCompatActivity {
         header.setTypeface(null, Typeface.BOLD); // make bold
         header.setText("QUESTION");
 
-        if (!callingClass.contains("FlashcardListForActivity"))
-            createBasicLayout(mvc.getFlashcards().get(position).getCategory());
+        //mvc.isTag decide whether this flashCard activity is open from a test list or normal
+        //list (i.e. flash card list or tag list,
+        if (!mvc.isTag) {
+            if (!callingClass.contains("FlashcardListForActivity"))
+                createBasicLayout(mvc.getFlashcards().get(position).getCategory());
 
 
+            if (callingClass.contains("FlashcardListForTestsActivity")) {
+                testPosition = intent.getIntExtra("TestPOS", 0);
+                testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
+                String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
-        if (callingClass.contains("FlashcardListForTestsActivity")) {
-            testPosition = intent.getIntExtra("TestPOS", 0);
-            testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
-            String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
-
-            createLayoutBasedOnCategory(category);
+                createLayoutBasedOnCategory(category);
+            }
         }
+        else
+            mvc.isTag = false;      //toggle the bool back for other activity
+
     }
 
     @Override
