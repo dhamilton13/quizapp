@@ -53,11 +53,6 @@
         </activity>
         <activity android:name="com.example.quizletclone.FlashcardListForTestsActivity" >
         </activity>
-        <activity
-            android:name="com.example.quizletclone.TagActivity"
-            android:label="@string/title_activity_tag"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
         <activity android:name="com.example.quizletclone.CreateTag" >
         </activity>
         <activity android:name="com.example.quizletclone.FlashcardlistForTag" >

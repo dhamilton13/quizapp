@@ -54,9 +54,8 @@ public class FlashcardActivity extends AppCompatActivity {
         else
             card = mvc.sortedCard.get(position);            //only get the card sorted by tag
 
-            testTextView.setText(card.getQuestion());
 
-       //toggle the bool back for tag activity
+        testTextView.setText(card.getQuestion());
 
 
         testTextView.setMovementMethod(new ScrollingMovementMethod()); // make scrollable
@@ -69,7 +68,7 @@ public class FlashcardActivity extends AppCompatActivity {
         //mvc.isTag decide whether this flashCard activity is open from a test list or normal
         //list (i.e. flash card list or tag list,
         if (!mvc.isTag) {
-            if (!callingClass.contains("FlashcardListForActivity"))
+            if (!callingClass.contains("FlashcardListForTestActivity"))
                 createBasicLayout(mvc.getFlashcards().get(position).getCategory());
 
 
@@ -81,8 +80,10 @@ public class FlashcardActivity extends AppCompatActivity {
                 createLayoutBasedOnCategory(category);
             }
         }
-        else
+        else {
+            createBasicLayout(card.getCategory());
             mvc.isTag = false;      //toggle the bool back for other activity
+        }
 
     }
 
@@ -157,11 +158,11 @@ public class FlashcardActivity extends AppCompatActivity {
             TextView t4 = new TextView(this);
             TextView t5 = new TextView(this);
 
-            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
-            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
-            t3.setText("C: " + mvc.getFlashcards().get(position).getListOfAnswers().get(2));
-            t4.setText("D: " + mvc.getFlashcards().get(position).getListOfAnswers().get(3));
-            t5.setText("E: " + mvc.getFlashcards().get(position).getListOfAnswers().get(4));
+            t1.setText("A: " + card.getListOfAnswers().get(0));
+            t2.setText("B: " + card.getListOfAnswers().get(1));
+            t3.setText("C: " + card.getListOfAnswers().get(2));
+            t4.setText("D: " + card.getListOfAnswers().get(3));
+            t5.setText("E: " + card.getListOfAnswers().get(4));
 
             layout.addView(t1);
             layout.addView(t2);
@@ -176,11 +177,11 @@ public class FlashcardActivity extends AppCompatActivity {
             TextView t4 = new TextView(this);
             TextView t5 = new TextView(this);
 
-            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
-            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
-            t3.setText("C: " + mvc.getFlashcards().get(position).getListOfAnswers().get(2));
-            t4.setText("D: " + mvc.getFlashcards().get(position).getListOfAnswers().get(3));
-            t5.setText("E: " + mvc.getFlashcards().get(position).getListOfAnswers().get(4));
+            t1.setText("A: " + card.getListOfAnswers().get(0));
+            t2.setText("B: " + card.getListOfAnswers().get(1));
+            t3.setText("C: " + card.getListOfAnswers().get(2));
+            t4.setText("D: " + card.getListOfAnswers().get(3));
+            t5.setText("E: " + card.getListOfAnswers().get(4));
 
             layout.addView(t1);
             layout.addView(t2);
@@ -191,8 +192,8 @@ public class FlashcardActivity extends AppCompatActivity {
             TextView t1 = new TextView(this);
             TextView t2 = new TextView(this);
 
-            t1.setText("A: " + mvc.getFlashcards().get(position).getListOfAnswers().get(0));
-            t2.setText("B: " + mvc.getFlashcards().get(position).getListOfAnswers().get(1));
+            t1.setText("A: " + card.getListOfAnswers().get(0));
+            t2.setText("B: " + card.getListOfAnswers().get(1));
 
             layout.addView(t1);
             layout.addView(t2);

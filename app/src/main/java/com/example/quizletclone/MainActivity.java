@@ -128,16 +128,6 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Go to Tag List when user press "View Tag" button
-	 */
-	public void goToTagList(String str) {
-		Intent intent = new Intent(this, TagActivity.class);
-		intent.putExtra(TAG, str);
-		startActivity(intent);
-	}
-
-
-	/**
 	 * Go to Tag List when user press "Create Tag" button
 	 */
 	public void createTag(View view) {
