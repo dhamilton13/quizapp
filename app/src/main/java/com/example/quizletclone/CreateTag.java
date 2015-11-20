@@ -92,13 +92,13 @@ public class CreateTag extends AppCompatActivity {
                 input.setText("");
 
                 if (createSuccess) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Tag created",
+                    Toast toast = Toast.makeText(getApplicationContext(), "Tag Created",
                             Toast.LENGTH_SHORT);
                     toast.show();
 
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(),
-                            "Error creating flashcard", Toast.LENGTH_SHORT);
+                            "Tag Already Exists", Toast.LENGTH_SHORT);
                     toast.show();
                 }
 

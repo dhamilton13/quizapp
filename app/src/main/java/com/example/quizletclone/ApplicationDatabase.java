@@ -36,7 +36,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db)  {
-        db.execSQL("create table " + TABLE_3_NAME + "(TAG TEXT)");
+        db.execSQL("create table " + TABLE_3_NAME + "(TAG TEXT UNIQUE)");
         db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, FLASHCARDS TEXT)");
         db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT, ANSWERLIST TEXT)");
     }
