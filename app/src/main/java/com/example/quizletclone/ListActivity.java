@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView myRecyclerView;
     LinearLayoutManager linearLayoutManager;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private List<Flashcard> fc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class ListActivity extends AppCompatActivity {
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
         mvc.loadFlashcards(this);
+        mvc.loadTag(this);
+
+        //fc = mvc.getFlashcards();
 
         setTitle("View Flashcards");
 
@@ -41,15 +46,17 @@ public class ListActivity extends AppCompatActivity {
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
-        populateCards(); // Populate the recyclerView with flashcard data
 
 
-		/* Construction of the floating action button which presents the user with various
-		    flashcard creation types.
-		 */
+        if(!mvc.isSorted)
+            populateCards(); // Populate the recyclerView with all flashcard data
+        else
+        {
+            setTitle(mvc.sort_option);
+            populateCards(mvc.sort_option);    //populate the recyclerView with only the sorted card
+            //mvc.isSorted = false;  TODO: it will never go back to true!
 
-		setTitle("View flashcards");
-
+        }
 	}
 
 	@Override
@@ -88,17 +95,33 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.list, menu);
+
+        //menu = (Menu) findViewById(R.id.sort_menu);
+
+        //menu.add("option 1");
+
+		getMenuInflater().inflate(R.menu.list_activity, menu);
 		return true;
 	}
 
     /* If 'back' is pressed on the device, return home. */
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
-        return;
+
+        //press 'back' from a sorted list will go back to unsorted list
+        //press 'back' from an unsorted list will go back to MainActivity
+        if(!mvc.isSorted) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        else
+        {
+            mvc.isSorted = false;
+            finish();
+            startActivity(getIntent());
+        }
     }
 
 	@Override
@@ -106,8 +129,44 @@ public class ListActivity extends AppCompatActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+
+        /* reaction when you click the top right search button */
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_sort) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            int size = mvc.getTags().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getTags().get(i);
+
+            builder.setTitle("Sort Flash Card by Tags")
+                    .setItems(arr, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // The 'which' argument contains the index position
+                            // of the selected item
+                            mvc.sort_option = mvc.getTags().get(which);
+                            mvc.isSorted = true;
+
+                            //decide what tag content need to be show and refresh the current activity
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+
+
+
+            AlertDialog a = builder.create();
+            a.show();
+
+/* test if the sort_option is returned correctly
+
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+            builder2.setTitle(sort_option);
+            AlertDialog b = builder2.create();
+            b.show();
+*/
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -163,6 +222,38 @@ public class ListActivity extends AppCompatActivity {
                 myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
         }
     }
+
+    /*overload populateCards() and buildFlashCardToStrings(fc) to serve the sorting purpose */
+    private List<String> buildFlashcardsToStrings(List<Flashcard> fc, String str) {
+        List<String> questions = new ArrayList<String>();
+
+        mvc.sortedCard.clear();
+        for (int i = 0; i < fc.size(); i++) {
+            if(fc.get(i).getTag().equals(str)) {
+                questions.add(fc.get(i).getQuestion());
+                mvc.sortedCard.add(fc.get(i));          //record that card for recyclerView in next activity
+            }
+        }
+
+        return questions;
+    }
+
+    private void populateCards(String str){
+        //Retrieve flashcard questions and convert to Strings
+        List<String> cards = buildFlashcardsToStrings(mvc.getFlashcards(), str);
+
+        // populates the questions to the recyclerview to be displayed on cardview
+
+        int i = 0;
+        while(i < cards.size()){
+            String propName = cards.get(i);
+            i++;
+            myRecyclerViewAdapter.add(
+                    myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
+        }
+
+    }
+
 
     /* The following private methods are responsible for passing control to the respective
         activites that will create specific types of questions. Each method passes the

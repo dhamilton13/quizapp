@@ -1,0 +1,15 @@
+<!-- this xml specify the action bar menu in ListActivity -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.quizletclone.List" >
+
+
+    <item
+        android:id="@+id/action_sort"
+        android:orderInCategory="100"
+        android:title="sort"
+        android:icon="@drawable/search"
+        app:showAsAction="always"/>
+
+</menu>

@@ -25,6 +25,10 @@ public class ModelViewController {
 	//notify the FlashcardActivity whether it should adopt a sortedCard or all the card from database
 	public boolean isTag;
 
+	//these two is for viewing flash card by tag, I store them outside of activity so that a refresh won't change them
+	public boolean isSorted = false;
+	public String sort_option;
+
 
 	private ModelViewController() {
 		setOfFlashcards = new ArrayList<Flashcard>();

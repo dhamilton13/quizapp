@@ -5,6 +5,7 @@ package com.example.quizletclone;
         import android.os.Bundle;
         import android.support.v7.widget.LinearLayoutManager;
         import android.support.v7.widget.RecyclerView;
+        import android.view.Menu;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -52,6 +53,14 @@ public class FlashcardlistForTag extends AppCompatActivity {
         finish();
         return;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.tag, menu);
+        return true;
+    }
+
 
     private List<String> buildFlashcardsToStrings(List<Flashcard> fc, String str) {
         List<String> questions = new ArrayList<String>();
