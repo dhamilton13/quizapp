@@ -48,16 +48,21 @@ public class ListActivity extends AppCompatActivity {
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
 
-        if(!mvc.isSorted)
-            populateCards(); // Populate the recyclerView with all flashcard data
-        else
+        if(!mvc.sortByTag && !mvc.sortByCategory)        //while filtered by nothing
+            populateCards();                        // Populate the recyclerView with all flashcard data
+        else if(mvc.sortByTag && !mvc.sortByCategory)    //while filtered by tag
         {
-            setTitle(mvc.sort_option);
-            populateCards(mvc.sort_option);    //populate the recyclerView with only the sorted card
+            setTitle(mvc.tag_option);
+            populateCards(mvc.tag_option);    //populate the recyclerView with only the sorted card
             //mvc.isSorted = false;  TODO: it will never go back to true!
 
         }
-	}
+        else if(!mvc.sortByTag && mvc.sortByCategory)
+        {
+            setTitle(mvc.category_option);
+            populateCardsByCategory(mvc.getFlashcards(), mvc.category_option);
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {FAB = (ImageButton) findViewById(R.id.imageButton);
@@ -110,7 +115,7 @@ public class ListActivity extends AppCompatActivity {
 
         //press 'back' from a sorted list will go back to unsorted list
         //press 'back' from an unsorted list will go back to MainActivity
-        if(!mvc.isSorted) {
+        if(!mvc.sortByTag && !mvc.sortByCategory) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -118,7 +123,8 @@ public class ListActivity extends AppCompatActivity {
         }
         else
         {
-            mvc.isSorted = false;
+            mvc.sortByTag = false;
+            mvc.sortByCategory = false;
             finish();
             startActivity(getIntent());
         }
@@ -130,7 +136,7 @@ public class ListActivity extends AppCompatActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 
-        /* reaction when you click the top right search button */
+        /* reaction when you click the top right search button, it will sort the list by tag*/
 		int id = item.getItemId();
 		if (id == R.id.action_sort) {
 
@@ -146,8 +152,8 @@ public class ListActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             // The 'which' argument contains the index position
                             // of the selected item
-                            mvc.sort_option = mvc.getTags().get(which);
-                            mvc.isSorted = true;
+                            mvc.tag_option = mvc.getTags().get(which);
+                            mvc.sortByTag = true;
 
                             //decide what tag content need to be show and refresh the current activity
                             finish();
@@ -169,6 +175,57 @@ public class ListActivity extends AppCompatActivity {
 */
 			return true;
 		}
+        else if(id == R.id.action_category)     // the pencil button, which sort the list by category
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            int size = mvc.getTags().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getTags().get(i);
+
+            builder.setTitle("Sort Flash Card by Tags")
+                    .setItems(new CharSequence[]
+                                    {"Multiple Choice", "Short Answer", "True/False",
+                                            "Check All That Apply"},
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // The 'which' argument contains the index position
+                                    // of the selected item
+                                    switch (which) {
+                                        case 0:
+                                            mvc.category_option = "Multiple Choice";
+                                            mvc.sortByCategory = true;
+                                            finish();
+                                            startActivity(getIntent());
+                                            break;
+                                        case 1:
+                                            mvc.category_option = "Short Answer";
+                                            mvc.sortByCategory = true;
+                                            finish();
+                                            startActivity(getIntent());
+                                            break;
+                                        case 2:
+                                            mvc.category_option = "True Or False";
+                                            mvc.sortByCategory = true;
+                                            finish();
+                                            startActivity(getIntent());
+                                            break;
+                                        case 3:
+                                            mvc.category_option = "Check All That Apply";
+                                            mvc.sortByCategory = true;
+                                            finish();
+                                            startActivity(getIntent());
+                                            break;
+                                    }
+                                }
+                            });
+
+
+            AlertDialog a = builder.create();
+            a.show();
+            return true;
+        }
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -247,6 +304,28 @@ public class ListActivity extends AppCompatActivity {
         int i = 0;
         while(i < cards.size()){
             String propName = cards.get(i);
+            i++;
+            myRecyclerViewAdapter.add(
+                    myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
+        }
+
+    }
+
+    //populate a recyclerView by category
+    private void populateCardsByCategory(List<Flashcard> fc, String str)
+    {
+        List<String> questions = new ArrayList<>();
+        mvc.sortedCard.clear();
+        for (int i = 0; i < fc.size(); i++) {
+            if(fc.get(i).getCategory().equals(str)) {
+                questions.add(fc.get(i).getQuestion());
+                mvc.sortedCard.add(fc.get(i));          //record that card for recyclerView in next activity
+            }
+        }
+
+        int i = 0;
+        while(i < questions.size()){
+            String propName = questions.get(i);
             i++;
             myRecyclerViewAdapter.add(
                     myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));

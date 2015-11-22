@@ -71,7 +71,8 @@ public class MainActivity extends ActionBarActivity {
 	 * user presses "View Flashcards".
 	 */
 	public void goToViewFlashcards(View view) {
-		mvc.isSorted = false;
+		mvc.sortByTag = false;
+		mvc.sortByCategory = false;
 		Intent intent = new Intent(this, ListActivity.class);
 		intent.putExtra("isSorted", false);
 		startActivity(intent);

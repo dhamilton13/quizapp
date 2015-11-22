@@ -26,8 +26,12 @@ public class ModelViewController {
 	public boolean isTag;
 
 	//these two is for viewing flash card by tag, I store them outside of activity so that a refresh won't change them
-	public boolean isSorted = false;
-	public String sort_option;
+	public boolean sortByTag = false;
+	public String tag_option;
+
+	//these two variables is for viewing flash card by categories, same purpose to store them here as above
+	public boolean sortByCategory = false;
+	public String category_option;
 
 
 	private ModelViewController() {

@@ -103,7 +103,9 @@ public class MyRecyclerViewAdapter extends
         public void movePosition(int position, View v) {
             ModelViewController mvc = ModelViewController.getInstance(v.getContext());
             // See if the onclick is called in the ListActivity
-            if((v.getContext() instanceof ListActivity && !mvc.isSorted) || v.getContext() instanceof FlashcardListForTestsActivity) {
+            if((v.getContext() instanceof ListActivity && !mvc.sortByTag && !mvc.sortByCategory) ||
+                    v.getContext() instanceof FlashcardListForTestsActivity) {
+
                 Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
 
                 if (v.getContext() instanceof FlashcardListForTestsActivity) {
@@ -123,7 +125,9 @@ public class MyRecyclerViewAdapter extends
                 Intent intent = new Intent(v.getContext(), FlashcardlistForTag.class);
                 intent.putExtra("POS", position);
                 v.getContext().startActivity(intent);
-            } else if(v.getContext() instanceof FlashcardlistForTag || (v.getContext() instanceof  ListActivity && mvc.isSorted)){
+            } else if(v.getContext() instanceof FlashcardlistForTag ||
+                    (v.getContext() instanceof  ListActivity && (mvc.sortByTag || mvc.sortByCategory))){
+
                 mvc.isTag = true;
                 /*
                 Intent intent = new Intent(v.getContext(), FlashcardActivity.class);

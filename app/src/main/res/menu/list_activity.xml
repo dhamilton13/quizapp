@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.quizletclone.List" >
 
+    <item
+        android:id="@+id/action_category"
+        android:orderInCategory="100"
+        android:title="sort_by_category"
+        android:icon="@drawable/pencil"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_sort"

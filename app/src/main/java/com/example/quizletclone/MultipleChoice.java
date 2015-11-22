@@ -30,7 +30,7 @@ public class MultipleChoice extends AppCompatActivity {
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
 
-        setTitle("Multiple choice");
+        setTitle("Multiple Choice");
         initializeGUIComponents();
         createFlashcardObject();
     }
