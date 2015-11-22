@@ -33,6 +33,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         position = intent.getIntExtra("TestPOS", 0);
         index = intent.getIntExtra("TestPOS", 0);
+        mvc.prepareGrader(mvc.getTests().get(index));
 
         ArrayList<Flashcard> cards = mvc.getTests().get(position).getSetOfFlashcards();
         ArrayList<String> cardNames = buildFlashcardsToStrings(cards);
@@ -58,17 +59,21 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Grade Test?");
+                builder.setTitle("Test options");
                 // The flashcard creation options
                 builder.setItems(new CharSequence[]
-                                {"Yes", "No"},
+                                {"Grade Test", "Clear Test"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
                                 // of the selected item
                                 switch (which) {
                                     case 0:
-                                    break;
+                                        gradeTest();
+                                        break;
+                                    case 1:
+                                        clearTest();
+                                        break;
                                 }
                             }
                         });
@@ -83,6 +88,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
     /* If 'back' is pressed on the device, return home. */
     @Override
     public void onBackPressed() {
+        mvc.clearGrader();
         Intent intent = new Intent(this, TestListActivity.class);
         startActivity(intent);
         finish();
@@ -107,6 +113,15 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
             questions.add(fc.get(i).getQuestion());
         }
         return questions;
+    }
+
+    private void gradeTest() {
+        TestGrader.gradeTest();
+    }
+
+    private void clearTest() {
+        mvc.clearGrader();
+        mvc.prepareGrader(mvc.getTests().get(index));
     }
 
 

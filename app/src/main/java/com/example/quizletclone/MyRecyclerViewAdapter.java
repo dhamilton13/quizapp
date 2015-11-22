@@ -29,6 +29,7 @@ public class MyRecyclerViewAdapter extends
     private LayoutInflater layoutInflater;
     private Context context;
     private ModelViewController mvc;
+    public static boolean areCardsLocked = false;
 
     public MyRecyclerViewAdapter(Context context){
         this.context = context;
@@ -110,7 +111,6 @@ public class MyRecyclerViewAdapter extends
 
                 if (v.getContext() instanceof FlashcardListForTestsActivity) {
                     intent.putExtra("TestPOS", FlashcardListForTestsActivity.index);
-                    Log.v("TEST INDEX", String.valueOf(FlashcardListForTestsActivity.index));
                 }
 
                 intent.putExtra("POS", position);

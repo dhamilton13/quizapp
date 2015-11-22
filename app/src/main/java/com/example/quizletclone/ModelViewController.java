@@ -136,6 +136,21 @@ public class ModelViewController {
 		tagAreLoaded = true;
 	}
 
+	public void prepareGrader(Test test) {
+		TestGrader.setTestSize(test.getSetOfFlashcards().size());
+		for (int i = 0; i < test.getSetOfFlashcards().size(); i++) {
+			TestGrader.addCorrectAnswer(test.getSetOfFlashcards().get(i).getAnswer(), i);
+		}
+	}
+
+	public void addUserAnswerToGrader(String answer, int index) {
+		TestGrader.addUserAnswer(answer, index);
+	}
+
+	public void clearGrader() {
+		TestGrader.clearGrader();
+	}
+
 	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {
 		return this.setOfFlashcards;

@@ -1,10 +1,12 @@
 package com.example.quizletclone;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,11 +21,16 @@ import java.util.ArrayList;
 public class FlashcardActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private int position, testPosition;
-    private boolean tapped, componentAdded = false, basicLayoutExists = false;
-    private String callingClass, userAnswer;
+    private boolean tapped, isFlashcardGraded = false, isTestGraded = false;
+    private String callingClass;
     private TextView testTextView, header;
     private LinearLayout layout;
     private Flashcard card;
+    private ArrayList<CheckBox> checkBoxes;
+    private ArrayList<TextView> checkAllTextView, mpTextView, tfTextView;
+    private ArrayList<RadioButton> mpRadioButtons, tfRadioButtons;
+    private EditText saTextField;
+    private Button saveAnswerButton;
 
 
     @Override
@@ -72,11 +79,23 @@ public class FlashcardActivity extends AppCompatActivity {
                 testTextView.setText(card.getQuestion());
                 createBasicFlashcardLayout(mvc.getFlashcards().get(position).getCategory());
             } else if (callingClass.contains("FlashcardListForTestsActivity")) {
+                isTestGraded = TestGrader.isTestGraded();
+                if (TestGrader.getUserAnswers()[position] != null)
+                    isFlashcardGraded = true;
+
                 testPosition = intent.getIntExtra("TestPOS", 0);
                 testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
                 String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
+                saveAnswerButton = new Button(this);
+                saveAnswerButton.setText("Save Answer");
+                layout.addView(saveAnswerButton);
+
                 createTestFlashcardLayout(category);
+                getUserAnswer(category);
+
+                if (isFlashcardGraded || isTestGraded)
+                    createGradedTestFlashcardLayout(category);
             }
         }
         else {
@@ -105,47 +124,51 @@ public class FlashcardActivity extends AppCompatActivity {
     }
 
     /* Create a test flashcard layout depending on category type */
-    private void createTestFlashcardLayout(String category) {
+    private void createTestFlashcardLayout(final String category) {
+        /*
+         * mp = multiple choice
+         * tf = true false
+         * sa = short answer
+         */
         if (category.equals(CheckAllThatApply.CATEGORY)) {
-            ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
-            ArrayList<TextView> textView = new ArrayList<TextView>();
+            checkBoxes = new ArrayList<CheckBox>();
+            checkAllTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 5; ++i) {
                 checkBoxes.add(new CheckBox(this));
-                textView.add(new TextView(this));
-                textView.get(i).setText(mvc.getTests().get(testPosition).
+                checkAllTextView.add(new TextView(this));
+                checkAllTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
                 layout.addView(checkBoxes.get(i));
-                layout.addView(textView.get(i));
+                layout.addView(checkAllTextView.get(i));
             }
-
         } else if (category.equals(MultipleChoice.CATEGORY)) {
-            ArrayList<RadioButton> radioButtons = new ArrayList<RadioButton>();
-            ArrayList<TextView> textView = new ArrayList<TextView>();
+            mpRadioButtons = new ArrayList<RadioButton>();
+            mpTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 5; ++i) {
-                radioButtons.add(new RadioButton(this));
-                textView.add(new TextView(this));
-                textView.get(i).setText(mvc.getTests().get(testPosition).
+                mpRadioButtons.add(new RadioButton(this));
+                mpTextView.add(new TextView(this));
+                mpTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
-                layout.addView(radioButtons.get(i));
-                layout.addView(textView.get(i));
+                layout.addView(mpRadioButtons.get(i));
+                layout.addView(mpTextView.get(i));
             }
         } else if (category.equals(TrueFalse.CATEGORY)) {
-            ArrayList<RadioButton> radioButtons = new ArrayList<RadioButton>();
-            ArrayList<TextView> textView = new ArrayList<TextView>();
+            tfRadioButtons = new ArrayList<RadioButton>();
+            tfTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 2; ++i) {
-                radioButtons.add(new RadioButton(this));
-                textView.add(new TextView(this));
-                textView.get(i).setText(mvc.getTests().get(testPosition).
+                tfRadioButtons.add(new RadioButton(this));
+                tfTextView.add(new TextView(this));
+                tfTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
-                layout.addView(radioButtons.get(i));
-                layout.addView(textView.get(i));
+                layout.addView(tfRadioButtons.get(i));
+                layout.addView(tfTextView.get(i));
             }
         } else {
-            EditText textField = new EditText(this);
-            layout.addView(textField);
+            saTextField = new EditText(this);
+            layout.addView(saTextField);
         }
     }
 
@@ -200,6 +223,123 @@ public class FlashcardActivity extends AppCompatActivity {
         } else {
             //ignore for now
         }
+    }
+
+    private void createGradedTestFlashcardLayout(String category) {
+        String correctAnswer = TestGrader.getCorrectAnswers()[position];
+        String userAnswer = TestGrader.getUserAnswers()[position];
+        boolean isAnswerCorrect = (correctAnswer.equals(userAnswer));
+
+        if (category.equals(CheckAllThatApply.CATEGORY)) {
+            for (int i = 0; i < checkBoxes.size(); ++i) {
+                if (userAnswer.equals(checkAllTextView.get(i).getText().toString())) {
+                    checkBoxes.get(i).setChecked(true);
+                    if (isAnswerCorrect && isTestGraded) {
+                        checkAllTextView.get(i).setTextColor(Color.GREEN);
+                    } else if (!isAnswerCorrect && isTestGraded){
+                        checkAllTextView.get(i).setTextColor(Color.RED);
+                        for (int j = 0; j < checkBoxes.size(); ++j) {
+                            if (correctAnswer.equals(checkAllTextView.get(j).getText().toString())) {
+                                checkAllTextView.get(j).setTextColor(Color.GREEN);
+                            }
+                        }
+                    }
+                } else {
+                    checkBoxes.get(i).setEnabled(false);
+                    checkAllTextView.get(i).setEnabled(false);
+                }
+            }
+        } else if (category.equals(MultipleChoice.CATEGORY)) {
+            for (int i = 0; i < mpRadioButtons.size(); ++i) {
+                if (userAnswer.equals(mpTextView.get(i).getText().toString())) {
+                    mpRadioButtons.get(i).setChecked(true);
+                    if (isAnswerCorrect && isTestGraded) {
+                        mpTextView.get(i).setTextColor(Color.GREEN);
+                    } else if (!isAnswerCorrect && isTestGraded){
+                        mpTextView.get(i).setTextColor(Color.RED);
+                        for (int j = 0; j < mpRadioButtons.size(); ++j) {
+                            if (correctAnswer.equals(mpTextView.get(j).getText().toString())) {
+                                mpTextView.get(j).setTextColor(Color.GREEN);
+                            }
+                        }
+                    }
+                } else {
+                    mpRadioButtons.get(i).setEnabled(false);
+                    mpTextView.get(i).setEnabled(false);
+                }
+            }
+        } else if (category.equals(TrueFalse.CATEGORY)) {
+            for (int i = 0; i < tfRadioButtons.size(); ++i) {
+                if (userAnswer.equals(tfTextView.get(i).getText().toString())) {
+                    tfRadioButtons.get(i).setChecked(true);
+                    if (isAnswerCorrect && isTestGraded) {
+                        tfTextView.get(i).setTextColor(Color.GREEN);
+                    } else if (!isAnswerCorrect && isTestGraded) {
+                        tfTextView.get(i).setTextColor(Color.RED);
+                        for (int j = 0; j < tfRadioButtons.size(); ++j) {
+                            if (correctAnswer.equals(tfTextView.get(j).getText().toString())) {
+                                tfTextView.get(j).setTextColor(Color.GREEN);
+                            }
+                        }
+                    }
+                } else {
+                    tfRadioButtons.get(i).setEnabled(false);
+                    tfTextView.get(i).setEnabled(false);
+                }
+            }
+        } else {
+            if (isAnswerCorrect && isTestGraded) {
+                saTextField.setTextColor(Color.GREEN);
+            } else if (!isAnswerCorrect && isTestGraded){
+                saTextField.setTextColor(Color.RED);
+            }
+        }
+    }
+
+    private void getUserAnswer(final String category) {
+        saveAnswerButton.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View view) {
+                       if (category.equals(CheckAllThatApply.CATEGORY)) {
+                           for (int i = 0; i < checkBoxes.size(); ++i) {
+                               if (checkBoxes.get(i).isChecked()) {
+                                   TestGrader.addUserAnswer(checkAllTextView.get(i).getText()
+                                           .toString(), position);
+                               }
+
+                               checkBoxes.get(i).setEnabled(false);
+                           }
+                       } else if (category.equals(MultipleChoice.CATEGORY)) {
+                           for (int i = 0; i < mpRadioButtons.size(); ++i) {
+                               if (mpRadioButtons.get(i).isChecked()) {
+                                    TestGrader.addUserAnswer(mpTextView.get(i).getText()
+                                            .toString(), position);
+                               }
+
+                               mpRadioButtons.get(i).setEnabled(false);
+                           }
+                       } else if (category.equals(TrueFalse.CATEGORY)) {
+                           boolean answerFound = false;
+                           for (int i = 0; i < tfRadioButtons.size(); ++i) {
+                               if (tfRadioButtons.get(i).isChecked()) {
+                                    TestGrader.addUserAnswer(tfTextView.get(i).getText()
+                                            .toString(), position);
+                                   answerFound = true;
+                               }
+
+                               if (answerFound) {
+                                   tfRadioButtons.get(0).setEnabled(false);
+                                   tfRadioButtons.get(1).setEnabled(false);
+                                   break;
+                               }
+                           }
+                       } else {
+                                    TestGrader.addUserAnswer(saTextField.getText()
+                                            .toString(), position);
+                       }
+
+                    }
+                });
     }
 
     public void showAnswer(View v) {
