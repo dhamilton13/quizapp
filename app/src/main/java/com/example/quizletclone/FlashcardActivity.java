@@ -20,12 +20,8 @@ public class FlashcardActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private int position, testPosition;
     private boolean tapped, componentAdded = false, basicLayoutExists = false;
-    private String callingClass;
-
-    // what is being displayed on flashcard
-    private TextView testTextView;
-    // header, either "QUESTION" or "ANSWER"
-    private TextView header;
+    private String callingClass, userAnswer;
+    private TextView testTextView, header;
     private LinearLayout layout;
     private Flashcard card;
 
@@ -54,10 +50,6 @@ public class FlashcardActivity extends AppCompatActivity {
         else
             card = mvc.sortedCard.get(position);            //only get the card sorted by tag
 
-
-        testTextView.setText(card.getQuestion());
-
-
         testTextView.setMovementMethod(new ScrollingMovementMethod()); // make scrollable
 
         // set the header onto flashcard
@@ -68,20 +60,26 @@ public class FlashcardActivity extends AppCompatActivity {
         //mvc.isTag decide whether this flashCard activity is open from a test list or normal
         //list (i.e. flash card list or tag list,
         if (!mvc.isTag) {
-            if (!callingClass.contains("FlashcardListForTestActivity"))
-                createBasicLayout(mvc.getFlashcards().get(position).getCategory());
+            /* Flashcard activity layout will depend on whether it is a normal flashcard or a test
+                flashcard. Normal flashcards show answer and question. Test flashcards allow the
+                user to input questions. The below if else statements will build the layout
+                depending on the type of flashcard (Test vs normal).
 
-
-            if (callingClass.contains("FlashcardListForTestsActivity")) {
+                Calls either createBasicLayout (normal flashcard) or createLayoutBasedOnCagetory
+                (test flashcard)
+             */
+            if (!callingClass.contains("FlashcardListForTestsActivity")) {
+                testTextView.setText(card.getQuestion());
+                createBasicFlashcardLayout(mvc.getFlashcards().get(position).getCategory());
+            } else if (callingClass.contains("FlashcardListForTestsActivity")) {
                 testPosition = intent.getIntExtra("TestPOS", 0);
                 testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
                 String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
-                createLayoutBasedOnCategory(category);
+                createTestFlashcardLayout(category);
             }
         }
         else {
-            createBasicLayout(card.getCategory());
             mvc.isTag = false;      //toggle the bool back for other activity
         }
 
@@ -106,7 +104,8 @@ public class FlashcardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void createLayoutBasedOnCategory(String category) {
+    /* Create a test flashcard layout depending on category type */
+    private void createTestFlashcardLayout(String category) {
         if (category.equals(CheckAllThatApply.CATEGORY)) {
             ArrayList<CheckBox> checkBoxes = new ArrayList<CheckBox>();
             ArrayList<TextView> textView = new ArrayList<TextView>();
@@ -150,7 +149,8 @@ public class FlashcardActivity extends AppCompatActivity {
         }
     }
 
-    private void createBasicLayout(String category) {
+    /* Create a normal flashcard depending on layout */
+    private void createBasicFlashcardLayout(String category) {
         if (category.equals(CheckAllThatApply.CATEGORY)) {
             TextView t1 = new TextView(this);
             TextView t2 = new TextView(this);
@@ -198,6 +198,7 @@ public class FlashcardActivity extends AppCompatActivity {
             layout.addView(t1);
             layout.addView(t2);
         } else {
+            //ignore for now
         }
     }
 
