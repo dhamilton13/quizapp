@@ -19,7 +19,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/ic_action"
-                    android:background="@drawable/circle"
+                    android:background="@color/ColorPrimaryDark"
                     android:id="@+id/imageButton"
                     android:layout_gravity="bottom|right"
                     android:layout_alignParentBottom="true"
@@ -27,4 +27,4 @@
                     android:layout_alignParentEnd="true"
                     />
 
-</RelativeLayout><!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/layout/activity_list.xml -->
+</RelativeLayout><!-- From: file:/Users/Jessica/AndroidStudioProjects/quizapp/app/src/main/res/layout/activity_list.xml -->

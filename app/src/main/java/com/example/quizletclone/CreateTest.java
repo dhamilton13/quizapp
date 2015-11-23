@@ -55,11 +55,11 @@ public class CreateTest extends AppCompatActivity {
                     boolean successfulCreation;
                     if (random.isChecked()) {
                         successfulCreation = mvc.createTest(nameField.getText().toString(),
-                                true, false, false, false, false);
+                                true, false, false, false, false, true);
                     } else {
                         successfulCreation = mvc.createTest(nameField.getText().toString(), false,
                                 shortAnswer.isChecked(), multipleChoice.isChecked(),
-                                trueFalse.isChecked(), checkAll.isChecked());
+                                trueFalse.isChecked(), checkAll.isChecked(), random.isChecked());
                     }
 
                     nameField.setText("");

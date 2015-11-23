@@ -4,23 +4,26 @@ import android.os.Parcelable;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
+import android.util.Log;
 
 public class Test {
     private boolean isTestDynamic, isMultipleChoice, isShortAnswer, isCheckAllThatApply,
-            isTrueFalse;
+            isTrueFalse, isRandom;
     private String name;
     private ModelViewController mvc;
     private ArrayList<Flashcard> setOfFlashcards;
 
 
     Test(String name, boolean isTestDynamic, boolean isShortAnswer,
-         boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll) {
+         boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll, boolean isRandom) {
         this.name = name;
         this.isTestDynamic = isTestDynamic;
         this.isShortAnswer = isShortAnswer;
         this.isMultipleChoice = isMultipleChoice;
         this.isTrueFalse = isTrueFalse;
         this.isCheckAllThatApply = isCheckAll;
+        this.isRandom = isRandom;
     }
 
     /* Build a test with proper formatting. The test structure depends on whether the user
@@ -31,22 +34,35 @@ public class Test {
     public ArrayList<Flashcard> generateQuestions (ArrayList<Flashcard> fcs){
         setOfFlashcards = new ArrayList<Flashcard>();
 
-        if (isTestDynamic) {
+        //if (isTestDynamic) {
             //do something, this will be implemented later
-        } else {
+       // } else {
             for (int i = 0; i < fcs.size(); ++i) {
-                String category = fcs.get(i).getCategory();
-                if (isShortAnswer && category.equals(ShortAnswer.CATEGORY)) {
-                    setOfFlashcards.add(fcs.get(i));
-                } else if (isMultipleChoice && category.equals(MultipleChoice.CATEGORY)) {
-                    setOfFlashcards.add(fcs.get(i));
-                } else if (isTrueFalse && category.equals(TrueFalse.CATEGORY)) {
-                    setOfFlashcards.add(fcs.get(i));
-                } else if (isCheckAllThatApply && category.equals(CheckAllThatApply.CATEGORY)){
-                    setOfFlashcards.add(fcs.get(i));
+                if(isRandom)
+                {
+                    Random myRandom = new Random();
+                    int addOrNot = myRandom.nextInt() % 2;
+                    if(addOrNot == 1)
+                    {
+                        setOfFlashcards.add(fcs.get(i));
+                        Log.w("dylans test", "should have added a card");
+                    }
+                }
+                else {
+                    String category = fcs.get(i).getCategory();
+                    if (isShortAnswer && category.equals(ShortAnswer.CATEGORY)) {
+                        setOfFlashcards.add(fcs.get(i));
+                    } else if (isMultipleChoice && category.equals(MultipleChoice.CATEGORY)) {
+                        setOfFlashcards.add(fcs.get(i));
+                    } else if (isTrueFalse && category.equals(TrueFalse.CATEGORY)) {
+                        setOfFlashcards.add(fcs.get(i));
+                    } else if (isCheckAllThatApply && category.equals(CheckAllThatApply.CATEGORY)) {
+                        setOfFlashcards.add(fcs.get(i));
+                    }
                 }
             }
-        } return setOfFlashcards;
+        //}
+    return setOfFlashcards;
     }
 
 

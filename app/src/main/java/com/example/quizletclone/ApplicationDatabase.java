@@ -21,6 +21,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String COL_5_T2 = "TF";
     private static final String COL_6_T2 = "CA";
     private static final String COL_7_T2 = "FLASHCARDS";
+    private static final String COL_8_T2 = "RA";
     private static final String COL_1_T1 = "QUESTION";
     private static final String COL_2_T1 = "ANSWER";
     private static final String COL_3_T1 = "TAG";
@@ -37,7 +38,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)  {
         db.execSQL("create table " + TABLE_3_NAME + "(TAG TEXT UNIQUE)");
-        db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, FLASHCARDS TEXT)");
+        db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, RA INT, FLASHCARDS TEXT)");
         db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT, ANSWERLIST TEXT)");
     }
 
@@ -67,7 +68,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     }
 
     public boolean insertTestData(String testName, boolean isDynamic, boolean isSA, boolean isMC,
-                                  boolean isTF, boolean isCA, String flashcards) {
+                                  boolean isTF, boolean isCA, boolean isRA, String flashcards) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1_T2, testName);
@@ -76,6 +77,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         contentValues.put(COL_4_T2, isMC);
         contentValues.put(COL_5_T2, isTF);
         contentValues.put(COL_6_T2, isCA);
+        contentValues.put(COL_8_T2, isRA);
         contentValues.put(COL_7_T2, flashcards);
 
         long result = db.insert(TABLE_2_NAME, null, contentValues);
