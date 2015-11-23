@@ -101,6 +101,10 @@ public class MultipleChoice extends AppCompatActivity {
                     listOfAnswers.add(fieldD.getText().toString());
                     listOfAnswers.add(fieldE.getText().toString());
 
+                        if (listOfAnswers.size() != 5 || questionField.getText().toString().isEmpty()
+                                || spinner.getSelectedItem().toString().isEmpty())
+                        return;
+
                     if (answerFieldA.isChecked()) {
                             //TODO: Find a better way of creating these cards
                         successfulCreation = mvc.createFlashcard(questionField.getText().toString(),
@@ -122,12 +126,14 @@ public class MultipleChoice extends AppCompatActivity {
                                         toString(), fieldD.getText().toString(), listOfAnswers,
                                     CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldD.setChecked(false);
-                        } else {
-                        successfulCreation = mvc.createFlashcard(questionField.getText().
+                        } else if (answerFieldE.isChecked()){
+                            successfulCreation = mvc.createFlashcard(questionField.getText().
                                         toString(), fieldE.getText().toString(), listOfAnswers,
                                 CATEGORY, spinner.getSelectedItem().toString());
                             answerFieldE.setChecked(false);
-                        }
+                        } else {
+                        return;
+                    }
                         questionField.setText("");
                         fieldA.setText("");
                         fieldB.setText("");

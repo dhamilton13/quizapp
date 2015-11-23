@@ -100,21 +100,30 @@ public class CheckAllThatApply extends AppCompatActivity {
                     String answer = "";
 
                     if (checkBoxA.isChecked()) {
-                        answer += fieldA.getText().toString() + " ";
+                        if (!fieldA.getText().toString().isEmpty())
+                            answer += fieldA.getText().toString() + " ";
                     }
                     if (checkBoxB.isChecked()) {
-                        answer += fieldB.getText().toString() + " ";
+                        if (!fieldA.getText().toString().isEmpty())
+                         answer += fieldB.getText().toString() + " ";
                     }
                     if (checkBoxC.isChecked()) {
-                        answer += fieldC.getText().toString() + " ";
+                        if (!fieldA.getText().toString().isEmpty())
+                         answer += fieldC.getText().toString() + " ";
                     }
                     if (checkBoxD.isChecked()) {
-                        answer += fieldD.getText().toString() + " ";
+                        if (!fieldA.getText().toString().isEmpty())
+                         answer += fieldD.getText().toString() + " ";
                     }
                     if (checkBoxE.isChecked()) {
-                        answer += fieldE.getText().toString() + " ";
+                        if (!fieldA.getText().toString().isEmpty())
+                            answer += fieldE.getText().toString() + " ";
                     }
 
+                    if (questionField.getText().toString().isEmpty() || answer.length() == 0 ||
+                            spinner.getSelectedItem() == null) {
+                        return;
+                    }
                         //The flashcard creation
                     boolean successfulCreation = mvc.createFlashcard(
                         questionField.getText().toString(), answer, listOfAnswers, CATEGORY,

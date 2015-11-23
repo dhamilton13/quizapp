@@ -101,6 +101,11 @@ public class ShortAnswer extends ActionBarActivity {
 				    //The flashcard creation
 					ArrayList<String> listOfAnswers = new ArrayList<String>();
 					listOfAnswers.add(answerField.getText().toString());
+
+					if (answerField.getText().toString().isEmpty() || questionField.getText().toString().isEmpty()
+							|| spinner.getSelectedItem().toString().isEmpty())
+						return;
+
 				    boolean successfulCreation = mvc.createFlashcard(questionField.getText()
 										.toString(), answerField.getText().toString(), listOfAnswers,
 										CATEGORY, spinner.getSelectedItem().toString());

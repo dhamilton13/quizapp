@@ -92,6 +92,11 @@ public class TrueFalse extends AppCompatActivity {
                     ArrayList<String> listOfAnswers = new ArrayList<String>();
                     listOfAnswers.add("True");
                     listOfAnswers.add("False");
+
+                    if (questionField.getText().toString().isEmpty() || spinner.getSelectedItem()
+                            .toString().isEmpty())
+                        return;
+
                     if (answerFieldT.isChecked()) {
                         successfulInsertion = mvc.createFlashcard(questionField.getText().
                                             toString(),"True", listOfAnswers, CATEGORY,

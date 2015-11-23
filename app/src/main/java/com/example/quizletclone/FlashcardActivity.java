@@ -234,7 +234,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
         allCorrectCheckAllAnswers = correctAnswer.split(" ");
 
-        if (userAnswer != null) {
+        if ((userAnswer != null) && category.equals(CheckAllThatApply.CATEGORY)) {
             isAnswerCorrect = correctAnswer.toLowerCase().equals(userAnswer.toLowerCase());
             allUserCheckAllAnswers = userAnswer.split(" ");
 
@@ -252,8 +252,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
 
         if (category.equals(CheckAllThatApply.CATEGORY)) {
-
-            if (allUserCheckAllAnswers == null) {
+            if (userAnswer == null) {
                 for (int i = 0; i < checkBoxes.size(); ++i) {
                     for (int j = 0; j < allCorrectCheckAllAnswers.length; ++j) {
                         if (allCorrectCheckAllAnswers[j].equals(checkAllTextView.get(i).getText().toString())) {
@@ -321,6 +320,7 @@ public class FlashcardActivity extends AppCompatActivity {
         } else if (category.equals(TrueFalse.CATEGORY)) {
 
             if (userAnswer == null) {
+                Log.v("Is TF Null?", "YES!");
                 for (int i = 0; i < tfRadioButtons.size(); ++i) {
                     if (correctAnswer.equals(tfTextView.get(i).getText().toString())) {
                         tfTextView.get(i).setTextColor(Color.GREEN);
@@ -331,6 +331,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 } return;
             }
 
+            Log.v("Is TF Null?", "NO!");
             for (int i = 0; i < tfRadioButtons.size(); ++i) {
                 if (userAnswer.equals(tfTextView.get(i).getText().toString())) {
                     tfRadioButtons.get(i).setChecked(true);
@@ -373,39 +374,53 @@ public class FlashcardActivity extends AppCompatActivity {
                            String checkAllAnswer = "";
                            for (int i = 0; i < checkBoxes.size(); ++i) {
                                if (checkBoxes.get(i).isChecked()) {
-                                   checkAllAnswer += checkAllTextView.get(i).getText().toString() +
+                                   if (!checkAllTextView.get(i).getText().toString().isEmpty())
+                                       checkAllAnswer += checkAllTextView.get(i).getText().toString() +
                                            " ";
                                }
                                checkBoxes.get(i).setEnabled(false);
                            }
 
+                           if (checkAllAnswer.isEmpty() || checkAllAnswer.length() == 0)
+                               checkAllAnswer = null;
+
                            TestGrader.addUserAnswer(checkAllAnswer, position);
                        } else if (category.equals(MultipleChoice.CATEGORY)) {
+                           boolean answerFound = false;
                            for (int i = 0; i < mpRadioButtons.size(); ++i) {
                                if (mpRadioButtons.get(i).isChecked()) {
                                     TestGrader.addUserAnswer(mpTextView.get(i).getText()
                                             .toString(), position);
+                                    answerFound = true;
                                }
 
                                mpRadioButtons.get(i).setEnabled(false);
                            }
+                           if (!answerFound)
+                               TestGrader.addUserAnswer(null, position);
                        } else if (category.equals(TrueFalse.CATEGORY)) {
                            boolean answerFound = false;
                            for (int i = 0; i < tfRadioButtons.size(); ++i) {
                                if (tfRadioButtons.get(i).isChecked()) {
                                     TestGrader.addUserAnswer(tfTextView.get(i).getText()
                                             .toString(), position);
+
                                    answerFound = true;
                                }
 
-                               if (answerFound) {
-                                   tfRadioButtons.get(0).setEnabled(false);
-                                   tfRadioButtons.get(1).setEnabled(false);
-                                   break;
-                               }
+                               tfRadioButtons.get(i).setEnabled(false);
+                           }
+
+                           if (!answerFound) {
+                               TestGrader.addUserAnswer(null, position);
+
                            }
                        } else {
-                           TestGrader.addUserAnswer(saTextField.getText().toString(), position);
+                           if (saTextField.getText().toString().equals(null) || saTextField.getText().toString().isEmpty()) {
+                               TestGrader.addUserAnswer(null, position);
+                           } else {
+                               TestGrader.addUserAnswer(saTextField.getText().toString(), position);
+                           }
                            saTextField.setEnabled(false);
                        }
                         saveAnswerButton.setEnabled(false);
