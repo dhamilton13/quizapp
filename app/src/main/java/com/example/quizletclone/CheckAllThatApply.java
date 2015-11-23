@@ -20,7 +20,7 @@ public class CheckAllThatApply extends AppCompatActivity {
     private EditText questionField, fieldA, fieldB, fieldC, fieldD, fieldE;
     private CheckBox checkBoxA, checkBoxB, checkBoxC, checkBoxD, checkBoxE;
     private Spinner spinner;
-    public static final String CATEGORY = "Check All That Apply";
+    public static final String CATEGORY = "Check All That Apply", PLACEHOLDER = "   ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,23 +101,23 @@ public class CheckAllThatApply extends AppCompatActivity {
 
                     if (checkBoxA.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
-                            answer += fieldA.getText().toString() + " ";
+                            answer += fieldA.getText().toString() + PLACEHOLDER;
                     }
                     if (checkBoxB.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
-                         answer += fieldB.getText().toString() + " ";
+                         answer += fieldB.getText().toString() + PLACEHOLDER;
                     }
                     if (checkBoxC.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
-                         answer += fieldC.getText().toString() + " ";
+                         answer += fieldC.getText().toString() + PLACEHOLDER;
                     }
                     if (checkBoxD.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
-                         answer += fieldD.getText().toString() + " ";
+                         answer += fieldD.getText().toString() + PLACEHOLDER;
                     }
                     if (checkBoxE.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
-                            answer += fieldE.getText().toString() + " ";
+                            answer += fieldE.getText().toString() + PLACEHOLDER;
                     }
 
                     if (questionField.getText().toString().isEmpty() || answer.length() == 0 ||

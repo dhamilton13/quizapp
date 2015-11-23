@@ -34,6 +34,7 @@ public class FlashcardActivity extends AppCompatActivity {
     private EditText saTextField;
     private Button saveAnswerButton;
     private final int MULTIPLE_CHOICE_LIMIT = 5, CHECK_ALL_LIMIT = 5, TRUE_FALSE_LIMIT = 2;
+    private final String PLACEHOLDER = "   ";
 
 
     @Override
@@ -233,14 +234,14 @@ public class FlashcardActivity extends AppCompatActivity {
         /* Special case for checkAllThatApply. Since checkAllThatApply has multiple answers, its
             answers need to be stored into an array.
          */
-        allCorrectCheckAllAnswers = correctAnswer.split(" ");
+        allCorrectCheckAllAnswers = correctAnswer.split(PLACEHOLDER);
 
         /* Before preceding, a check is done to make sure the array containing answers from
            from the user matches the correct answers 1-to-1.
          */
         if ((userAnswer != null) && category.equals(CheckAllThatApply.CATEGORY)) {
             isAnswerCorrect = correctAnswer.toLowerCase().equals(userAnswer.toLowerCase());
-            allUserCheckAllAnswers = userAnswer.split(" ");
+            allUserCheckAllAnswers = userAnswer.split(PLACEHOLDER);
 
             if (allUserCheckAllAnswers.length == allCorrectCheckAllAnswers.length) {
                 isAnswerCorrect = true;
@@ -419,7 +420,7 @@ public class FlashcardActivity extends AppCompatActivity {
                                if (checkBoxes.get(i).isChecked()) {
                                    if (!checkAllTextView.get(i).getText().toString().isEmpty())
                                        checkAllAnswer += checkAllTextView.get(i).getText().toString() +
-                                           " ";
+                                           PLACEHOLDER;
                                }
                                checkBoxes.get(i).setEnabled(false);
                            }
