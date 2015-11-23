@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class FlashcardActivity extends AppCompatActivity {
     private ModelViewController mvc;
     private int position, testPosition;
-    private boolean tapped, isFlashcardGraded = false, isTestGraded = false;
+    private boolean tapped = true, isFlashcardGraded = false, isTestGraded = false;
     private String callingClass;
     private TextView testTextView, header;
     private LinearLayout layout;
@@ -33,14 +33,13 @@ public class FlashcardActivity extends AppCompatActivity {
     private ArrayList<RadioButton> mpRadioButtons, tfRadioButtons;
     private EditText saTextField;
     private Button saveAnswerButton;
+    private final int MULTIPLE_CHOICE_LIMIT = 5, CHECK_ALL_LIMIT = 5, TRUE_FALSE_LIMIT = 2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard);
-        // when tapped == true, display question string, otherwise it will display answer
-        tapped = true;
 
         // gets intent to obtain position of card clicked
         Intent intent = getIntent();
@@ -89,6 +88,9 @@ public class FlashcardActivity extends AppCompatActivity {
                 testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
                 String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
+                /* If the test has not been graded, call createTestFlashcardLayout, else call
+                    createGradedTestFlashcardLayout.
+                 */
                 createTestFlashcardLayout(category);
                 getUserAnswer(category);
 
@@ -105,22 +107,32 @@ public class FlashcardActivity extends AppCompatActivity {
     /* Create a test flashcard layout depending on category type */
     private void createTestFlashcardLayout(final String category) {
         /*
-         * mp = multiple choice
+         * mp = multiple choice (meant to write mc...)
          * tf = true false
          * sa = short answer
+         *
+         * For each category, an arrayList of widgets is created and added to a separate
+         * LinearLayout named row. This LinearLayout has the vertical orientation. The row layout
+         * is then added to the parent Layout which has a horizontal orientation.
+         *
+         * Any data needed to fill the widgets is called from the ModelViewController class.
+         *
+         * saveAnswerButton is added at the end and resized.
          */
         if (category.equals(CheckAllThatApply.CATEGORY)) {
             checkBoxes = new ArrayList<CheckBox>();
             checkAllTextView = new ArrayList<TextView>();
 
-            for (int i = 0; i < 5; ++i) {
+            for (int i = 0; i < CHECK_ALL_LIMIT; ++i) {
                 LinearLayout row = new LinearLayout(this);
                 row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 row.setOrientation(LinearLayout.HORIZONTAL);
+
                 checkBoxes.add(new CheckBox(this));
                 checkAllTextView.add(new TextView(this));
                 checkAllTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
+
                 row.addView(checkBoxes.get(i));
                 row.addView(checkAllTextView.get(i));
                 layout.addView(row);
@@ -129,14 +141,17 @@ public class FlashcardActivity extends AppCompatActivity {
             mpRadioButtons = new ArrayList<RadioButton>();
             mpTextView = new ArrayList<TextView>();
 
-            for (int i = 0; i < 5; ++i) {
+            for (int i = 0; i < MULTIPLE_CHOICE_LIMIT; ++i) {
                 LinearLayout row = new LinearLayout(this);
-                row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.
+                        WRAP_CONTENT));
                 row.setOrientation(LinearLayout.HORIZONTAL);
+
                 mpRadioButtons.add(new RadioButton(this));
                 mpTextView.add(new TextView(this));
                 mpTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
+
                 row.addView(mpRadioButtons.get(i));
                 row.addView(mpTextView.get(i));
                 layout.addView(row);
@@ -145,7 +160,7 @@ public class FlashcardActivity extends AppCompatActivity {
             tfRadioButtons = new ArrayList<RadioButton>();
             tfTextView = new ArrayList<TextView>();
 
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < TRUE_FALSE_LIMIT; ++i) {
                 LinearLayout row = new LinearLayout(this);
                 row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
                 row.setOrientation(LinearLayout.HORIZONTAL);
@@ -154,6 +169,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 tfTextView.add(new TextView(this));
                 tfTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
+
                 row.addView(tfRadioButtons.get(i));
                 row.addView(tfTextView.get(i));
                 layout.addView(row);
@@ -170,62 +186,43 @@ public class FlashcardActivity extends AppCompatActivity {
         ViewGroup.LayoutParams params = saveAnswerButton.getLayoutParams();
         params.width = 400;
         saveAnswerButton.setLayoutParams(params);
-        //saveAnswerButton.requestLayout();
     }
 
     /* Create a normal flashcard depending on layout */
     private void createBasicFlashcardLayout(String category) {
         if (category.equals(CheckAllThatApply.CATEGORY)) {
-            TextView t1 = new TextView(this);
-            TextView t2 = new TextView(this);
-            TextView t3 = new TextView(this);
-            TextView t4 = new TextView(this);
-            TextView t5 = new TextView(this);
+            ArrayList<TextView> textViews = new ArrayList<TextView>();
+            String[] labels = {"A: ", "B: ", "C: ", "D: ", "E: "};
 
-            t1.setText("A: " + card.getListOfAnswers().get(0));
-            t2.setText("B: " + card.getListOfAnswers().get(1));
-            t3.setText("C: " + card.getListOfAnswers().get(2));
-            t4.setText("D: " + card.getListOfAnswers().get(3));
-            t5.setText("E: " + card.getListOfAnswers().get(4));
-
-            layout.addView(t1);
-            layout.addView(t2);
-            layout.addView(t3);
-            layout.addView(t4);
-            layout.addView(t5);
-
+            for (int i = 0; i < CHECK_ALL_LIMIT; ++i) {
+                textViews.add(new TextView(this));
+                textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
+                layout.addView(textViews.get(i));
+            }
         } else if (category.equals(MultipleChoice.CATEGORY)) {
-            TextView t1 = new TextView(this);
-            TextView t2 = new TextView(this);
-            TextView t3 = new TextView(this);
-            TextView t4 = new TextView(this);
-            TextView t5 = new TextView(this);
+                ArrayList<TextView> textViews = new ArrayList<TextView>();
+                String[] labels = {"A: ", "B: ", "C: ", "D: ", "E: "};
 
-            t1.setText("A: " + card.getListOfAnswers().get(0));
-            t2.setText("B: " + card.getListOfAnswers().get(1));
-            t3.setText("C: " + card.getListOfAnswers().get(2));
-            t4.setText("D: " + card.getListOfAnswers().get(3));
-            t5.setText("E: " + card.getListOfAnswers().get(4));
-
-            layout.addView(t1);
-            layout.addView(t2);
-            layout.addView(t3);
-            layout.addView(t4);
-            layout.addView(t5);
+                for (int i = 0; i < MULTIPLE_CHOICE_LIMIT; ++i) {
+                    textViews.add(new TextView(this));
+                    textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
+                    layout.addView(textViews.get(i));
+                }
         } else if (category.equals(TrueFalse.CATEGORY)) {
-            TextView t1 = new TextView(this);
-            TextView t2 = new TextView(this);
+                ArrayList<TextView> textViews = new ArrayList<TextView>();
+                String[] labels = {"A: ", "B: "};
 
-            t1.setText("A: " + card.getListOfAnswers().get(0));
-            t2.setText("B: " + card.getListOfAnswers().get(1));
-
-            layout.addView(t1);
-            layout.addView(t2);
+                for (int i = 0; i < TRUE_FALSE_LIMIT; ++i) {
+                    textViews.add(new TextView(this));
+                    textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
+                    layout.addView(textViews.get(i));
+                }
         } else {
             //ignore for now
         }
     }
 
+    /* Creates a flashcard layout for cards that have already been graded, depending on category */
     private void createGradedTestFlashcardLayout(String category) {
         String correctAnswer = TestGrader.getCorrectAnswers()[position];
         String userAnswer = TestGrader.getUserAnswers()[position];
@@ -233,8 +230,14 @@ public class FlashcardActivity extends AppCompatActivity {
         String[] allUserCheckAllAnswers = null;
         String[] allCorrectCheckAllAnswers;
 
+        /* Special case for checkAllThatApply. Since checkAllThatApply has multiple answers, its
+            answers need to be stored into an array.
+         */
         allCorrectCheckAllAnswers = correctAnswer.split(" ");
 
+        /* Before preceding, a check is done to make sure the array containing answers from
+           from the user matches the correct answers 1-to-1.
+         */
         if ((userAnswer != null) && category.equals(CheckAllThatApply.CATEGORY)) {
             isAnswerCorrect = correctAnswer.toLowerCase().equals(userAnswer.toLowerCase());
             allUserCheckAllAnswers = userAnswer.split(" ");
@@ -251,7 +254,33 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         }
 
+        /* Every category (except short answer) follows the same (messy) format.
+            1) Check if the user provided answer is null. If the user did not provide an answer,
+            by default it is null. This is an error check against users providing blank answers or
+            forgetting to select an answer.
 
+            If the answer is null, loop through the possible answers and highlight the correct ones
+            by setting their text color to green. We only set the text to green if the card has
+            already been graded. This is checked by calling TestGrader.isTestGraded(). If it has not
+            been graded, nothing is highlighted. All possible options are then grayed out by calling
+            setEnabled() and setting it to false.
+
+            2) If the user answer is NOT null, highlight the options selected by the user by calling
+                setChecked and setting it to true. If the user answer is correct, and test has been
+                graded, highlight the user answer by setting the text color to green. If the answer
+                is wrong and the test has been graded, highlight the user answer by setting the text
+                to red. Any correct answers that are missed are then highlighted afterwards in the
+                last for loop. If we are not in the testGrading phase, jump to the first else state-
+                ment and gray out the options. This means the card is awaiting to be graded so the
+                answers are now "locked".
+
+                SaveAnswer button is grayed out regardless as the user can only save their answer
+                once per test.
+
+                These blocks essentially either highlight the correct and incorrect answers OR gray
+                out the answer options to simulate a "lock". This means the user has already
+                answered the card and cannot change anything until it is graded/test is cleared.
+         */
         if (category.equals(CheckAllThatApply.CATEGORY)) {
             if (userAnswer == null) {
                 for (int i = 0; i < checkBoxes.size(); ++i) {
@@ -323,7 +352,6 @@ public class FlashcardActivity extends AppCompatActivity {
                 }
             }
         } else if (category.equals(TrueFalse.CATEGORY)) {
-
             if (userAnswer == null) {
                 for (int i = 0; i < tfRadioButtons.size(); ++i) {
                     if (correctAnswer.equals(tfTextView.get(i).getText().toString())
@@ -370,7 +398,18 @@ public class FlashcardActivity extends AppCompatActivity {
         saveAnswerButton.setEnabled(false);
     }
 
+    /* Retrieve the user inputted answer for a flashcard depending on category. Answers are only
+     * retrieved when the user selects the Save Answer option.
+     */
     private void getUserAnswer(final String category) {
+        /* Each block follows a similar pattern. First, the options/fields are checked to see if
+            they have been selected or written to. If so, the answer is stored and sent to the
+            TestGrader to be stored as a user answer. One check is done at the end incase the user
+            enters a blank answer or doesn't select anything at all. In that case, null is set as
+            the answer. Regardless of input, all options are then grayed out by setting setEnabled
+            to false. This locks the answer options/fields so the user cannot modify them while the
+            test is being graded.
+         */
         saveAnswerButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
@@ -411,13 +450,11 @@ public class FlashcardActivity extends AppCompatActivity {
 
                                    answerFound = true;
                                }
-
                                tfRadioButtons.get(i).setEnabled(false);
                            }
 
                            if (!answerFound) {
                                TestGrader.addUserAnswer(null, position);
-
                            }
                        } else {
                            if (saTextField.getText().toString().equals(null) || saTextField.getText().toString().isEmpty()) {
