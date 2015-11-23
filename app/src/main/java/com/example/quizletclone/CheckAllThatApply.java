@@ -100,19 +100,19 @@ public class CheckAllThatApply extends AppCompatActivity {
                     String answer = "";
 
                     if (checkBoxA.isChecked()) {
-                        answer += "A. " + fieldA.getText().toString() + " ";
+                        answer += fieldA.getText().toString() + " ";
                     }
                     if (checkBoxB.isChecked()) {
-                        answer += "B. " + fieldB.getText().toString() + " ";
+                        answer += fieldB.getText().toString() + " ";
                     }
                     if (checkBoxC.isChecked()) {
-                        answer += "C. " + fieldC.getText().toString() + " ";
+                        answer += fieldC.getText().toString() + " ";
                     }
                     if (checkBoxD.isChecked()) {
-                        answer += "D. " + fieldD.getText().toString() + " ";
+                        answer += fieldD.getText().toString() + " ";
                     }
                     if (checkBoxE.isChecked()) {
-                        answer += "E. " + fieldE.getText().toString() + " ";
+                        answer += fieldE.getText().toString() + " ";
                     }
 
                         //The flashcard creation

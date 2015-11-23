@@ -116,7 +116,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
     }
 
     private void gradeTest() {
-        TestGrader.gradeTest();
+        mvc.gradeTest();
     }
 
     private void clearTest() {

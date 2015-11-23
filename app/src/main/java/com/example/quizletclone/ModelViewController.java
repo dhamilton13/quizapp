@@ -147,9 +147,12 @@ public class ModelViewController {
 		TestGrader.addUserAnswer(answer, index);
 	}
 
+
+	/* clearGrader() and gradeTest() do not need to be in MVC but are here for consistency  */
 	public void clearGrader() {
 		TestGrader.clearGrader();
 	}
+	public void gradeTest() { TestGrader.gradeTest(); }
 
 	// Will be moved in the next iteration, getters for cards and tests
 	public List<Flashcard> getFlashcards() {

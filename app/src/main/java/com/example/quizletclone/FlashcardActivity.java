@@ -228,28 +228,78 @@ public class FlashcardActivity extends AppCompatActivity {
     private void createGradedTestFlashcardLayout(String category) {
         String correctAnswer = TestGrader.getCorrectAnswers()[position];
         String userAnswer = TestGrader.getUserAnswers()[position];
-        boolean isAnswerCorrect = (correctAnswer.equals(userAnswer));
+        boolean isAnswerCorrect = false;
+        String[] allUserCheckAllAnswers = null;
+        String[] allCorrectCheckAllAnswers;
+
+        allCorrectCheckAllAnswers = correctAnswer.split(" ");
+
+        if (userAnswer != null) {
+            isAnswerCorrect = correctAnswer.toLowerCase().equals(userAnswer.toLowerCase());
+            allUserCheckAllAnswers = userAnswer.split(" ");
+
+            if (allUserCheckAllAnswers.length == allCorrectCheckAllAnswers.length) {
+                isAnswerCorrect = true;
+                for (int i = 0; i < allCorrectCheckAllAnswers.length; ++i) {
+                    if (!allCorrectCheckAllAnswers[i].toLowerCase().equals
+                            (allUserCheckAllAnswers[i].toLowerCase())) {
+                        isAnswerCorrect = false;
+                        break;
+                    }
+                }
+            }
+        }
+
 
         if (category.equals(CheckAllThatApply.CATEGORY)) {
+
+            if (allUserCheckAllAnswers == null) {
+                for (int i = 0; i < checkBoxes.size(); ++i) {
+                    for (int j = 0; j < allCorrectCheckAllAnswers.length; ++j) {
+                        if (allCorrectCheckAllAnswers[j].equals(checkAllTextView.get(i).getText().toString())) {
+                            checkAllTextView.get(i).setTextColor(Color.GREEN);
+                        }
+                        checkBoxes.get(i).setEnabled(false);
+                        saveAnswerButton.setEnabled(false);
+                    }
+                } return;
+            }
+
             for (int i = 0; i < checkBoxes.size(); ++i) {
-                if (userAnswer.equals(checkAllTextView.get(i).getText().toString())) {
-                    checkBoxes.get(i).setChecked(true);
-                    if (isAnswerCorrect && isTestGraded) {
-                        checkAllTextView.get(i).setTextColor(Color.GREEN);
-                    } else if (!isAnswerCorrect && isTestGraded){
-                        checkAllTextView.get(i).setTextColor(Color.RED);
-                        for (int j = 0; j < checkBoxes.size(); ++j) {
-                            if (correctAnswer.equals(checkAllTextView.get(j).getText().toString())) {
-                                checkAllTextView.get(j).setTextColor(Color.GREEN);
+                for (int j = 0; j < allUserCheckAllAnswers.length; ++j) {
+                    if (allUserCheckAllAnswers[j].equals(checkAllTextView.get(i).getText().toString())) {
+                        checkBoxes.get(i).setChecked(true);
+                        if (isAnswerCorrect && isTestGraded) {
+                            checkAllTextView.get(i).setTextColor(Color.GREEN);
+                        } else if (!isAnswerCorrect && isTestGraded) {
+                            checkAllTextView.get(i).setTextColor(Color.RED);
+                            for (int k = 0; k < checkBoxes.size(); ++k) {
+                                for (int l = 0; l < allCorrectCheckAllAnswers.length; ++l) {
+                                    if (allCorrectCheckAllAnswers[l].equals(checkAllTextView.get(k).getText().toString())) {
+                                        checkAllTextView.get(k).setTextColor(Color.GREEN);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        checkBoxes.get(i).setEnabled(false);
+                        checkAllTextView.get(i).setEnabled(false);
                     }
-                } else {
-                    checkBoxes.get(i).setEnabled(false);
-                    checkAllTextView.get(i).setEnabled(false);
                 }
             }
         } else if (category.equals(MultipleChoice.CATEGORY)) {
+
+            if (userAnswer == null) {
+                for (int i = 0; i < mpRadioButtons.size(); ++i) {
+                    if (correctAnswer.equals(mpTextView.get(i).getText().toString())) {
+                        mpTextView.get(i).setTextColor(Color.GREEN);
+                    }
+                    mpRadioButtons.get(i).setEnabled(false);
+                    mpTextView.get(i).setEnabled(false);
+                    saveAnswerButton.setEnabled(false);
+                } return;
+            }
+
             for (int i = 0; i < mpRadioButtons.size(); ++i) {
                 if (userAnswer.equals(mpTextView.get(i).getText().toString())) {
                     mpRadioButtons.get(i).setChecked(true);
@@ -269,6 +319,18 @@ public class FlashcardActivity extends AppCompatActivity {
                 }
             }
         } else if (category.equals(TrueFalse.CATEGORY)) {
+
+            if (userAnswer == null) {
+                for (int i = 0; i < tfRadioButtons.size(); ++i) {
+                    if (correctAnswer.equals(tfTextView.get(i).getText().toString())) {
+                        tfTextView.get(i).setTextColor(Color.GREEN);
+                    }
+                    tfTextView.get(i).setEnabled(false);
+                    tfRadioButtons.get(i).setEnabled(false);
+                    saveAnswerButton.setEnabled(false);
+                } return;
+            }
+
             for (int i = 0; i < tfRadioButtons.size(); ++i) {
                 if (userAnswer.equals(tfTextView.get(i).getText().toString())) {
                     tfRadioButtons.get(i).setChecked(true);
@@ -288,12 +350,19 @@ public class FlashcardActivity extends AppCompatActivity {
                 }
             }
         } else {
+                saTextField.setText(userAnswer);
             if (isAnswerCorrect && isTestGraded) {
                 saTextField.setTextColor(Color.GREEN);
             } else if (!isAnswerCorrect && isTestGraded){
                 saTextField.setTextColor(Color.RED);
+                TextView correctAnswerTextView = new TextView(this);
+                correctAnswerTextView.setText(correctAnswer);
+                correctAnswerTextView.setTextColor(Color.GREEN);
+                layout.addView(correctAnswerTextView);
             }
+            saTextField.setEnabled(false);
         }
+        saveAnswerButton.setEnabled(false);
     }
 
     private void getUserAnswer(final String category) {
@@ -301,14 +370,16 @@ public class FlashcardActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                        if (category.equals(CheckAllThatApply.CATEGORY)) {
+                           String checkAllAnswer = "";
                            for (int i = 0; i < checkBoxes.size(); ++i) {
                                if (checkBoxes.get(i).isChecked()) {
-                                   TestGrader.addUserAnswer(checkAllTextView.get(i).getText()
-                                           .toString(), position);
+                                   checkAllAnswer += checkAllTextView.get(i).getText().toString() +
+                                           " ";
                                }
-
                                checkBoxes.get(i).setEnabled(false);
                            }
+
+                           TestGrader.addUserAnswer(checkAllAnswer, position);
                        } else if (category.equals(MultipleChoice.CATEGORY)) {
                            for (int i = 0; i < mpRadioButtons.size(); ++i) {
                                if (mpRadioButtons.get(i).isChecked()) {
@@ -334,10 +405,10 @@ public class FlashcardActivity extends AppCompatActivity {
                                }
                            }
                        } else {
-                                    TestGrader.addUserAnswer(saTextField.getText()
-                                            .toString(), position);
+                           TestGrader.addUserAnswer(saTextField.getText().toString(), position);
+                           saTextField.setEnabled(false);
                        }
-
+                        saveAnswerButton.setEnabled(false);
                     }
                 });
     }
