@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.*;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -269,6 +268,9 @@ public class FlashcardActivity extends AppCompatActivity {
                     }
                 }
             }
+        } else if (userAnswer != null && !category.equals(CheckAllThatApply.CATEGORY)) {
+            if (correctAnswer.toLowerCase().equals(userAnswer.toLowerCase()))
+                isAnswerCorrect = true;
         }
 
         /* Every category (except short answer) follows the same (messy) format.
@@ -411,6 +413,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 layout.addView(correctAnswerTextView);
             }
             saTextField.setEnabled(false);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
         saveAnswerButton.setEnabled(false);
     }
@@ -474,7 +477,7 @@ public class FlashcardActivity extends AppCompatActivity {
                                TestGrader.addUserAnswer(null, position);
                            }
                        } else {
-                           if (saTextField.getText().toString().equals(null) || saTextField.getText().toString().isEmpty()) {
+                           if (saTextField.getText().toString() == null || saTextField.getText().toString().isEmpty()) {
                                TestGrader.addUserAnswer(null, position);
                            } else {
                                TestGrader.addUserAnswer(saTextField.getText().toString(), position);
