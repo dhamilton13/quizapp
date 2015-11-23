@@ -80,7 +80,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 createBasicFlashcardLayout(mvc.getFlashcards().get(position).getCategory());
             } else if (callingClass.contains("FlashcardListForTestsActivity")) {
                 isTestGraded = TestGrader.isTestGraded();
-                if (TestGrader.getUserAnswers()[position] != null)
+                if (TestGrader.getAnswersBeingGraded()[position] == true)
                     isFlashcardGraded = true;
 
                 testPosition = intent.getIntExtra("TestPOS", 0);
@@ -255,7 +255,8 @@ public class FlashcardActivity extends AppCompatActivity {
             if (userAnswer == null) {
                 for (int i = 0; i < checkBoxes.size(); ++i) {
                     for (int j = 0; j < allCorrectCheckAllAnswers.length; ++j) {
-                        if (allCorrectCheckAllAnswers[j].equals(checkAllTextView.get(i).getText().toString())) {
+                        if (allCorrectCheckAllAnswers[j].equals(checkAllTextView.get(i)
+                                .getText().toString()) && TestGrader.isTestGraded()) {
                             checkAllTextView.get(i).setTextColor(Color.GREEN);
                         }
                         checkBoxes.get(i).setEnabled(false);
@@ -266,7 +267,8 @@ public class FlashcardActivity extends AppCompatActivity {
 
             for (int i = 0; i < checkBoxes.size(); ++i) {
                 for (int j = 0; j < allUserCheckAllAnswers.length; ++j) {
-                    if (allUserCheckAllAnswers[j].equals(checkAllTextView.get(i).getText().toString())) {
+                    if (allUserCheckAllAnswers[j].equals(checkAllTextView.get(i).getText()
+                            .toString())) {
                         checkBoxes.get(i).setChecked(true);
                         if (isAnswerCorrect && isTestGraded) {
                             checkAllTextView.get(i).setTextColor(Color.GREEN);
@@ -274,7 +276,8 @@ public class FlashcardActivity extends AppCompatActivity {
                             checkAllTextView.get(i).setTextColor(Color.RED);
                             for (int k = 0; k < checkBoxes.size(); ++k) {
                                 for (int l = 0; l < allCorrectCheckAllAnswers.length; ++l) {
-                                    if (allCorrectCheckAllAnswers[l].equals(checkAllTextView.get(k).getText().toString())) {
+                                    if (allCorrectCheckAllAnswers[l].equals(checkAllTextView.get(k)
+                                            .getText().toString())) {
                                         checkAllTextView.get(k).setTextColor(Color.GREEN);
                                     }
                                 }
@@ -290,7 +293,8 @@ public class FlashcardActivity extends AppCompatActivity {
 
             if (userAnswer == null) {
                 for (int i = 0; i < mpRadioButtons.size(); ++i) {
-                    if (correctAnswer.equals(mpTextView.get(i).getText().toString())) {
+                    if (correctAnswer.equals(mpTextView.get(i).getText().toString()) &&
+                            TestGrader.isTestGraded()) {
                         mpTextView.get(i).setTextColor(Color.GREEN);
                     }
                     mpRadioButtons.get(i).setEnabled(false);
@@ -320,9 +324,9 @@ public class FlashcardActivity extends AppCompatActivity {
         } else if (category.equals(TrueFalse.CATEGORY)) {
 
             if (userAnswer == null) {
-                Log.v("Is TF Null?", "YES!");
                 for (int i = 0; i < tfRadioButtons.size(); ++i) {
-                    if (correctAnswer.equals(tfTextView.get(i).getText().toString())) {
+                    if (correctAnswer.equals(tfTextView.get(i).getText().toString())
+                            && TestGrader.isTestGraded()) {
                         tfTextView.get(i).setTextColor(Color.GREEN);
                     }
                     tfTextView.get(i).setEnabled(false);
@@ -331,7 +335,6 @@ public class FlashcardActivity extends AppCompatActivity {
                 } return;
             }
 
-            Log.v("Is TF Null?", "NO!");
             for (int i = 0; i < tfRadioButtons.size(); ++i) {
                 if (userAnswer.equals(tfTextView.get(i).getText().toString())) {
                     tfRadioButtons.get(i).setChecked(true);

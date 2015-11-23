@@ -150,7 +150,7 @@ public class MultipleChoice extends AppCompatActivity {
                         //TODO: need a better way of calling toast (instead of creating an object everytime).
                             toast.show();
 
-                        /* After a 2000 ms delay, return to the list of flashcards */
+                        /* After a 1500 ms delay, return to the list of flashcards */
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -158,7 +158,7 @@ public class MultipleChoice extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }
-                            }, 2000);
+                            }, 1500);
                         } else {
                             Toast toast = Toast.makeText(getApplicationContext(), "Error creating flashcard", Toast.LENGTH_SHORT);
                             //TODO: need a better way of calling toast (instead of creating an object everytime).
