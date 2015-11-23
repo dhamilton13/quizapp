@@ -1,14 +1,18 @@
 package com.example.quizletclone;
 
 import android.content.Intent;
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -20,6 +24,7 @@ public class CheckAllThatApply extends AppCompatActivity {
     private EditText questionField, fieldA, fieldB, fieldC, fieldD, fieldE;
     private CheckBox checkBoxA, checkBoxB, checkBoxC, checkBoxD, checkBoxE;
     private Spinner spinner;
+    private RelativeLayout layout;
     public static final String CATEGORY = "Check All That Apply", PLACEHOLDER = "   ";
 
     @Override
@@ -36,8 +41,11 @@ public class CheckAllThatApply extends AppCompatActivity {
         createFlashcardObject();
     }
 
-    /* The below methods operate whenever the activity is paused, or terminated */
-    @Override
+     protected void hideKeyboard(View view) {
+         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+         in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+     }
+
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -54,6 +62,7 @@ public class CheckAllThatApply extends AppCompatActivity {
 
     /** Initialize all the graphical user interface elements. */
     private void initializeGUIComponents() {
+        layout = (RelativeLayout)findViewById(R.id.layout);
         createQuestion = (Button)findViewById(R.id.createFlashcard);
         questionField = (EditText)findViewById(R.id.questionField);
         checkBoxA = (CheckBox)findViewById(R.id.checkboxA);
@@ -81,7 +90,17 @@ public class CheckAllThatApply extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+
+                hideKeyboard(view);
+                return false;
+            }
+        });
     }
+
 
     /** When the user clicks create question, create a flashcard using the ModelViewController
         object.

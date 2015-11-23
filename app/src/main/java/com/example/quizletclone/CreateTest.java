@@ -1,12 +1,16 @@
 package com.example.quizletclone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.CheckBox;
 
@@ -15,6 +19,7 @@ public class CreateTest extends AppCompatActivity {
     private Button createQuestion;
     private EditText nameField;
     private CheckBox shortAnswer, multipleChoice, trueFalse, checkAll, random;
+    private RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,13 @@ public class CreateTest extends AppCompatActivity {
         createTestObject();
     }
 
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
     private void initializeGUIComponents() {
+        layout = (RelativeLayout)findViewById(R.id.layout);
         createQuestion = (Button)findViewById(R.id.createTest);
         nameField = (EditText)findViewById(R.id.nameField);
         shortAnswer = (CheckBox)findViewById(R.id.shortAnswerCB);
@@ -38,6 +49,15 @@ public class CreateTest extends AppCompatActivity {
         trueFalse = (CheckBox)findViewById(R.id.trueFalseCB);
         checkAll = (CheckBox)findViewById(R.id.checkAllCB);
         random = (CheckBox)findViewById(R.id.randomCB);
+
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+
+                hideKeyboard(view);
+                return false;
+            }
+        });
     }
 
     private void createTestObject() {

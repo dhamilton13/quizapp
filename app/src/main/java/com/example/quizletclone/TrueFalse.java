@@ -1,14 +1,18 @@
 package com.example.quizletclone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +26,7 @@ public class TrueFalse extends AppCompatActivity {
     private TextView trueField, falseField;
     private RadioButton answerFieldT, answerFieldF;
     private Spinner spinner;
+    private RelativeLayout layout;
     public static final String CATEGORY = "True Or False";
 
 
@@ -37,6 +42,11 @@ public class TrueFalse extends AppCompatActivity {
         setTitle("True or false");
         initializeGUIComponents();
         createFlashcardObject();
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /* The below methods save flashcard data whenever the activity is paused, or terminated */
@@ -60,6 +70,7 @@ public class TrueFalse extends AppCompatActivity {
 
     private void initializeGUIComponents() {
         /* Initialize all the graphical user interface elements. */
+        layout = (RelativeLayout)findViewById(R.id.layout);
         createQuestion = (Button)findViewById(R.id.createFlashcard);
         questionField = (EditText)findViewById(R.id.questionField);
         trueField = (TextView)findViewById(R.id.trueField);
@@ -78,6 +89,14 @@ public class TrueFalse extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
     }
 
     private void createFlashcardObject() {

@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
@@ -11,9 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
@@ -24,6 +28,7 @@ public class CreateTag extends AppCompatActivity {
     private RecyclerView myRecyclerView;
     LinearLayoutManager linearLayoutManager;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private RelativeLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +46,21 @@ public class CreateTag extends AppCompatActivity {
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
-        populateCards();
+        layout = (RelativeLayout)findViewById(R.id.layout);
 
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
+        populateCards();
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /* If 'back' is pressed on the device, return home. */

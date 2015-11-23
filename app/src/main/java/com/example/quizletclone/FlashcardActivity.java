@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,8 +10,10 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -49,7 +52,15 @@ public class FlashcardActivity extends AppCompatActivity {
         // the position of the cardview clicked
         position = intent.getIntExtra("POS", 0);
         callingClass = intent.getStringExtra("callingClass");
+
         layout = (LinearLayout) findViewById(R.id.layout);
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
 
         // set the question onto flashcard
         testTextView = (TextView) findViewById(R.id.testTextView);
@@ -103,6 +114,11 @@ public class FlashcardActivity extends AppCompatActivity {
             mvc.isTag = false;      //toggle the bool back for other activity
         }
 
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /* Create a test flashcard layout depending on category type */

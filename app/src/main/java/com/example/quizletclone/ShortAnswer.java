@@ -1,14 +1,18 @@
 package com.example.quizletclone;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
@@ -21,6 +25,7 @@ public class ShortAnswer extends ActionBarActivity {
 	private ModelViewController mvc;
 	private Spinner spinner;
 	public static final String CATEGORY = "Short Answer";
+	private RelativeLayout layout;
 
 
 	@Override
@@ -34,26 +39,10 @@ public class ShortAnswer extends ActionBarActivity {
 		createFlashcardObject();
 	}
 
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create, menu);
-		return true;
+	protected void hideKeyboard(View view) {
+		InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
 
 	/* The below methods save flashcard data whenever the activity is paused, or terminated */
 	@Override
@@ -73,6 +62,7 @@ public class ShortAnswer extends ActionBarActivity {
 
 	private void initializeGUIComponents() {
 		/* Initialize all the graphical user interface elements. */
+		layout = (RelativeLayout)findViewById(R.id.layout);
 		createQuestion = (Button)findViewById(R.id.createFlashcard);
 		questionField = (EditText)findViewById(R.id.questionField);
 		answerField = (EditText)findViewById(R.id.answerTextField);
@@ -90,6 +80,14 @@ public class ShortAnswer extends ActionBarActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
+
+		layout.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				hideKeyboard(view);
+				return false;
+			}
+		});
 	}
 
 	/* Creates a question when the user presses the 'Create
