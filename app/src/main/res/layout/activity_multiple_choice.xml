@@ -143,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Choose a category:"
+        android:text="Choose a tag:"
         android:id="@+id/categoryLabel"
         android:layout_below="@+id/fieldE"
         android:layout_alignRight="@+id/createQuestionLabel"
