@@ -136,6 +136,10 @@ public class ModelViewController {
 		tagAreLoaded = true;
 	}
 
+	/* White TestGrader is static and doesn't  need to be in MVC, this allows a central
+		point for debugging for nowm - instead of looking around in the code. I might change this
+		depending on if I run into any issues. TestGrader's getters are not called in this class.
+	 */
 	public void prepareGrader(Test test) {
 		TestGrader.setTestSize(test.getSetOfFlashcards().size());
 		for (int i = 0; i < test.getSetOfFlashcards().size(); i++) {

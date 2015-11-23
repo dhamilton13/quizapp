@@ -7,7 +7,6 @@ package com.example.quizletclone;
 public class TestGrader {
     private static String[] correctAnswers, userAnswers;
     private static boolean[] answersBeingGraded;
-
     private static boolean areAnswersBeingRecorded = false, isTestGraded = false;
 
     TestGrader(){
@@ -38,6 +37,7 @@ public class TestGrader {
         isTestGraded = false;
         correctAnswers = null;
         userAnswers = null;
+        answersBeingGraded = null;
     }
 
     public static boolean isTestInProgress() {
