@@ -41,10 +41,8 @@ public class FlashcardlistForTag extends AppCompatActivity {
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
         populateCards(selected_Tag);
-
-
-
     }
+
     /* If 'back' is pressed on the device, return to previous. */
     @Override
     public void onBackPressed() {
@@ -53,14 +51,6 @@ public class FlashcardlistForTag extends AppCompatActivity {
         finish();
         return;
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tag, menu);
-        return true;
-    }
-
 
     private List<String> buildFlashcardsToStrings(List<Flashcard> fc, String str) {
         List<String> questions = new ArrayList<String>();
@@ -72,7 +62,6 @@ public class FlashcardlistForTag extends AppCompatActivity {
                 mvc.sortedCard.add(fc.get(i));          //record that card for recyclerView in next activity
             }
         }
-
         return questions;
     }
 
@@ -89,8 +78,5 @@ public class FlashcardlistForTag extends AppCompatActivity {
             myRecyclerViewAdapter.add(
                     myRecyclerViewAdapter.getItemCount(), propName, System.getProperty(propName));
         }
-
     }
-
-
 }

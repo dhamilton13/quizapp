@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 
 import java.util.ArrayList;
 
@@ -87,10 +89,6 @@ public class FlashcardActivity extends AppCompatActivity {
                 testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
                 String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
-                saveAnswerButton = new Button(this);
-                saveAnswerButton.setText("Save Answer");
-                layout.addView(saveAnswerButton);
-
                 createTestFlashcardLayout(category);
                 getUserAnswer(category);
 
@@ -102,25 +100,6 @@ public class FlashcardActivity extends AppCompatActivity {
             mvc.isTag = false;      //toggle the bool back for other activity
         }
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.create, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     /* Create a test flashcard layout depending on category type */
@@ -135,41 +114,63 @@ public class FlashcardActivity extends AppCompatActivity {
             checkAllTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 5; ++i) {
+                LinearLayout row = new LinearLayout(this);
+                row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                row.setOrientation(LinearLayout.HORIZONTAL);
                 checkBoxes.add(new CheckBox(this));
                 checkAllTextView.add(new TextView(this));
                 checkAllTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
-                layout.addView(checkBoxes.get(i));
-                layout.addView(checkAllTextView.get(i));
+                row.addView(checkBoxes.get(i));
+                row.addView(checkAllTextView.get(i));
+                layout.addView(row);
             }
         } else if (category.equals(MultipleChoice.CATEGORY)) {
             mpRadioButtons = new ArrayList<RadioButton>();
             mpTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 5; ++i) {
+                LinearLayout row = new LinearLayout(this);
+                row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                row.setOrientation(LinearLayout.HORIZONTAL);
                 mpRadioButtons.add(new RadioButton(this));
                 mpTextView.add(new TextView(this));
                 mpTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
-                layout.addView(mpRadioButtons.get(i));
-                layout.addView(mpTextView.get(i));
+                row.addView(mpRadioButtons.get(i));
+                row.addView(mpTextView.get(i));
+                layout.addView(row);
             }
         } else if (category.equals(TrueFalse.CATEGORY)) {
             tfRadioButtons = new ArrayList<RadioButton>();
             tfTextView = new ArrayList<TextView>();
 
             for (int i = 0; i < 2; ++i) {
+                LinearLayout row = new LinearLayout(this);
+                row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+                row.setOrientation(LinearLayout.HORIZONTAL);
+
                 tfRadioButtons.add(new RadioButton(this));
                 tfTextView.add(new TextView(this));
                 tfTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
-                layout.addView(tfRadioButtons.get(i));
-                layout.addView(tfTextView.get(i));
+                row.addView(tfRadioButtons.get(i));
+                row.addView(tfTextView.get(i));
+                layout.addView(row);
             }
         } else {
             saTextField = new EditText(this);
             layout.addView(saTextField);
         }
+
+        saveAnswerButton = new Button(this);
+        saveAnswerButton.setText("Save Answer");
+        layout.addView(saveAnswerButton);
+
+        ViewGroup.LayoutParams params = saveAnswerButton.getLayoutParams();
+        params.width = 400;
+        saveAnswerButton.setLayoutParams(params);
+        //saveAnswerButton.requestLayout();
     }
 
     /* Create a normal flashcard depending on layout */
