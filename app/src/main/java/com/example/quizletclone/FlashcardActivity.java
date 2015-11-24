@@ -110,6 +110,8 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         }
         else {
+            testTextView.setText(card.getQuestion());
+            createBasicFlashcardLayout(card.getCategory());
             mvc.isTag = false;      //toggle the bool back for other activity
         }
 

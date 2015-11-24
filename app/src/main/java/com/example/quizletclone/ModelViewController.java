@@ -23,7 +23,7 @@ public class ModelViewController {
 	//to store a list of card that sorted by the tag
 	public ArrayList<Flashcard> sortedCard;
 	//notify the FlashcardActivity whether it should adopt a sortedCard or all the card from database
-	public boolean isTag;
+	public boolean isTag=false;
 
 	//these two is for viewing flash card by tag, I store them outside of activity so that a refresh won't change them
 	public boolean sortByTag = false;
@@ -39,7 +39,6 @@ public class ModelViewController {
 		setOfTests = new ArrayList<Test>();
 		setOfTag = new ArrayList<String>();
 		sortedCard = new ArrayList<Flashcard>();
-		isTag = false;
 	}
 
 	public static ModelViewController getInstance(Context context) {

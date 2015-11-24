@@ -54,13 +54,15 @@ public class ListActivity extends AppCompatActivity {
         {
             setTitle(mvc.tag_option);
             populateCards(mvc.tag_option);    //populate the recyclerView with only the sorted card
-            //mvc.isSorted = false;  TODO: it will never go back to true!
-
+            //mvc.sortByTag = false;
+            //mvc.sortByCategory = false;
         }
         else if(!mvc.sortByTag && mvc.sortByCategory)
         {
             setTitle(mvc.category_option);
             populateCardsByCategory(mvc.getFlashcards(), mvc.category_option);
+            //mvc.sortByCategory = false;
+            //mvc.sortByTag = false;
         }
     }
 
@@ -154,6 +156,7 @@ public class ListActivity extends AppCompatActivity {
                             // of the selected item
                             mvc.tag_option = mvc.getTags().get(which);
                             mvc.sortByTag = true;
+                            mvc.sortByCategory = false;         //prevent both true
 
                             //decide what tag content need to be show and refresh the current activity
                             finish();
@@ -196,24 +199,28 @@ public class ListActivity extends AppCompatActivity {
                                         case 0:
                                             mvc.category_option = "Multiple Choice";
                                             mvc.sortByCategory = true;
+                                            mvc.sortByTag = false;
                                             finish();
                                             startActivity(getIntent());
                                             break;
                                         case 1:
                                             mvc.category_option = "Short Answer";
                                             mvc.sortByCategory = true;
+                                            mvc.sortByTag = false;
                                             finish();
                                             startActivity(getIntent());
                                             break;
                                         case 2:
                                             mvc.category_option = "True Or False";
                                             mvc.sortByCategory = true;
+                                            mvc.sortByTag = false;
                                             finish();
                                             startActivity(getIntent());
                                             break;
                                         case 3:
                                             mvc.category_option = "Check All That Apply";
                                             mvc.sortByCategory = true;
+                                            mvc.sortByTag = false;
                                             finish();
                                             startActivity(getIntent());
                                             break;
