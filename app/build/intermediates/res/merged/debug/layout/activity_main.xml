@@ -8,43 +8,140 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.quizletclone.MainActivity" >
 
-    <Button
-        android:id="@+id/viewFlashcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToViewFlashcards"
-        android:text="View Flashcards"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/custom_app_button"/>
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/ic_flashcards"
+                 android:id="@+id/viewFlashcard"
+                 android:onClick="goToViewFlashcards"
+                 android:text="View Flashcards"
+                 android:scaleType="fitCenter"
+                 android:background="@null"
+                 android:layout_marginBottom="83dp"
+                 android:layout_marginLeft="26dp"
+                 android:layout_marginStart="26dp"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"/>
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/ic_test"
+                 android:id="@+id/viewTest"
+                 android:onClick="goToCreateTest"
+                 android:text="View Tests"
+                 android:scaleType="fitCenter"
+                 android:background="@null"
+                 android:layout_alignTop="@+id/viewFlashcard"
+                 android:layout_centerHorizontal="true"/>
 
-    <Button
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/ic_tags"
+                 android:id="@+id/viewTags"
+                 android:onClick="createTag"
+                 android:text="View Tags"
+                 android:scaleType="fitCenter"
+                 android:background="@null"
+                 android:layout_marginRight="28dp"
+                 android:layout_marginEnd="28dp"
+                 android:layout_alignTop="@+id/viewTest"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentEnd="true"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Tests"
-        android:id="@+id/button"
-        android:onClick="goToCreateTest"
-        android:layout_below="@+id/viewFlashcard"
-        android:layout_alignLeft="@+id/viewFlashcard"
-        android:layout_alignStart="@+id/viewFlashcard"
-        android:layout_marginTop="35dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Flashcards"
+        android:id="@+id/textView"
         android:layout_alignRight="@+id/viewFlashcard"
         android:layout_alignEnd="@+id/viewFlashcard"
-        android:background="@drawable/custom_app_button"/>
+        android:layout_below="@+id/viewTest"
+        android:paddingTop="10dp"
+        android:gravity="center_horizontal"
+        android:layout_alignLeft="@+id/viewFlashcard"
+        android:layout_alignStart="@+id/viewFlashcard"/>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manage Tag"
-        android:id="@+id/viewFlashcardByTag"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="35dp"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:onClick="createTag"
-        android:background="@drawable/custom_app_button"/>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tests"
+        android:id="@+id/textView2"
+        android:paddingTop="10dp"
+        android:gravity="center_horizontal"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignLeft="@+id/viewTest"
+        android:layout_alignStart="@+id/viewTest"
+        android:layout_alignRight="@+id/viewTest"
+        android:layout_alignEnd="@+id/viewTest"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tags"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/viewTags"
+        android:layout_alignLeft="@+id/viewTags"
+        android:layout_alignStart="@+id/viewTags"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/viewTags"
+        android:layout_alignEnd="@+id/viewTags"
+        android:paddingTop="10dp"
+        android:gravity="center_horizontal"/>
+
+    <ImageView
+        android:src="@drawable/ic_quizme"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/viewFlashcard"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="goToViewFlashcards"-->
+        <!--android:text="View Flashcards"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@drawable/custom_app_button"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="View Tests"-->
+        <!--android:id="@+id/button"-->
+        <!--android:onClick="goToCreateTest"-->
+        <!--android:layout_below="@+id/viewFlashcard"-->
+        <!--android:layout_alignLeft="@+id/viewFlashcard"-->
+        <!--android:layout_alignStart="@+id/viewFlashcard"-->
+        <!--android:layout_marginTop="35dp"-->
+        <!--android:layout_alignRight="@+id/viewFlashcard"-->
+        <!--android:layout_alignEnd="@+id/viewFlashcard"-->
+        <!--android:background="@drawable/custom_app_button"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Manage Tag"-->
+        <!--android:id="@+id/viewFlashcardByTag"-->
+        <!--android:layout_below="@+id/button"-->
+        <!--android:layout_marginTop="35dp"-->
+        <!--android:layout_alignRight="@+id/button"-->
+        <!--android:layout_alignEnd="@+id/button"-->
+        <!--android:layout_alignLeft="@+id/button"-->
+        <!--android:layout_alignStart="@+id/button"-->
+        <!--android:onClick="createTag"-->
+        <!--android:background="@drawable/custom_app_button"/>-->
 
 
-</RelativeLayout><!-- From: file:/Users/Jessica/AndroidStudioProjects/quizapp/app/src/main/res/layout/activity_main.xml -->
+</RelativeLayout><!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/src/main/res/layout/activity_main.xml -->
