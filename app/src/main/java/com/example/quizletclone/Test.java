@@ -129,12 +129,20 @@ public class Test {
         {
             //add ammount of each type without shuffling
             if(isShortAnswer)
+                if(numSA == 0)
+                    numSA = saCards.size();
                 addCards(setOfFlashcards, saCards, numSA);
             if(isMultipleChoice)
+                if(numMC == 0)
+                    numMC = mcCards.size();
                 addCards(setOfFlashcards, mcCards, numMC);
             if(isTrueFalse)
+                if(numTF == 0)
+                    numTF = tfCards.size();
                 addCards(setOfFlashcards, tfCards, numTF);
             if(isCheckAllThatApply)
+                if(numCA == 0)
+                    numCA = caCards.size();
                 addCards(setOfFlashcards, caCards, numCA);
 
         }

@@ -54,15 +54,11 @@ public class ListActivity extends AppCompatActivity {
         {
             setTitle(mvc.tag_option);
             populateCards(mvc.tag_option);    //populate the recyclerView with only the sorted card
-            //mvc.sortByTag = false;
-            //mvc.sortByCategory = false;
         }
         else if(!mvc.sortByTag && mvc.sortByCategory)
         {
             setTitle(mvc.category_option);
             populateCardsByCategory(mvc.getFlashcards(), mvc.category_option);
-            //mvc.sortByCategory = false;
-            //mvc.sortByTag = false;
         }
     }
 

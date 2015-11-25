@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -77,7 +78,83 @@ public class CreateTag extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         //mvc.storeFlashcards(getApplicationContext());
     }
-    
+
+    @Override   //inflate the action menu bar
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.tag, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //reaction when click the delete tag button
+        if (id == R.id.tag_action_delete) {
+
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+
+            int size = mvc.getTags().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getTags().get(i);
+
+            builder.setTitle("Delete Tag")
+                    .setItems(arr, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //gets the tag you want to delete
+                            mvc.tag_option = mvc.getTags().get(which);
+
+                            if(mvc.tag_option.equals("root"))
+                            {
+                                Toast toast = Toast.makeText(getApplicationContext(), "root cannot be deleted",
+                                        Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                            else
+                                confirmDelete();
+
+                        }
+                    });
+
+            android.app.AlertDialog a = builder.create();
+            a.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //alert user while delete tag data
+    public void confirmDelete()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Delete Confirmation");
+        alert.setMessage("delete a tag will destroy all flash card associated!");
+
+        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                mvc.deleteTag(mvc.tag_option);
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+
+    }
+
+
     public void addTag(View view)
     {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -87,6 +164,7 @@ public class CreateTag extends AppCompatActivity {
 
         // Set an EditText view to get user input
         final EditText input = new EditText(this);
+        input.setGravity(Gravity.CENTER);
 
         alert.setView(input);
 
@@ -94,7 +172,7 @@ public class CreateTag extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 // Do something with value!
-               String message = input.getText().toString();
+                String message = input.getText().toString();
                 boolean createSuccess = mvc.createTag(message);
                 input.setText("");
 
