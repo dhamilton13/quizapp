@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
 		mvc = ModelViewController.getInstance(this);
 		mvc.loadTests(this);
 		mvc.loadFlashcards(this);
+		mvc.createTag("root");
 		mvc.loadTag(this);
 	}
 

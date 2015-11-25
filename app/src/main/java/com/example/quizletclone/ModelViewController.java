@@ -166,5 +166,12 @@ public class ModelViewController {
 
 	public List<String> getTags() { return this.setOfTag; }
 
-
+	/**
+	 * This function delete the tag specified by str and all the flashCard associated
+	 * @param str
+	 */
+	public void deleteTag(String str)
+	{
+		database.deleteTag(str);
+	}
 }

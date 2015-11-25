@@ -51,8 +51,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     }
 
     public boolean insertFlashcardData(String flashcardQuestion, String flashcardAnswer, String answerList,
-                                       String flashcardTag,
-                            String flashcardCategory) {
+                                       String flashcardTag,String flashcardCategory) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1_T1, flashcardQuestion);
@@ -60,6 +59,12 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         contentValues.put(COL_3_T1, flashcardTag);
         contentValues.put(COL_4_T1, flashcardCategory);
         contentValues.put(COL_5_T1, answerList);
+
+        //so the structure of contentValue after all puts should be
+        //due to the mismatch of flash card constructor and database insert method signature
+        //  question | answer | Category | tag | answerList
+        //  Col_1    | Col_2  | Col_3    |Col_4| Col_5
+
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if(result == -1)
@@ -117,6 +122,15 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         return res;
     }
 
+    public void deleteTag(String str)
+    {
+        //memo:
+        //  question | answer | Category | tag | answerList
+        //  Col_1    | Col_2  | Col_3    |Col_4| Col_5
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_3_NAME + " WHERE " + COL_1_T3 + "='" + str + "'");
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_4_T1 + "='" + str + "'");
+    }
 
 
 }

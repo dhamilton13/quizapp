@@ -2310,13 +2310,14 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020043;
         public static final int abc_textfield_search_material=0x7f020044;
         public static final int circle=0x7f020045;
-        public static final int design_fab_background=0x7f020046;
-        public static final int design_snackbar_background=0x7f020047;
-        public static final int ic_action=0x7f020048;
-        public static final int ic_launcher=0x7f020049;
-        public static final int notification_template_icon_bg=0x7f02004c;
-        public static final int pencil=0x7f02004a;
-        public static final int search=0x7f02004b;
+        public static final int delete=0x7f020046;
+        public static final int design_fab_background=0x7f020047;
+        public static final int design_snackbar_background=0x7f020048;
+        public static final int ic_action=0x7f020049;
+        public static final int ic_launcher=0x7f02004a;
+        public static final int notification_template_icon_bg=0x7f02004d;
+        public static final int pencil=0x7f02004b;
+        public static final int search=0x7f02004c;
     }
     public static final class id {
         public static final int action0=0x7f0c00a4;
@@ -2475,7 +2476,7 @@ containing a value of this type.
         public static final int status_bar_latest_event_content=0x7f0c00a6;
         public static final int submit_area=0x7f0c0065;
         public static final int tabMode=0x7f0c000d;
-        public static final int tag_action_settings=0x7f0c00b4;
+        public static final int tag_action_delete=0x7f0c00b4;
         public static final int tag_imageButton=0x7f0c007c;
         public static final int tag_recyclerview=0x7f0c007b;
         public static final int tag_to_card_recyclerview=0x7f0c008f;
