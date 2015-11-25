@@ -114,30 +114,44 @@ public class CreateTag extends AppCompatActivity {
                                 toast.show();
                             }
                             else
-                            {
-                                mvc.deleteTag(mvc.tag_option);
+                                confirmDelete();
 
-                                finish();
-                                startActivity(getIntent());
-
-                            }
                         }
                     });
 
             android.app.AlertDialog a = builder.create();
             a.show();
-
-/* test if the sort_option is returned correctly
-
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-            builder2.setTitle(sort_option);
-            AlertDialog b = builder2.create();
-            b.show();
-*/
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //alert user while delete tag data
+    public void confirmDelete()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Delete Confirmation");
+        alert.setMessage("delete a tag will destroy all flash card associated!");
+
+        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                mvc.deleteTag(mvc.tag_option);
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+
     }
 
 
