@@ -16,7 +16,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_action"
-        android:background="@color/ColorPrimaryDark"
+        android:background="@color/YikYakish"
         android:id="@+id/imageButton"
         android:layout_gravity="bottom|right"
         android:layout_alignParentBottom="true"
@@ -24,4 +24,4 @@
         android:layout_alignParentEnd="true"
         />
 
-</RelativeLayout><!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/layout/activity_list_test_flashcards.xml -->
+</RelativeLayout><!-- From: file:/Users/Jessica/AndroidStudioProjects/quizapp/app/src/main/res/layout/activity_list_test_flashcards.xml -->

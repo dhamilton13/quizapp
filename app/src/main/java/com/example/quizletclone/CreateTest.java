@@ -10,16 +10,20 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.CheckBox;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 public class CreateTest extends AppCompatActivity {
     private ModelViewController mvc;
     private Button createQuestion;
     private EditText nameField;
     private CheckBox shortAnswer, multipleChoice, trueFalse, checkAll, random;
-    private RelativeLayout layout;
+    private EditText etnumSA, etnumMC, etnumTF, etnumCA, etnumRA;
+    private int numSA, numMC, numTF, numCA, numRA;
+    private LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,7 @@ public class CreateTest extends AppCompatActivity {
     }
 
     private void initializeGUIComponents() {
-        layout = (RelativeLayout)findViewById(R.id.layout);
+        layout = (LinearLayout)findViewById(R.id.layout);
         createQuestion = (Button)findViewById(R.id.createTest);
         nameField = (EditText)findViewById(R.id.nameField);
         shortAnswer = (CheckBox)findViewById(R.id.shortAnswerCB);
@@ -49,6 +53,158 @@ public class CreateTest extends AppCompatActivity {
         trueFalse = (CheckBox)findViewById(R.id.trueFalseCB);
         checkAll = (CheckBox)findViewById(R.id.checkAllCB);
         random = (CheckBox)findViewById(R.id.randomCB);
+        etnumSA = (EditText)findViewById(R.id.etAmmountSA);
+        etnumMC = (EditText)findViewById(R.id.etAmmountMC);
+        etnumTF = (EditText)findViewById(R.id.etAmmountTF);
+        etnumCA = (EditText)findViewById(R.id.etAmmountCA);
+        etnumRA = (EditText)findViewById(R.id.etAmmountRA);
+
+
+
+        //these handle enabling and disabling the edit texts to only allow number of types or just number of random
+        etnumSA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etnumSA.getText().toString().matches("") &&
+                    etnumMC.getText().toString().matches("")&&
+                    etnumTF.getText().toString().matches("")&&
+                    etnumRA.getText().toString().matches(""))
+                {
+                    enableNumRA();
+                }
+                else
+                {
+                    disableNumRA();
+                    shortAnswer.setChecked(true);
+                }
+            }
+
+        });
+
+        etnumMC.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(etnumSA.getText().toString().matches("") &&
+                        etnumMC.getText().toString().matches("")&&
+                        etnumTF.getText().toString().matches("")&&
+                        etnumCA.getText().toString().matches(""))
+                {
+                    enableNumRA();
+                }
+                else
+                {
+                    disableNumRA();
+                    multipleChoice.setChecked(true);
+                }
+            }
+
+        });
+
+        etnumTF.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etnumSA.getText().toString().matches("") &&
+                        etnumMC.getText().toString().matches("")&&
+                        etnumTF.getText().toString().matches("")&&
+                        etnumCA.getText().toString().matches(""))
+                {
+                    enableNumRA();
+                }
+                else
+                {
+                    disableNumRA();
+                    trueFalse.setChecked(true);
+                }
+            }
+
+        });
+
+        etnumCA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etnumSA.getText().toString().matches("") &&
+                        etnumMC.getText().toString().matches("")&&
+                        etnumTF.getText().toString().matches("")&&
+                        etnumCA.getText().toString().matches(""))
+                {
+                    enableNumRA();
+                }
+                else
+                {
+                    disableNumRA();
+                    checkAll.setChecked(true);
+                }
+            }
+
+        });
+
+        etnumRA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etnumRA.getText().toString().matches(""))
+                {
+                    enableOtherET();
+                }
+                else {
+                    disableOtherET();
+                    random.setChecked(true);
+                }
+            }
+
+        });
+
+
 
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -59,6 +215,33 @@ public class CreateTest extends AppCompatActivity {
             }
         });
     }
+
+    private void disableNumRA()
+    {
+        etnumRA.setEnabled(false);
+    }
+
+    private void enableNumRA()
+    {
+        etnumRA.setEnabled(true);
+    }
+
+    private void enableOtherET()
+    {
+        etnumSA.setEnabled(true);
+        etnumMC.setEnabled(true);
+        etnumTF.setEnabled(true);
+        etnumCA.setEnabled(true);
+    }
+
+    private void disableOtherET()
+    {
+        etnumSA.setEnabled(false);
+        etnumMC.setEnabled(false);
+        etnumTF.setEnabled(false);
+        etnumCA.setEnabled(false);
+    }
+
 
     private void createTestObject() {
         createQuestion.setOnClickListener(
@@ -73,14 +256,56 @@ public class CreateTest extends AppCompatActivity {
                     }
 
                     boolean successfulCreation;
-                    if (random.isChecked()) {
-                        successfulCreation = mvc.createTest(nameField.getText().toString(),
-                                true, false, false, false, false, true);
-                    } else {
-                        successfulCreation = mvc.createTest(nameField.getText().toString(), false,
-                                shortAnswer.isChecked(), multipleChoice.isChecked(),
-                                trueFalse.isChecked(), checkAll.isChecked(), random.isChecked());
+
+                    if(etnumSA.getText().toString().matches(""))
+                    {
+                        numSA = 0;
                     }
+                    else {
+                        numSA = Integer.parseInt(etnumSA.getText().toString());
+                    }
+
+
+                    if(etnumMC.getText().toString().matches(""))
+                    {
+                        numMC = 0;
+                    }
+                    else {
+                        numMC = Integer.parseInt(etnumMC.getText().toString());
+                    }
+
+
+                    if(etnumTF.getText().toString().matches(""))
+                    {
+                        numTF = 0;
+                    }
+                    else {
+                        numTF = Integer.parseInt(etnumTF.getText().toString());
+                    }
+
+
+                    if(etnumCA.getText().toString().matches(""))
+                    {
+                        numCA = 0;
+                    }
+                    else {
+                        numCA = Integer.parseInt(etnumCA.getText().toString());
+                    }
+
+
+                    if(etnumRA.getText().toString().matches(""))
+                    {
+                        numRA = 0;
+                    }
+                    else {
+                        numRA = Integer.parseInt(etnumRA.getText().toString());
+                    }
+
+                    successfulCreation = mvc.createTest(nameField.getText().toString(), false,
+                            shortAnswer.isChecked(), multipleChoice.isChecked(),
+                            trueFalse.isChecked(), checkAll.isChecked(), random.isChecked(),
+                            numSA, numMC, numTF, numCA, numRA);
+
 
                     nameField.setText("");
 

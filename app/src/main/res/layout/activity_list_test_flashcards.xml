@@ -16,7 +16,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_action"
-        android:background="@color/ColorPrimaryDark"
+        android:background="@color/YikYakish"
         android:id="@+id/imageButton"
         android:layout_gravity="bottom|right"
         android:layout_alignParentBottom="true"

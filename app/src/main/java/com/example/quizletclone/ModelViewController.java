@@ -61,8 +61,12 @@ public class ModelViewController {
 
 	/** Create a new Test object and store into SQLite database */
 	public boolean createTest(String nameOfTest, boolean isDynamic, boolean isShortAnswer,
-						   boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll, boolean isRandom) {
-		Test test = new Test(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice, isTrueFalse, isCheckAll, isRandom);
+						   boolean isMultipleChoice, boolean isTrueFalse, boolean isCheckAll, boolean isRandom,
+							int numSA, int numMC, int numTF, int numCA, int numRA) {
+
+		Test test = new Test(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice, isTrueFalse, isCheckAll, isRandom,
+						numSA, numMC, numTF, numCA, numRA);
+
 		ArrayList<Flashcard> fcs = test.generateQuestions(setOfFlashcards);
 		setOfTests.add(test);
 
@@ -71,7 +75,8 @@ public class ModelViewController {
 		String flashcards = gson.toJson(fcs);
 
 		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
-				isTrueFalse, isCheckAll, isRandom, flashcards);
+				isTrueFalse, isCheckAll, isRandom, flashcards,
+				numSA, numMC, numTF, numCA, numRA);
 	}
 
 	/** Create a new Test object and store into SQLite database */
@@ -115,7 +120,9 @@ public class ModelViewController {
 			ArrayList<Flashcard> cards = gson.fromJson(res.getString(7), type);
 
 			Test test = new Test(res.getString(0), res.getInt(1)!=0, res.getInt(2)!=0,
-					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0, res.getInt(6) != 0);
+					res.getInt(3)!=0, res.getInt(4)!=0, res.getInt(5)!=0, res.getInt(6) != 0,
+					res.getInt(8), res.getInt(9), res.getInt(10), res.getInt(11), res.getInt(12));
+
 			test.setFlashcards(cards);
 			setOfTests.add(test);
 		}

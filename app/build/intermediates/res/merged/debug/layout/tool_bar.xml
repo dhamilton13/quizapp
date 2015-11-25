@@ -7,4 +7,4 @@
     android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
     android:background="@color/ColorPrimary"
     xmlns:android="http://schemas.android.com/apk/res/android" />
-<!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/layout/tool_bar.xml -->
+<!-- From: file:/Users/Jessica/AndroidStudioProjects/quizapp/app/src/main/res/layout/tool_bar.xml -->

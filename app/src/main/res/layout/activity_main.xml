@@ -15,7 +15,8 @@
         android:onClick="goToViewFlashcards"
         android:text="View Flashcards"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_app_button"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
         android:layout_alignStart="@+id/viewFlashcard"
         android:layout_marginTop="35dp"
         android:layout_alignRight="@+id/viewFlashcard"
-        android:layout_alignEnd="@+id/viewFlashcard" />
+        android:layout_alignEnd="@+id/viewFlashcard"
+        android:background="@drawable/custom_app_button"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -41,7 +43,8 @@
         android:layout_alignEnd="@+id/button"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
-        android:onClick="createTag"/>
+        android:onClick="createTag"
+        android:background="@drawable/custom_app_button"/>
 
 
 </RelativeLayout>

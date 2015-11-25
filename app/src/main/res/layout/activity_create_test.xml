@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:id="@+id/layout"
+    android:orientation="vertical"
     tools:context="com.example.quizletclone.CreateTest">
 
     <TextView
@@ -14,12 +15,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Enter a test name:"
         android:id="@+id/testName"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
+        android:layout_gravity="center"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,115 +23,164 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/nameField"
-        android:layout_below="@+id/testName"
-        android:layout_alignLeft="@+id/testName"
-        android:layout_alignStart="@+id/testName" />
+        android:layout_gravity="center"/>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_marginTop="44dp"-->
+        <!--android:layout_gravity="right">-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="100"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Number of Questions: "-->
+            <!--android:gravity="right"/>-->
+    <!--</LinearLayout>-->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id = "@+id/llSA"
+        android:layout_marginTop="44dp">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortAnswerCB"
+            android:checked="false"
+            android:text="Short Answer"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:ems="7"
+            android:id="@+id/etAmmountSA"
+            android:hint="# of Questions"
+            android:inputType="number"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id = "@+id/llMC">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/multipleChoiceCB"
+            android:checked="false"
+            android:text = "Multiple Choice"/>
+
+        <EditText
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="7"
+            android:id="@+id/etAmmountMC"
+            android:hint="# of Questions"
+            android:inputType="number"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id = "@+id/llMC">
+
+        <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/trueFalseCB"
+        android:checked="false"
+        android:text = "True/False"/>
+
+        <EditText
+            android:layout_marginLeft="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="7"
+            android:id="@+id/etAmmountTF"
+            android:hint="# of Questions"
+            android:inputType="number"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id = "@+id/llMC">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkAllCB"
+            android:checked="false"
+            android:text = "Check All That Apply"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="7"
+            android:id="@+id/etAmmountCA"
+            android:hint="# of Questions"
+            android:inputType="number"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id = "@+id/llMC">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/randomCB"
+            android:checked="false"
+            android:text = "Random"/>
+
+        <EditText
+            android:layout_marginLeft="75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="7"
+            android:id="@+id/etAmmountRA"
+            android:hint="# of Questions"
+            android:inputType="number"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Test"
         android:id="@+id/createTest"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/nameField"
-        android:layout_alignStart="@+id/nameField" />
+        android:layout_gravity="center"
+        android:background="@color/YikYakish"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shortAnswerCB"
-        android:layout_below="@+id/nameField"
-        android:layout_alignLeft="@+id/nameField"
-        android:layout_alignStart="@+id/nameField"
-        android:layout_marginTop="44dp"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/multipleChoiceCB"
-        android:layout_below="@+id/shortAnswerCB"
-        android:layout_alignLeft="@+id/shortAnswerCB"
-        android:layout_alignStart="@+id/shortAnswerCB"
-        android:layout_alignRight="@+id/createTest"
-        android:layout_alignEnd="@+id/createTest"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/trueFalseCB"
-        android:layout_below="@+id/multipleChoiceCB"
-        android:layout_alignLeft="@+id/multipleChoiceCB"
-        android:layout_alignStart="@+id/multipleChoiceCB"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkAllCB"
-        android:layout_below="@+id/trueFalseCB"
-        android:layout_alignLeft="@+id/trueFalseCB"
-        android:layout_alignStart="@+id/trueFalseCB"
-        android:checked="false" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/randomCB"
-        android:layout_below="@+id/checkAllCB"
-        android:layout_alignLeft="@+id/checkAllCB"
-        android:layout_alignStart="@+id/checkAllCB"
-        android:checked="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Short answer"
-        android:id="@+id/saLabel"
-        android:layout_above="@+id/multipleChoiceCB"
-        android:layout_toRightOf="@+id/shortAnswerCB"
-        android:layout_toEndOf="@+id/shortAnswerCB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Multiple choice"
-        android:id="@+id/mcLabel"
-        android:layout_above="@+id/trueFalseCB"
-        android:layout_toRightOf="@+id/shortAnswerCB"
-        android:layout_toEndOf="@+id/shortAnswerCB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="True and False"
-        android:id="@+id/tfLabel"
-        android:layout_alignBottom="@+id/trueFalseCB"
-        android:layout_toRightOf="@+id/trueFalseCB"
-        android:layout_toEndOf="@+id/trueFalseCB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Check all"
-        android:id="@+id/caLabel"
-        android:layout_above="@+id/randomCB"
-        android:layout_toRightOf="@+id/trueFalseCB"
-        android:layout_toEndOf="@+id/trueFalseCB" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Random"
-        android:id="@+id/randomLabel"
-        android:layout_alignBottom="@+id/randomCB"
-        android:layout_toRightOf="@+id/checkAllCB"
-        android:layout_toEndOf="@+id/checkAllCB" />
-
-</RelativeLayout>
+</LinearLayout>

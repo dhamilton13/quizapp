@@ -22,6 +22,13 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String COL_6_T2 = "CA";
     private static final String COL_7_T2 = "FLASHCARDS";
     private static final String COL_8_T2 = "RA";
+
+    private static final String COL_9_T2 = "SANUM";
+    private static final String COL_10_T2 = "MCNUM";
+    private static final String COL_11_T2 = "TFNUM";
+    private static final String COL_12_T2 = "CANUM";
+    private static final String COL_13_T2 = "RANUM";
+
     private static final String COL_1_T1 = "QUESTION";
     private static final String COL_2_T1 = "ANSWER";
     private static final String COL_3_T1 = "TAG";
@@ -38,7 +45,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)  {
         db.execSQL("create table " + TABLE_3_NAME + "(TAG TEXT UNIQUE)");
-        db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, RA INT, FLASHCARDS TEXT)");
+        db.execSQL("create table " + TABLE_2_NAME + "(NAME TEXT, DYNAMIC INT, SA INT, MC INT, TF INT, CA INT, RA INT, FLASHCARDS TEXT, SANUM INT, MCNUM INT, TFNUM, CANUM INT, RANUM INT)");
         db.execSQL("create table " + TABLE_NAME + "(QUESTION TEXT, ANSWER TEXT, TAG TEXT, CATEGORY TEXT, ANSWERLIST TEXT)");
     }
 
@@ -68,7 +75,8 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     }
 
     public boolean insertTestData(String testName, boolean isDynamic, boolean isSA, boolean isMC,
-                                  boolean isTF, boolean isCA, boolean isRA, String flashcards) {
+                                  boolean isTF, boolean isCA, boolean isRA, String flashcards,
+                                  int saNum, int mcNum, int tfNum, int caNum, int raNum) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1_T2, testName);
@@ -79,6 +87,11 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         contentValues.put(COL_6_T2, isCA);
         contentValues.put(COL_8_T2, isRA);
         contentValues.put(COL_7_T2, flashcards);
+        contentValues.put(COL_9_T2, saNum);
+        contentValues.put(COL_10_T2, mcNum);
+        contentValues.put(COL_11_T2, tfNum);
+        contentValues.put(COL_12_T2, caNum);
+        contentValues.put(COL_13_T2, raNum);
 
         long result = db.insert(TABLE_2_NAME, null, contentValues);
 
