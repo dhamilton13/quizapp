@@ -8,14 +8,14 @@
         android:id="@+id/action_category"
         android:orderInCategory="100"
         android:title="sort_by_category"
-        android:icon="@drawable/pencil"
+        android:icon="@drawable/sort"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_sort"
         android:orderInCategory="100"
         android:title="sort"
-        android:icon="@drawable/search"
+        android:icon="@drawable/tags"
         app:showAsAction="always"/>
 
 </menu>

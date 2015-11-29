@@ -145,7 +145,7 @@ public class ListActivity extends AppCompatActivity {
             for(int i=0;i<size;i++)
                 arr[i] = mvc.getTags().get(i);
 
-            builder.setTitle("Sort Flash Card by Tags")
+            builder.setTitle("Sort Flashcards by Tags")
                     .setItems(arr, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // The 'which' argument contains the index position
@@ -183,7 +183,7 @@ public class ListActivity extends AppCompatActivity {
             for(int i=0;i<size;i++)
                 arr[i] = mvc.getTags().get(i);
 
-            builder.setTitle("Sort Flash Card by Tags")
+            builder.setTitle("Sort Flashcards by Type")
                     .setItems(new CharSequence[]
                                     {"Multiple Choice", "Short Answer", "True/False",
                                             "Check All That Apply"},
