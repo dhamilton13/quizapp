@@ -565,6 +565,7 @@ public class FlashcardActivity extends AppCompatActivity {
         intent.putExtra("TestPOS", FlashcardListForTestsActivity.index);
         intent.putExtra("POS", position);
         v.getContext().startActivity(intent);
+        finish();
     }
 
     public void displayCardListActivity(View v) {
@@ -572,6 +573,7 @@ public class FlashcardActivity extends AppCompatActivity {
         intent.putExtra("POS", position);
         intent.putExtra("callingClass", ListActivity.class.toString());
         v.getContext().startActivity(intent);
+        finish();
     }
 
     public void displayCardTagActivity(View v) {
@@ -580,5 +582,6 @@ public class FlashcardActivity extends AppCompatActivity {
         intent.putExtra("callingClass", FlashcardlistForTag.class.toString());
         mvc.isTag = true;
         v.getContext().startActivity(intent);
+        finish();
     }
 }

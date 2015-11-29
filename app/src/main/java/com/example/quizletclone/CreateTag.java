@@ -139,8 +139,8 @@ public class CreateTag extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 mvc.deleteTag(mvc.tag_option);
-                finish();
                 startActivity(getIntent());
+                finish();
             }
         });
 
@@ -187,8 +187,8 @@ public class CreateTag extends AppCompatActivity {
                     toast.show();
                 }
 
-                finish();
                 startActivity(getIntent());
+                finish();
 
             }
         });

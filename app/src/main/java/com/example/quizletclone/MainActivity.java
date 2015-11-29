@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		//getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-		setTitle("Quiz App"); //Can be modified to match APP name
+		setTitle("Quiz Me!"); //Can be modified to match APP name
 		mvc = ModelViewController.getInstance(this);
 		mvc.loadTests(this);
 		mvc.loadFlashcards(this);
@@ -47,11 +47,13 @@ public class MainActivity extends ActionBarActivity {
 		Intent intent = new Intent(this, ListActivity.class);
 		intent.putExtra("isSorted", false);
 		startActivity(intent);
+		finish();
 	}
 
 	public void goToCreateTest(View view) {
 		Intent intent = new Intent(this, TestListActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	/**
@@ -60,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
 	public void createTag(View view) {
 		Intent intent = new Intent(this, CreateTag.class);
 		startActivity(intent);
+		finish();
 	}
 
 	

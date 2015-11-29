@@ -123,8 +123,8 @@ public class ListActivity extends AppCompatActivity {
         {
             mvc.sortByTag = false;
             mvc.sortByCategory = false;
-            finish();
             startActivity(getIntent());
+            finish();
         }
     }
 
@@ -155,8 +155,8 @@ public class ListActivity extends AppCompatActivity {
                             mvc.sortByCategory = false;         //prevent both true
 
                             //decide what tag content need to be show and refresh the current activity
-                            finish();
                             startActivity(getIntent());
+                            finish();
                         }
                     });
 
@@ -196,29 +196,29 @@ public class ListActivity extends AppCompatActivity {
                                             mvc.category_option = "Multiple Choice";
                                             mvc.sortByCategory = true;
                                             mvc.sortByTag = false;
-                                            finish();
                                             startActivity(getIntent());
+                                            finish();
                                             break;
                                         case 1:
                                             mvc.category_option = "Short Answer";
                                             mvc.sortByCategory = true;
                                             mvc.sortByTag = false;
-                                            finish();
                                             startActivity(getIntent());
+                                            finish();
                                             break;
                                         case 2:
                                             mvc.category_option = "True Or False";
                                             mvc.sortByCategory = true;
                                             mvc.sortByTag = false;
-                                            finish();
                                             startActivity(getIntent());
+                                            finish();
                                             break;
                                         case 3:
                                             mvc.category_option = "Check All That Apply";
                                             mvc.sortByCategory = true;
                                             mvc.sortByTag = false;
-                                            finish();
                                             startActivity(getIntent());
+                                            finish();
                                             break;
                                     }
                                 }
@@ -345,6 +345,7 @@ public class ListActivity extends AppCompatActivity {
     private void multipleChoice(){
         Intent intent = new Intent(this, MultipleChoice.class);
         startActivity(intent);
+        finish();
     }
 
     // starts new activity leading to short answer creation
@@ -352,15 +353,18 @@ public class ListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ShortAnswer.class);
 
         startActivity(intent);
+        finish();
     }
 
     private void trueFalse(){
         Intent intent = new Intent(this, TrueFalse.class);
         startActivity(intent);
+        finish();
     }
 
     private void checkAllThatApply() {
         Intent intent = new Intent(this, CheckAllThatApply.class);
         startActivity(intent);
+        finish();
     }
 }

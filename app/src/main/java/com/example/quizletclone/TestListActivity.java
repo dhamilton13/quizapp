@@ -137,5 +137,6 @@ public class TestListActivity extends AppCompatActivity {
     private void createTest() {
         Intent intent = new Intent(this, CreateTest.class);
         startActivity(intent);
+        finish();
     }
 }
