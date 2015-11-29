@@ -19,4 +19,6 @@
     <string name="title_activity_tag">TagActivity</string>
     <string name="title_activity_create_tag">CreateTag</string>
 
+    <string name="flashcardNum">Flashcard 0/0</string>
+
 </resources>

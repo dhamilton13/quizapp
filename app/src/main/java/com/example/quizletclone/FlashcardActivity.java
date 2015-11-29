@@ -38,7 +38,6 @@ public class FlashcardActivity extends AppCompatActivity {
     private final int MULTIPLE_CHOICE_LIMIT = 5, CHECK_ALL_LIMIT = 5, TRUE_FALSE_LIMIT = 2;
     private final String PLACEHOLDER = "   ";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,10 +60,12 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
+
         // set the question onto flashcard
         testTextView = (TextView) findViewById(R.id.testTextView);
 
-        if(!mvc.isTag)
+
+        if (!mvc.isTag)
             card = mvc.getFlashcards().get(position);       //get all cards from database
         else
             card = mvc.sortedCard.get(position);            //only get the card sorted by tag
@@ -89,6 +90,9 @@ public class FlashcardActivity extends AppCompatActivity {
              */
             if (!callingClass.contains("FlashcardListForTestsActivity")) {
                 testTextView.setText(card.getQuestion());
+                final TextView textViewToChange = (TextView) findViewById(R.id.flashcardNum);
+                textViewToChange.setText(
+                        "Flashcard " + (position+1) + "/" + mvc.getFlashcards().size());
                 createBasicFlashcardLayout(mvc.getFlashcards().get(position).getCategory());
             } else if (callingClass.contains("FlashcardListForTestsActivity")) {
                 isTestGraded = TestGrader.isTestGraded();
@@ -99,6 +103,10 @@ public class FlashcardActivity extends AppCompatActivity {
                 testTextView.setText(mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getQuestion());
                 String category = mvc.getTests().get(testPosition).getSetOfFlashcards().get(position).getCategory();
 
+                final TextView textViewToChange = (TextView) findViewById(R.id.flashcardNum);
+                textViewToChange.setText(
+                        "Flashcard " + (position+1) + "/" + mvc.getTests().get(testPosition).getSetOfFlashcards().size());
+
                 /* If the test has not been graded, call createTestFlashcardLayout, else call
                     createGradedTestFlashcardLayout.
                  */
@@ -108,9 +116,11 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (isFlashcardGraded || isTestGraded)
                     createGradedTestFlashcardLayout(category);
             }
-        }
-        else {
+        } else {
             testTextView.setText(card.getQuestion());
+            final TextView textViewToChange = (TextView) findViewById(R.id.flashcardNum);
+            textViewToChange.setText(
+                    "Flashcard " + (position+1) + "/" + mvc.sortedCard.size());
             createBasicFlashcardLayout(card.getCategory());
             mvc.isTag = false;      //toggle the bool back for other activity
         }
@@ -218,23 +228,23 @@ public class FlashcardActivity extends AppCompatActivity {
                 layout.addView(textViews.get(i));
             }
         } else if (category.equals(MultipleChoice.CATEGORY)) {
-                ArrayList<TextView> textViews = new ArrayList<TextView>();
-                String[] labels = {"A: ", "B: ", "C: ", "D: ", "E: "};
+            ArrayList<TextView> textViews = new ArrayList<TextView>();
+            String[] labels = {"A: ", "B: ", "C: ", "D: ", "E: "};
 
-                for (int i = 0; i < MULTIPLE_CHOICE_LIMIT; ++i) {
-                    textViews.add(new TextView(this));
-                    textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
-                    layout.addView(textViews.get(i));
-                }
+            for (int i = 0; i < MULTIPLE_CHOICE_LIMIT; ++i) {
+                textViews.add(new TextView(this));
+                textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
+                layout.addView(textViews.get(i));
+            }
         } else if (category.equals(TrueFalse.CATEGORY)) {
-                ArrayList<TextView> textViews = new ArrayList<TextView>();
-                String[] labels = {"A: ", "B: "};
+            ArrayList<TextView> textViews = new ArrayList<TextView>();
+            String[] labels = {"A: ", "B: "};
 
-                for (int i = 0; i < TRUE_FALSE_LIMIT; ++i) {
-                    textViews.add(new TextView(this));
-                    textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
-                    layout.addView(textViews.get(i));
-                }
+            for (int i = 0; i < TRUE_FALSE_LIMIT; ++i) {
+                textViews.add(new TextView(this));
+                textViews.get(i).setText(labels[i] + card.getListOfAnswers().get(i));
+                layout.addView(textViews.get(i));
+            }
         } else {
             //ignore for now
         }
@@ -313,7 +323,8 @@ public class FlashcardActivity extends AppCompatActivity {
                         checkBoxes.get(i).setEnabled(false);
                         saveAnswerButton.setEnabled(false);
                     }
-                } return;
+                }
+                return;
             }
 
             for (int i = 0; i < checkBoxes.size(); ++i) {
@@ -351,7 +362,8 @@ public class FlashcardActivity extends AppCompatActivity {
                     mpRadioButtons.get(i).setEnabled(false);
                     mpTextView.get(i).setEnabled(false);
                     saveAnswerButton.setEnabled(false);
-                } return;
+                }
+                return;
             }
 
             for (int i = 0; i < mpRadioButtons.size(); ++i) {
@@ -359,7 +371,7 @@ public class FlashcardActivity extends AppCompatActivity {
                     mpRadioButtons.get(i).setChecked(true);
                     if (isAnswerCorrect && isTestGraded) {
                         mpTextView.get(i).setTextColor(Color.GREEN);
-                    } else if (!isAnswerCorrect && isTestGraded){
+                    } else if (!isAnswerCorrect && isTestGraded) {
                         mpTextView.get(i).setTextColor(Color.RED);
                         for (int j = 0; j < mpRadioButtons.size(); ++j) {
                             if (correctAnswer.equals(mpTextView.get(j).getText().toString())) {
@@ -382,7 +394,8 @@ public class FlashcardActivity extends AppCompatActivity {
                     tfTextView.get(i).setEnabled(false);
                     tfRadioButtons.get(i).setEnabled(false);
                     saveAnswerButton.setEnabled(false);
-                } return;
+                }
+                return;
             }
 
             for (int i = 0; i < tfRadioButtons.size(); ++i) {
@@ -404,10 +417,10 @@ public class FlashcardActivity extends AppCompatActivity {
                 }
             }
         } else {
-                saTextField.setText(userAnswer);
+            saTextField.setText(userAnswer);
             if (isAnswerCorrect && isTestGraded) {
                 saTextField.setTextColor(Color.GREEN);
-            } else if (!isAnswerCorrect && isTestGraded){
+            } else if (!isAnswerCorrect && isTestGraded) {
                 saTextField.setTextColor(Color.RED);
                 TextView correctAnswerTextView = new TextView(this);
                 correctAnswerTextView.setText(correctAnswer);
@@ -435,72 +448,137 @@ public class FlashcardActivity extends AppCompatActivity {
         saveAnswerButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
-                       if (category.equals(CheckAllThatApply.CATEGORY)) {
-                           String checkAllAnswer = "";
-                           for (int i = 0; i < checkBoxes.size(); ++i) {
-                               if (checkBoxes.get(i).isChecked()) {
-                                   if (!checkAllTextView.get(i).getText().toString().isEmpty())
-                                       checkAllAnswer += checkAllTextView.get(i).getText().toString() +
-                                           PLACEHOLDER;
-                               }
-                               checkBoxes.get(i).setEnabled(false);
-                           }
+                        if (category.equals(CheckAllThatApply.CATEGORY)) {
+                            String checkAllAnswer = "";
+                            for (int i = 0; i < checkBoxes.size(); ++i) {
+                                if (checkBoxes.get(i).isChecked()) {
+                                    if (!checkAllTextView.get(i).getText().toString().isEmpty())
+                                        checkAllAnswer += checkAllTextView.get(i).getText().toString() +
+                                                PLACEHOLDER;
+                                }
+                                checkBoxes.get(i).setEnabled(false);
+                            }
 
-                           if (checkAllAnswer.isEmpty() || checkAllAnswer.length() == 0)
-                               checkAllAnswer = null;
+                            if (checkAllAnswer.isEmpty() || checkAllAnswer.length() == 0)
+                                checkAllAnswer = null;
 
-                           TestGrader.addUserAnswer(checkAllAnswer, position);
-                       } else if (category.equals(MultipleChoice.CATEGORY)) {
-                           boolean answerFound = false;
-                           for (int i = 0; i < mpRadioButtons.size(); ++i) {
-                               if (mpRadioButtons.get(i).isChecked()) {
+                            TestGrader.addUserAnswer(checkAllAnswer, position);
+                        } else if (category.equals(MultipleChoice.CATEGORY)) {
+                            boolean answerFound = false;
+                            for (int i = 0; i < mpRadioButtons.size(); ++i) {
+                                if (mpRadioButtons.get(i).isChecked()) {
                                     TestGrader.addUserAnswer(mpTextView.get(i).getText()
                                             .toString(), position);
                                     answerFound = true;
-                               }
+                                }
 
-                               mpRadioButtons.get(i).setEnabled(false);
-                           }
-                           if (!answerFound)
-                               TestGrader.addUserAnswer(null, position);
-                       } else if (category.equals(TrueFalse.CATEGORY)) {
-                           boolean answerFound = false;
-                           for (int i = 0; i < tfRadioButtons.size(); ++i) {
-                               if (tfRadioButtons.get(i).isChecked()) {
+                                mpRadioButtons.get(i).setEnabled(false);
+                            }
+                            if (!answerFound)
+                                TestGrader.addUserAnswer(null, position);
+                        } else if (category.equals(TrueFalse.CATEGORY)) {
+                            boolean answerFound = false;
+                            for (int i = 0; i < tfRadioButtons.size(); ++i) {
+                                if (tfRadioButtons.get(i).isChecked()) {
                                     TestGrader.addUserAnswer(tfTextView.get(i).getText()
                                             .toString(), position);
 
-                                   answerFound = true;
-                               }
-                               tfRadioButtons.get(i).setEnabled(false);
-                           }
+                                    answerFound = true;
+                                }
+                                tfRadioButtons.get(i).setEnabled(false);
+                            }
 
-                           if (!answerFound) {
-                               TestGrader.addUserAnswer(null, position);
-                           }
-                       } else {
-                           if (saTextField.getText().toString() == null || saTextField.getText().toString().isEmpty()) {
-                               TestGrader.addUserAnswer(null, position);
-                           } else {
-                               TestGrader.addUserAnswer(saTextField.getText().toString(), position);
-                           }
-                           saTextField.setEnabled(false);
-                       }
+                            if (!answerFound) {
+                                TestGrader.addUserAnswer(null, position);
+                            }
+                        } else {
+                            if (saTextField.getText().toString() == null || saTextField.getText().toString().isEmpty()) {
+                                TestGrader.addUserAnswer(null, position);
+                            } else {
+                                TestGrader.addUserAnswer(saTextField.getText().toString(), position);
+                            }
+                            saTextField.setEnabled(false);
+                        }
                         saveAnswerButton.setEnabled(false);
+                        nextCard(view); // goes to next card after clicking save
                     }
                 });
     }
 
     public void showAnswer(View v) {
-        if(tapped == true && !callingClass.contains("FlashcardListForTestsActivity")) {
+        if (tapped == true && !callingClass.contains("FlashcardListForTestsActivity")) {
             testTextView.setText(card.getAnswer());
             header.setText("ANSWER");
             tapped = false;
-        } else if (tapped == false && !callingClass.contains("FlashcardListForTestsActivity")){
+        } else if (tapped == false && !callingClass.contains("FlashcardListForTestsActivity")) {
             testTextView.setText(card.getQuestion());
             header.setText("QUESTION");
             tapped = true;
 
         }
+    }
+
+    public void nextCard(View v) {
+
+        finish(); // closes previous activities
+        if (position < mvc.getFlashcards().size() - 1 &&
+                callingClass.contains("ListActivity")) {
+            position++;
+            displayCardListActivity(v);
+
+        } else if (position < mvc.getTests().get(testPosition).getSetOfFlashcards().size() - 1 &&
+                callingClass.contains("FlashcardListForTestsActivity")) {
+            position++;
+            displayCardTestActivity(v);
+
+        } else if (position < mvc.sortedCard.size() - 1 && callingClass.contains("FlashcardlistForTag")) {
+            System.out.println("position = "+position+" sorted size = "+mvc.sortedCard.size());
+            position++;
+            displayCardTagActivity(v);
+        } else {
+            System.out.println("end of deck");
+        }
+    }
+
+
+    public void prevCard(View v) {
+        finish(); // closes previous activities
+        if (position > 0 &&
+                callingClass.contains("ListActivity")) {
+            position--;
+            displayCardListActivity(v);
+        } else if (position > 0 &&
+                callingClass.contains("FlashcardListForTestsActivity")) {
+            position--;
+            displayCardTestActivity(v);
+        } else if (position > 0 && callingClass.contains("FlashcardlistForTag")) {
+            position--;
+            displayCardTagActivity(v);
+        } else {
+            System.out.println("end of deck");
+        }
+    }
+
+    public void displayCardTestActivity(View v) {
+        Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+        intent.putExtra("callingClass", FlashcardListForTestsActivity.class.toString());
+        intent.putExtra("TestPOS", FlashcardListForTestsActivity.index);
+        intent.putExtra("POS", position);
+        v.getContext().startActivity(intent);
+    }
+
+    public void displayCardListActivity(View v) {
+        Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+        intent.putExtra("POS", position);
+        intent.putExtra("callingClass", ListActivity.class.toString());
+        v.getContext().startActivity(intent);
+    }
+
+    public void displayCardTagActivity(View v) {
+        Intent intent = new Intent(v.getContext(), FlashcardActivity.class);
+        intent.putExtra("POS", position);
+        intent.putExtra("callingClass", FlashcardlistForTag.class.toString());
+        mvc.isTag = true;
+        v.getContext().startActivity(intent);
     }
 }
