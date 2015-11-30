@@ -270,19 +270,9 @@ public class FlashcardActivity extends AppCompatActivity {
             isAnswerCorrect = correctAnswer.toLowerCase().equals(userAnswer.toLowerCase());
             allUserCheckAllAnswers = userAnswer.split(PLACEHOLDER);
 
-            if (allUserCheckAllAnswers.length == allCorrectCheckAllAnswers.length) {
-                isAnswerCorrect = true;
-                for (int i = 0; i < allCorrectCheckAllAnswers.length; ++i) {
-                    if (!allCorrectCheckAllAnswers[i].toLowerCase().equals
-                            (allUserCheckAllAnswers[i].toLowerCase())) {
-                        isAnswerCorrect = false;
-                        break;
-                    }
-                }
-            }
+            isAnswerCorrect = TestGrader.checkArrayAnswer(allUserCheckAllAnswers, allCorrectCheckAllAnswers);
         } else if (userAnswer != null && !category.equals(CheckAllThatApply.CATEGORY)) {
-            if (correctAnswer.toLowerCase().equals(userAnswer.toLowerCase()))
-                isAnswerCorrect = true;
+            isAnswerCorrect = TestGrader.checkAnswer(userAnswer, correctAnswer);
         }
 
         /* Every category (except short answer) follows the same (messy) format.
@@ -445,6 +435,7 @@ public class FlashcardActivity extends AppCompatActivity {
             to false. This locks the answer options/fields so the user cannot modify them while the
             test is being graded.
          */
+        final String correctAnswer = TestGrader.getCorrectAnswers()[position];
         saveAnswerButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
@@ -463,25 +454,36 @@ public class FlashcardActivity extends AppCompatActivity {
                                 checkAllAnswer = null;
 
                             TestGrader.addUserAnswer(checkAllAnswer, position);
+                            if (TestGrader.checkArrayAnswer(checkAllAnswer.split(PLACEHOLDER),
+                                    TestGrader.getCorrectAnswers()[position].split(PLACEHOLDER)))
+                                TestGrader.increaseScore();
+
                         } else if (category.equals(MultipleChoice.CATEGORY)) {
                             boolean answerFound = false;
+                            String userAnswer = null;
                             for (int i = 0; i < mpRadioButtons.size(); ++i) {
                                 if (mpRadioButtons.get(i).isChecked()) {
-                                    TestGrader.addUserAnswer(mpTextView.get(i).getText()
-                                            .toString(), position);
+                                    userAnswer = mpTextView.get(i).getText().toString();
+                                    TestGrader.addUserAnswer(userAnswer, position);
                                     answerFound = true;
                                 }
 
                                 mpRadioButtons.get(i).setEnabled(false);
                             }
-                            if (!answerFound)
+                            if (!answerFound) {
                                 TestGrader.addUserAnswer(null, position);
+                            }
+
+                            if (TestGrader.checkAnswer(userAnswer, correctAnswer)) {
+                                TestGrader.increaseScore();
+                            }
                         } else if (category.equals(TrueFalse.CATEGORY)) {
                             boolean answerFound = false;
+                            String userAnswer = null;
                             for (int i = 0; i < tfRadioButtons.size(); ++i) {
                                 if (tfRadioButtons.get(i).isChecked()) {
-                                    TestGrader.addUserAnswer(tfTextView.get(i).getText()
-                                            .toString(), position);
+                                    userAnswer = tfTextView.get(i).getText().toString();
+                                    TestGrader.addUserAnswer(userAnswer, position);
 
                                     answerFound = true;
                                 }
@@ -491,6 +493,9 @@ public class FlashcardActivity extends AppCompatActivity {
                             if (!answerFound) {
                                 TestGrader.addUserAnswer(null, position);
                             }
+
+                            if (TestGrader.checkAnswer(userAnswer, correctAnswer))
+                                TestGrader.increaseScore();
                         } else {
                             if (saTextField.getText().toString() == null || saTextField.getText().toString().isEmpty()) {
                                 TestGrader.addUserAnswer(null, position);
@@ -498,6 +503,9 @@ public class FlashcardActivity extends AppCompatActivity {
                                 TestGrader.addUserAnswer(saTextField.getText().toString(), position);
                             }
                             saTextField.setEnabled(false);
+                            if (TestGrader.checkAnswer(saTextField.getText().toString(), correctAnswer)) {
+                                TestGrader.increaseScore();
+                            }
                         }
                         saveAnswerButton.setEnabled(false);
                         nextCard(view); // goes to next card after clicking save
@@ -526,12 +534,11 @@ public class FlashcardActivity extends AppCompatActivity {
             position++;
             displayCardListActivity(v);
 
-        } else if (position < mvc.getTests().get(testPosition).getSetOfFlashcards().size() - 1 &&
-                callingClass.contains("FlashcardListForTestsActivity")) {
+        } else if (callingClass.contains("FlashcardListForTestsActivity") && position < mvc.getTests().get(testPosition).getSetOfFlashcards().size() - 1) {
             position++;
             displayCardTestActivity(v);
 
-        } else if (position < mvc.sortedCard.size() - 1 && callingClass.contains("FlashcardlistForTag")) {
+        } else if (callingClass.contains("FlashcardlistForTag") && position < mvc.sortedCard.size() - 1) {
             System.out.println("position = "+position+" sorted size = "+mvc.sortedCard.size());
             position++;
             displayCardTagActivity(v);

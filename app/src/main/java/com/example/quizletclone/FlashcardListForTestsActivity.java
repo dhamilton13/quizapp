@@ -117,12 +117,11 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
 
     private void gradeTest() {
         mvc.gradeTest();
+        Log.v("NUMBER CORRECT", String.valueOf(TestGrader.getNumberCorrect()));
     }
 
     private void clearTest() {
         mvc.clearGrader();
         mvc.prepareGrader(mvc.getTests().get(index));
     }
-
-
 }

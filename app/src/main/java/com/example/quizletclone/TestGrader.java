@@ -8,6 +8,7 @@ public class TestGrader {
     private static String[] correctAnswers, userAnswers;
     private static boolean[] answersBeingGraded;
     private static boolean areAnswersBeingRecorded = false, isTestGraded = false;
+    private static int numberCorrect = 0;
 
     TestGrader(){
     }
@@ -38,8 +39,46 @@ public class TestGrader {
         correctAnswers = null;
         userAnswers = null;
         answersBeingGraded = null;
+        numberCorrect = 0;
     }
 
+    public static boolean checkAnswer(String userAnswer, String correctAnswer) {
+        boolean answerIsCorrect= false;
+         if (userAnswer != null) {
+             if (userAnswer.toLowerCase().equals(correctAnswer.toLowerCase()))
+                 answerIsCorrect = true;
+         }
+        return answerIsCorrect;
+    }
+
+    public static boolean checkArrayAnswer(String[] userAnswers, String[] correctAnswers) {
+        boolean answerIsCorrect= false;
+
+        if (userAnswers != null || userAnswers.length != 0) {
+            if (userAnswers.length == correctAnswers.length) {
+                answerIsCorrect = true;
+                for (int i = 0; i < correctAnswers.length; ++i) {
+                    if (!correctAnswers[i].toLowerCase().equals
+                            (userAnswers[i].toLowerCase())) {
+                        answerIsCorrect = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return answerIsCorrect;
+    }
+    public static void increaseScore() {
+        numberCorrect++;
+    }
+
+    public static double calculateScore() {
+        return numberCorrect/correctAnswers.length * 100;
+    }
+
+    public static int getNumberCorrect() {
+        return numberCorrect;
+    }
     public static boolean isTestInProgress() {
         return areAnswersBeingRecorded;
     }
