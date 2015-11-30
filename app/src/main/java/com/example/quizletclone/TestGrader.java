@@ -73,7 +73,7 @@ public class TestGrader {
     }
 
     public static double calculateScore() {
-        return numberCorrect/correctAnswers.length * 100;
+        return (double) (numberCorrect/correctAnswers.length) * 100;
     }
 
     public static int getNumberCorrect() {

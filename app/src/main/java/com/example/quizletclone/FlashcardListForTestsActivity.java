@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -117,11 +118,39 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
 
     private void gradeTest() {
         mvc.gradeTest();
-        Log.v("NUMBER CORRECT", String.valueOf(TestGrader.getNumberCorrect()));
+        final AlertDialog dialog = new AlertDialog.Builder(FlashcardListForTestsActivity.this).create();
+        dialog.setTitle("Score");
+        dialog.setMessage("You got " + String.valueOf(TestGrader.getNumberCorrect()) +
+                " out of " + String.valueOf(TestGrader.getCorrectAnswers().length) + " correct.\n" +
+                "Percent correct: " + String.valueOf(TestGrader.calculateScore()));
+
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterace, int id) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void clearTest() {
-        mvc.clearGrader();
-        mvc.prepareGrader(mvc.getTests().get(index));
+
+        final AlertDialog dialog = new AlertDialog.Builder(FlashcardListForTestsActivity.this).create();
+        dialog.setTitle("Clear test");
+        dialog.setMessage("Are you sure you wish to clear the quiz?");
+
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterace, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterace, int id) {
+                dialog.dismiss();
+                mvc.clearGrader();
+                mvc.prepareGrader(mvc.getTests().get(index));
+            }
+        });
+        dialog.show();
     }
 }
