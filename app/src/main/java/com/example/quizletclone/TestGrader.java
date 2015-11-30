@@ -4,6 +4,8 @@ package com.example.quizletclone;
  * Created by sunnysarow on 11/22/15.
  */
 
+import android.util.Log;
+
 public class TestGrader {
     private static String[] correctAnswers, userAnswers;
     private static boolean[] answersBeingGraded;
@@ -73,7 +75,8 @@ public class TestGrader {
     }
 
     public static double calculateScore() {
-        return (double) (numberCorrect/correctAnswers.length) * 100;
+        double totalScore = (double) numberCorrect/ (double) correctAnswers.length;
+        return totalScore * 100;
     }
 
     public static int getNumberCorrect() {

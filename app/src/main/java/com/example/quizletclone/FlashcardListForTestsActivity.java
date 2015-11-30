@@ -122,7 +122,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         dialog.setTitle("Score");
         dialog.setMessage("You got " + String.valueOf(TestGrader.getNumberCorrect()) +
                 " out of " + String.valueOf(TestGrader.getCorrectAnswers().length) + " correct.\n" +
-                "Percent correct: " + String.valueOf(TestGrader.calculateScore()));
+                "Percent correct: " + String.format("%.2f", TestGrader.calculateScore()) + "%");
 
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterace, int id) {
