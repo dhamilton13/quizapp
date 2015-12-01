@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -94,16 +95,83 @@ public class MultipleChoice extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerItem);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        createListeners();
+    }
 
+
+    private void createListeners() {
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-
                 hideKeyboard(view);
                 return false;
             }
         });
 
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                hideKeyboard(view);
+                return false;
+            }
+        });
+
+        answerFieldA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldA.isChecked()) {
+                    answerFieldB.setChecked(false);
+                    answerFieldC.setChecked(false);
+                    answerFieldD.setChecked(false);
+                    answerFieldE.setChecked(false);
+                }
+            }
+        });
+
+        answerFieldB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldB.isChecked()) {
+                    answerFieldA.setChecked(false);
+                    answerFieldC.setChecked(false);
+                    answerFieldD.setChecked(false);
+                    answerFieldE.setChecked(false);
+                }
+            }
+        });
+        answerFieldC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldC.isChecked()) {
+                    answerFieldA.setChecked(false);
+                    answerFieldB.setChecked(false);
+                    answerFieldD.setChecked(false);
+                    answerFieldE.setChecked(false);
+                }
+            }
+        });
+        answerFieldD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldD.isChecked()) {
+                    answerFieldA.setChecked(false);
+                    answerFieldB.setChecked(false);
+                    answerFieldC.setChecked(false);
+                    answerFieldE.setChecked(false);
+                }
+            }
+        });
+        answerFieldE.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldE.isChecked()) {
+                    answerFieldB.setChecked(false);
+                    answerFieldC.setChecked(false);
+                    answerFieldD.setChecked(false);
+                    answerFieldA.setChecked(false);
+                }
+            }
+        });
     }
 
     /* When the user clicks create question, create a flashcard using the ModelViewController

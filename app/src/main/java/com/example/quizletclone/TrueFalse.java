@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class TrueFalse extends AppCompatActivity {
     private EditText questionField;
     private TextView trueField, falseField;
     private RadioButton answerFieldT, answerFieldF;
+    private RadioGroup group;
     private Spinner spinner;
     private RelativeLayout layout;
     public static final String CATEGORY = "True Or False";
@@ -90,11 +93,31 @@ public class TrueFalse extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        createListeners();
+    }
+
+    private void createListeners() {
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 hideKeyboard(view);
                 return false;
+            }
+        });
+
+        answerFieldT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldT.isChecked())
+                    answerFieldF.setChecked(false);
+            }
+        });
+
+        answerFieldF.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (answerFieldF.isChecked())
+                    answerFieldT.setChecked(false);
             }
         });
     }
