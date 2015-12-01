@@ -105,6 +105,9 @@ public class TrueFalse extends AppCompatActivity {
             }
         });
 
+        /* note: Should have used a RadioGroup but this late into the project, the RadioGroup
+            breaks the view so this is a dirty work around
+         */
         answerFieldT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

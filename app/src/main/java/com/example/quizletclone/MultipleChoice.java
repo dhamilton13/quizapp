@@ -50,19 +50,16 @@ public class MultipleChoice extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //mvc.storeFlashcards(getApplicationContext());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //mvc.storeFlashcards(getApplicationContext());
     }
 
     private void initializeGUIComponents() {
@@ -116,6 +113,9 @@ public class MultipleChoice extends AppCompatActivity {
             }
         });
 
+        /* note: Should have used a RadioGroup but this late into the project, the RadioGroup
+            breaks the view so this is a dirty work around
+         */
         answerFieldA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

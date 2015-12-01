@@ -176,6 +176,21 @@ public class FlashcardActivity extends AppCompatActivity {
                 row.setOrientation(LinearLayout.HORIZONTAL);
 
                 mpRadioButtons.add(new RadioButton(this));
+                final RadioButton currentButton = mpRadioButtons.get(i);
+
+                currentButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (currentButton.isChecked()) {
+                            for (int j = 0; j < MULTIPLE_CHOICE_LIMIT; ++j) {
+                                if (mpRadioButtons.get(j) != currentButton)
+                                    mpRadioButtons.get(j).setChecked(false);
+                            }
+                        }
+
+                    }
+                });
+
                 mpTextView.add(new TextView(this));
                 mpTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
@@ -194,6 +209,20 @@ public class FlashcardActivity extends AppCompatActivity {
                 row.setOrientation(LinearLayout.HORIZONTAL);
 
                 tfRadioButtons.add(new RadioButton(this));
+                final RadioButton currentButton = tfRadioButtons.get(i);
+
+                currentButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (currentButton.isChecked()) {
+                            for (int j = 0; j < TRUE_FALSE_LIMIT; ++j) {
+                                if (tfRadioButtons.get(j) != currentButton)
+                                    tfRadioButtons.get(j).setChecked(false);
+                            }
+                        }
+                    }
+                });
+
                 tfTextView.add(new TextView(this));
                 tfTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
