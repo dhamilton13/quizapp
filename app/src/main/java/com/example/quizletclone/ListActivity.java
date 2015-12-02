@@ -28,6 +28,7 @@ public class ListActivity extends AppCompatActivity {
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private List<Flashcard> fc;
     private String callingClass;
+    private static String testTitle;
     private static List<Integer> positionOfFlashcards;
 
 	@Override
@@ -139,13 +140,18 @@ public class ListActivity extends AppCompatActivity {
             positionOfFlashcards.remove(new Integer(position));
     }
 
+    public static void setTestTitle(String title) {
+        testTitle = title;
+    }
+
     private void createQuiz() {
         boolean successfulCreation;
         if (positionOfFlashcards.size() != 0) {
-           successfulCreation =  mvc.createManualTest("TEST 1", positionOfFlashcards);
-            positionOfFlashcards.clear();
+           successfulCreation =  mvc.createManualTest(testTitle, positionOfFlashcards);
 
             if (successfulCreation) {
+                positionOfFlashcards.clear();
+                testTitle = null;
                 Toast toast = Toast.makeText(getApplicationContext(), "Quiz created",
                         Toast.LENGTH_SHORT);
                 toast.show();

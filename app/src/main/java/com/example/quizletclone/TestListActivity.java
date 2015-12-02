@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -201,9 +202,23 @@ public class TestListActivity extends AppCompatActivity {
 
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Choose cards", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterace, int id) {
-                intentForList.putExtra("callingClass", findViewById(android.R.id.content).getContext().toString());
-                startActivity(intentForList);
-                finish();
+                final EditText titleText = new EditText(TestListActivity.this);
+                final AlertDialog titleDialog = new AlertDialog.Builder(TestListActivity.this).create();
+                titleDialog.setTitle("Enter a name for your quiz");
+                titleDialog.setView(titleText);
+                titleDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Create", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface titleDialogInterace, int id2) {
+                        String title = titleText.getText().toString();
+
+                        if (!title.isEmpty() || title.length() != 0) {
+                            ListActivity.setTestTitle(title);
+                            intentForList.putExtra("callingClass", findViewById(android.R.id.content).getContext().toString());
+                            startActivity(intentForList);
+                            finish();
+                        }
+                    }
+                });
+                titleDialog.show();
             }
         });
 
