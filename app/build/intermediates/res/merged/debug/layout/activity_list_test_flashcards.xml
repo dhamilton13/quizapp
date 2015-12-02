@@ -12,16 +12,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
-    <ImageButton
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_action"
-        android:background="@color/YikYakish"
-        android:id="@+id/imageButton"
-        android:layout_gravity="bottom|right"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingRight="16dp"
+                  android:paddingBottom="16dp"
+                  android:orientation="vertical"
+                  android:gravity="bottom|right">
 
-</RelativeLayout><!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/layout/activity_list_test_flashcards.xml -->
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_action"
+            android:background="@drawable/circle"
+            android:id="@+id/imageButton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/src/main/res/layout/activity_list_test_flashcards.xml -->

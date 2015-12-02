@@ -60,10 +60,10 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("quiz options");
+                builder.setTitle("Quiz Options");
                 // The flashcard creation options
                 builder.setItems(new CharSequence[]
-                                {"Grade quiz", "Clear quiz"},
+                                {"Grade Quiz", "Clear Results"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
