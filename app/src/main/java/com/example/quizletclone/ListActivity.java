@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import android.os.Handler;
 import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class ListActivity extends AppCompatActivity {
 	private ModelViewController mvc;
@@ -71,7 +73,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
                 // The flashcard creation options
-                if (callingClass.contains("MainActivity")) {
+                if (callingClass == null || !callingClass.contains("ContextThemeWrapper")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Question Type");
                     builder.setItems(new CharSequence[]
@@ -138,8 +140,33 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void createQuiz() {
-        mvc.createManualTest("TEST 1", positionOfFlashcards);
-        positionOfFlashcards.clear();
+        boolean successfulCreation;
+        if (positionOfFlashcards.size() != 0) {
+           successfulCreation =  mvc.createManualTest("TEST 1", positionOfFlashcards);
+            positionOfFlashcards.clear();
+
+            if (successfulCreation) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Quiz created",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                
+                /* After a 1500ms delay, return to the list of tests */
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(getApplicationContext(), TestListActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 1500);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Failed to create quiz", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        } else {
+            return;
+        }
     }
     /* If 'back' is pressed on the device, return home. */
     @Override
