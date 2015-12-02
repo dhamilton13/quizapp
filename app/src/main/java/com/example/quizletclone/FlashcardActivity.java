@@ -442,6 +442,7 @@ public class FlashcardActivity extends AppCompatActivity {
             } else if (!isAnswerCorrect && isTestGraded) {
                 saTextField.setTextColor(Color.RED);
                 TextView correctAnswerTextView = new TextView(this);
+                correctAnswerTextView.setTextSize(20);
                 correctAnswerTextView.setText(correctAnswer);
                 correctAnswerTextView.setTextColor(Color.rgb(0,204,0));
                 layout.addView(correctAnswerTextView);
