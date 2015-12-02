@@ -48,7 +48,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         myRecyclerView = (RecyclerView)findViewById(R.id.myrecyclerview);
         linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, null);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
     }

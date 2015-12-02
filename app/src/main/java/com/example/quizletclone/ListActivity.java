@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,8 @@ public class ListActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private List<Flashcard> fc;
+    private String callingClass;
+    private static List<Integer> positionOfFlashcards;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +37,15 @@ public class ListActivity extends AppCompatActivity {
         mvc = ModelViewController.getInstance(this);
         mvc.loadFlashcards(this);
         mvc.loadTag(this);
-
-        //fc = mvc.getFlashcards();
-
+        positionOfFlashcards = new ArrayList<Integer>();
+        Intent intent = getIntent();
         setTitle("View Flashcards");
-
+        callingClass = intent.getStringExtra("callingClass");
         // recycler view
         myRecyclerView = (RecyclerView)findViewById(R.id.myrecyclerview);
         linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, callingClass);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
@@ -68,33 +70,52 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Question Type");
                 // The flashcard creation options
-                builder.setItems(new CharSequence[]
-                                {"Multiple Choice", "Short Answer", "True/False",
-                                        "Check All That Apply"},
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                                switch (which) {
-                                    case 0:
-                                        multipleChoice();
-                                        break;
-                                    case 1:
-                                        shortAnswer();
-                                        break;
-                                    case 2:
-                                        trueFalse();
-                                        break;
-                                    case 3:
-                                        checkAllThatApply();
-                                        break;
+                if (callingClass.contains("MainActivity")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Question Type");
+                    builder.setItems(new CharSequence[]
+                                    {"Multiple Choice", "Short Answer", "True/False",
+                                            "Check All That Apply"},
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // The 'which' argument contains the index position
+                                    // of the selected item
+                                    switch (which) {
+                                        case 0:
+                                            multipleChoice();
+                                            break;
+                                        case 1:
+                                            shortAnswer();
+                                            break;
+                                        case 2:
+                                            trueFalse();
+                                            break;
+                                        case 3:
+                                            checkAllThatApply();
+                                            break;
+                                    }
                                 }
-                            }
-                        });
-                builder.create().show();
+                            });
+                    builder.create().show();
+                } else if (callingClass.contains("ContextThemeWrapper")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Quiz options");
+                    builder.setItems(new CharSequence[]
+                                    {"Create quiz"},
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // The 'which' argument contains the index position
+                                    // of the selected item
+                                    switch (which) {
+                                        case 0:
+                                            createQuiz();
+                                            break;
+                                    }
+                                }
+                            });
+                    builder.create().show();
+                }
             }
         });
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -107,6 +128,19 @@ public class ListActivity extends AppCompatActivity {
 		return true;
 	}
 
+    public static void addToPositionOfFlashcards(int position) {
+        positionOfFlashcards.add(position);
+    }
+
+    public static void removeFromPositionOfFlashcards(int position) {
+        if (positionOfFlashcards.size() != 0)
+            positionOfFlashcards.remove(new Integer(position));
+    }
+
+    private void createQuiz() {
+        mvc.createManualTest("TEST 1", positionOfFlashcards);
+        positionOfFlashcards.clear();
+    }
     /* If 'back' is pressed on the device, return home. */
     @Override
     public void onBackPressed() {

@@ -47,7 +47,7 @@ public class TestListActivity extends AppCompatActivity {
         myRecyclerView = (RecyclerView)findViewById(R.id.testrecyclerview);
         linearLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, null);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
         populateTests(); // Populate the recyclerView with flashcard data
@@ -135,8 +135,28 @@ public class TestListActivity extends AppCompatActivity {
     }
 
     private void createTest() {
-        Intent intent = new Intent(this, CreateTest.class);
-        startActivity(intent);
-        finish();
+        final Intent intent = new Intent(this, CreateTest.class);
+        final Intent intentForList = new Intent(this, ListActivity.class);
+        final AlertDialog dialog = new AlertDialog.Builder(TestListActivity.this).create();
+        dialog.setTitle("Quiz Options");
+        dialog.setMessage("How would you like to create the quiz?");
+
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Choose cards", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterace, int id) {
+                intentForList.putExtra("callingClass", findViewById(android.R.id.content).getContext().toString());
+                startActivity(intentForList);
+                finish();
+            }
+        });
+
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Automatically", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterace, int id) {
+                intent.putExtra("callingClass", findViewById(android.R.id.content).getContext().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        dialog.show();
     }
 }

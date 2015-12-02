@@ -8,6 +8,7 @@ package com.example.quizletclone;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -31,11 +32,13 @@ public class MyRecyclerViewAdapter extends
     private Context context;
     private ModelViewController mvc;
     public static boolean areCardsLocked = false;
+    protected static String callingClass;
 
-    public MyRecyclerViewAdapter(Context context){
+    public MyRecyclerViewAdapter(Context context, String callingClass){
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
         cardQuestion = new ArrayList<String>();
+        this.callingClass = callingClass;
     }
 
     @Override
@@ -75,8 +78,9 @@ public class MyRecyclerViewAdapter extends
         private MyRecyclerViewAdapter parent;
         private CardView cardView;
         TextView textItemName;
+        private boolean tapped = false;
 
-        public ItemHolder(CardView cView, MyRecyclerViewAdapter parent) {
+        public ItemHolder(final CardView cView, MyRecyclerViewAdapter parent) {
             super(cView);
             cardView = cView;
             this.parent = parent;
@@ -86,9 +90,20 @@ public class MyRecyclerViewAdapter extends
             cView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    movePosition(position, v);
-
+                    if (callingClass != null && callingClass.contains("ContextThemeWrapper")) {
+                        if (!tapped) {
+                            cView.setCardBackgroundColor(Color.rgb(0, 200, 0));
+                            tapped = true;
+                            ListActivity.addToPositionOfFlashcards(getAdapterPosition());
+                        } else {
+                            cView.setCardBackgroundColor(Color.rgb(255,255,255));
+                            tapped = false;
+                            ListActivity.removeFromPositionOfFlashcards(getAdapterPosition());
+                        }
+                    } else {
+                        int position = getAdapterPosition();
+                        movePosition(position, v);
+                    }
                 }
             });
         }
