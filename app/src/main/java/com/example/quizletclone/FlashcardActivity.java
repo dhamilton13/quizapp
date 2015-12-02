@@ -337,7 +337,7 @@ public class FlashcardActivity extends AppCompatActivity {
                     for (int j = 0; j < allCorrectCheckAllAnswers.length; ++j) {
                         if (allCorrectCheckAllAnswers[j].equals(checkAllTextView.get(i)
                                 .getText().toString()) && TestGrader.isTestGraded()) {
-                            checkAllTextView.get(i).setTextColor(Color.GREEN);
+                            checkAllTextView.get(i).setTextColor(Color.rgb(0,204,0));
                         }
                         checkBoxes.get(i).setEnabled(false);
                         saveAnswerButton.setEnabled(false);
@@ -352,14 +352,14 @@ public class FlashcardActivity extends AppCompatActivity {
                             .toString())) {
                         checkBoxes.get(i).setChecked(true);
                         if (isAnswerCorrect && isTestGraded) {
-                            checkAllTextView.get(i).setTextColor(Color.GREEN);
+                            checkAllTextView.get(i).setTextColor(Color.rgb(0,204,0));
                         } else if (!isAnswerCorrect && isTestGraded) {
                             checkAllTextView.get(i).setTextColor(Color.RED);
                             for (int k = 0; k < checkBoxes.size(); ++k) {
                                 for (int l = 0; l < allCorrectCheckAllAnswers.length; ++l) {
                                     if (allCorrectCheckAllAnswers[l].equals(checkAllTextView.get(k)
                                             .getText().toString())) {
-                                        checkAllTextView.get(k).setTextColor(Color.GREEN);
+                                        checkAllTextView.get(k).setTextColor(Color.rgb(0,204,0));
                                     }
                                 }
                             }
@@ -376,7 +376,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 for (int i = 0; i < mpRadioButtons.size(); ++i) {
                     if (correctAnswer.equals(mpTextView.get(i).getText().toString()) &&
                             TestGrader.isTestGraded()) {
-                        mpTextView.get(i).setTextColor(Color.GREEN);
+                        mpTextView.get(i).setTextColor(Color.rgb(0,204,0));
                     }
                     mpRadioButtons.get(i).setEnabled(false);
                     mpTextView.get(i).setEnabled(false);
@@ -389,12 +389,12 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (userAnswer.equals(mpTextView.get(i).getText().toString())) {
                     mpRadioButtons.get(i).setChecked(true);
                     if (isAnswerCorrect && isTestGraded) {
-                        mpTextView.get(i).setTextColor(Color.GREEN);
+                        mpTextView.get(i).setTextColor(Color.rgb(0,204,0));
                     } else if (!isAnswerCorrect && isTestGraded) {
                         mpTextView.get(i).setTextColor(Color.RED);
                         for (int j = 0; j < mpRadioButtons.size(); ++j) {
                             if (correctAnswer.equals(mpTextView.get(j).getText().toString())) {
-                                mpTextView.get(j).setTextColor(Color.GREEN);
+                                mpTextView.get(j).setTextColor(Color.rgb(0,204,0));
                             }
                         }
                     }
@@ -408,7 +408,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 for (int i = 0; i < tfRadioButtons.size(); ++i) {
                     if (correctAnswer.equals(tfTextView.get(i).getText().toString())
                             && TestGrader.isTestGraded()) {
-                        tfTextView.get(i).setTextColor(Color.GREEN);
+                        tfTextView.get(i).setTextColor(Color.rgb(0,204,0));
                     }
                     tfTextView.get(i).setEnabled(false);
                     tfRadioButtons.get(i).setEnabled(false);
@@ -421,12 +421,12 @@ public class FlashcardActivity extends AppCompatActivity {
                 if (userAnswer.equals(tfTextView.get(i).getText().toString())) {
                     tfRadioButtons.get(i).setChecked(true);
                     if (isAnswerCorrect && isTestGraded) {
-                        tfTextView.get(i).setTextColor(Color.GREEN);
+                        tfTextView.get(i).setTextColor(Color.rgb(0,204,0));
                     } else if (!isAnswerCorrect && isTestGraded) {
                         tfTextView.get(i).setTextColor(Color.RED);
                         for (int j = 0; j < tfRadioButtons.size(); ++j) {
                             if (correctAnswer.equals(tfTextView.get(j).getText().toString())) {
-                                tfTextView.get(j).setTextColor(Color.GREEN);
+                                tfTextView.get(j).setTextColor(Color.rgb(0,204,0));
                             }
                         }
                     }
@@ -438,12 +438,12 @@ public class FlashcardActivity extends AppCompatActivity {
         } else {
             saTextField.setText(userAnswer);
             if (isAnswerCorrect && isTestGraded) {
-                saTextField.setTextColor(Color.GREEN);
+                saTextField.setTextColor(Color.rgb(0,204,0));
             } else if (!isAnswerCorrect && isTestGraded) {
                 saTextField.setTextColor(Color.RED);
                 TextView correctAnswerTextView = new TextView(this);
                 correctAnswerTextView.setText(correctAnswer);
-                correctAnswerTextView.setTextColor(Color.GREEN);
+                correctAnswerTextView.setTextColor(Color.rgb(0,204,0));
                 layout.addView(correctAnswerTextView);
             }
             saTextField.setEnabled(false);
