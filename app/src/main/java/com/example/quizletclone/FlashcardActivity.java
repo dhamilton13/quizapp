@@ -158,6 +158,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
                 checkBoxes.add(new CheckBox(this));
                 checkAllTextView.add(new TextView(this));
+                checkAllTextView.get(i).setTextSize(20);
                 checkAllTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
 
@@ -192,6 +193,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 });
 
                 mpTextView.add(new TextView(this));
+                mpTextView.get(i).setTextSize(20);
                 mpTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
 
@@ -224,6 +226,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 });
 
                 tfTextView.add(new TextView(this));
+                tfTextView.get(i).setTextSize(20);
                 tfTextView.get(i).setText(mvc.getTests().get(testPosition).
                         getSetOfFlashcards().get(position).getListOfAnswers().get(i));
 

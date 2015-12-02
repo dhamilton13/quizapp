@@ -159,6 +159,14 @@ public class Test {
             counter++;
         }
     }
+
+    public void populateSetOfFlashcardsManually(ArrayList<Flashcard> fcs) {
+        this.setOfFlashcards = new ArrayList<Flashcard>();
+
+        for (int i = 0; i < fcs.size(); ++i) {
+            this.setOfFlashcards.add(fcs.get(i));
+        }
+    }
     public ArrayList<Flashcard> shuffleCards(ArrayList<Flashcard> fcs)
     {
         Collections.shuffle(fcs);

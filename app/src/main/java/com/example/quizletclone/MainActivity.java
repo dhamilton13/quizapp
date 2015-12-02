@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
 		mvc.sortByTag = false;
 		mvc.sortByCategory = false;
 		Intent intent = new Intent(this, ListActivity.class);
+		intent.putExtra("callingClass", view.getContext().toString());
 		intent.putExtra("isSorted", false);
 		startActivity(intent);
 		finish();

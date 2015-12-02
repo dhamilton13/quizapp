@@ -1,5 +1,6 @@
 package com.example.quizletclone;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.reflect.Type;
@@ -77,6 +78,37 @@ public class ModelViewController {
 		return database.insertTestData(nameOfTest, isDynamic, isShortAnswer, isMultipleChoice,
 				isTrueFalse, isCheckAll, isRandom, flashcards,
 				numSA, numMC, numTF, numCA, numRA);
+	}
+
+	public boolean createManualTest(String nameOfTest, List<Integer> listOfPositions) {
+		boolean isMultipleChoice = false, isTrueFalse = false, isCheckAll = false, isShortAnswer = false;
+		ArrayList<Flashcard> newCards = new ArrayList<Flashcard>();
+
+		for (int i = 0; i < listOfPositions.size(); ++i) {
+			newCards.add(setOfFlashcards.get(listOfPositions.get(i)));
+			if (newCards.get(i).getCategory().equals(MultipleChoice.CATEGORY)) {
+				isMultipleChoice = true;
+			} else if (newCards.get(i).getCategory().equals(TrueFalse.CATEGORY)) {
+				isTrueFalse = true;
+			} else if (newCards.get(i).getCategory().equals(CheckAllThatApply.CATEGORY)) {
+				isCheckAll = true;
+			} else if (newCards.get(i).getCategory().equals(ShortAnswer.CATEGORY)) {
+				isShortAnswer = true;
+			}
+		}
+
+		Test test = new Test(nameOfTest, false, isShortAnswer, isMultipleChoice, isTrueFalse, isCheckAll,
+				false, 0, 0, 0, 0, 0);
+		test.populateSetOfFlashcardsManually(newCards);
+		ArrayList<Flashcard> testFlashcards = test.getSetOfFlashcards();
+		setOfTests.add(test);
+
+		Gson gson = new Gson();
+		String flashcards = gson.toJson(testFlashcards);
+
+		return database.insertTestData(nameOfTest, false, isShortAnswer, isMultipleChoice,
+				isTrueFalse, isCheckAll, false, flashcards,
+				0, 0, 0, 0, 0);
 	}
 
 	/** Create a new Test object and store into SQLite database */

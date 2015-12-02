@@ -43,7 +43,7 @@ public class CreateTag extends AppCompatActivity {
 
         myRecyclerView = (RecyclerView)findViewById(R.id.tag_recyclerview);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, null);
         myRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerView.setLayoutManager(linearLayoutManager);
 
