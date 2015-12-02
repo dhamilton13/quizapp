@@ -332,7 +332,7 @@
     <!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Settings</string>
-    <string name="app_name">QuizletClone</string>
+    <string name="app_name">Quiz Me!</string>
     <!-- From: file:/Users/jefflau/Documents/My%20Space/Tower/quizapp/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/res/values/values.xml -->
     <eat-comment/>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
