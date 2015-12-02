@@ -316,7 +316,7 @@ public class CreateTest extends AppCompatActivity {
                         toast.show();
 
 
-                        /* After a 2000ms delay, return to the list of tests */
+                        /* After a 1500 delay, return to the list of tests */
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -324,7 +324,7 @@ public class CreateTest extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                             }
-                        }, 2000);
+                        }, 1500);
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(),
                                 "Failed to create quiz", Toast.LENGTH_SHORT);

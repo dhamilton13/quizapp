@@ -189,7 +189,16 @@ public class MultipleChoice extends AppCompatActivity {
                     listOfAnswers.add(fieldD.getText().toString());
                     listOfAnswers.add(fieldE.getText().toString());
 
-                        if (listOfAnswers.size() != 5 || questionField.getText().toString().isEmpty()
+                    boolean emptyField = false;
+
+                    for (int i = 0 ; i < listOfAnswers.size(); ++i) {
+                        if (listOfAnswers.get(i).isEmpty()) {
+                            emptyField = true;
+                            break;
+                        }
+                    }
+
+                        if (emptyField || questionField.getText().toString().isEmpty()
                                 || spinner.getSelectedItem().toString().isEmpty())
                         return;
 

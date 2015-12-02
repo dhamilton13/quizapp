@@ -110,6 +110,7 @@ public class CheckAllThatApply extends AppCompatActivity {
             new View.OnClickListener() {
                 public void onClick(View view) {
                     ArrayList<String> listOfAnswers = new ArrayList<String>();
+                    boolean isEmpty = false;
                     listOfAnswers.add(fieldA.getText().toString());
                     listOfAnswers.add(fieldB.getText().toString());
                     listOfAnswers.add(fieldC.getText().toString());
@@ -117,6 +118,13 @@ public class CheckAllThatApply extends AppCompatActivity {
                     listOfAnswers.add(fieldE.getText().toString());
 
                     String answer = "";
+
+                    for (int i = 0; i < listOfAnswers.size(); ++i) {
+                        if (listOfAnswers.get(i).isEmpty()) {
+                            isEmpty = true;
+                            break;
+                        }
+                    }
 
                     if (checkBoxA.isChecked()) {
                         if (!fieldA.getText().toString().isEmpty())
@@ -139,7 +147,7 @@ public class CheckAllThatApply extends AppCompatActivity {
                             answer += fieldE.getText().toString() + PLACEHOLDER;
                     }
 
-                    if (questionField.getText().toString().isEmpty() || answer.length() == 0 ||
+                    if (isEmpty || questionField.getText().toString().isEmpty() || answer.length() == 0 ||
                             spinner.getSelectedItem() == null) {
                         return;
                     }

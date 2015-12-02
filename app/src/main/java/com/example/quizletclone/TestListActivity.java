@@ -194,6 +194,14 @@ public class TestListActivity extends AppCompatActivity {
     }
 
     private void createTest() {
+
+        if (mvc.getFlashcards().isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "You have no flashcards", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+
         final Intent intent = new Intent(this, CreateTest.class);
         final Intent intentForList = new Intent(this, ListActivity.class);
         final AlertDialog dialog = new AlertDialog.Builder(TestListActivity.this).create();

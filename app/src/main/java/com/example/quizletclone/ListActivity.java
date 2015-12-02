@@ -146,7 +146,7 @@ public class ListActivity extends AppCompatActivity {
 
     private void createQuiz() {
         boolean successfulCreation;
-        if (positionOfFlashcards.size() != 0) {
+        if (!positionOfFlashcards.isEmpty()) {
            successfulCreation =  mvc.createManualTest(testTitle, positionOfFlashcards);
 
             if (successfulCreation) {
@@ -167,10 +167,13 @@ public class ListActivity extends AppCompatActivity {
                 }, 1500);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
-                        "Failed to create quiz", Toast.LENGTH_SHORT);
+                        "Failed to create quiz", Toast.LENGTH_LONG);
                 toast.show();
             }
         } else {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Please select flashcards", Toast.LENGTH_LONG);
+            toast.show();
             return;
         }
     }

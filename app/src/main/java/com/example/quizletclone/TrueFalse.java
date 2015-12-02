@@ -138,8 +138,9 @@ public class TrueFalse extends AppCompatActivity {
                     listOfAnswers.add("True");
                     listOfAnswers.add("False");
 
+
                     if (questionField.getText().toString().isEmpty() || spinner.getSelectedItem()
-                            .toString().isEmpty())
+                            .toString().isEmpty() || (!answerFieldT.isChecked() && !answerFieldF.isChecked()))
                         return;
 
                     if (answerFieldT.isChecked()) {
