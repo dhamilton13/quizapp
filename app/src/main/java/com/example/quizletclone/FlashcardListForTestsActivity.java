@@ -39,7 +39,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
         ArrayList<Flashcard> cards = mvc.getTests().get(position).getSetOfFlashcards();
         ArrayList<String> cardNames = buildFlashcardsToStrings(cards);
 
-        setTitle("View Flashcards in Test");
+        setTitle("View Flashcards in Quiz");
         initializeComponents();
         populateCards(cardNames);
     }
@@ -60,10 +60,10 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // alert dialog asking the user what kind of question they want to click
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Test options");
+                builder.setTitle("quiz options");
                 // The flashcard creation options
                 builder.setItems(new CharSequence[]
-                                {"Grade Test", "Clear Test"},
+                                {"Grade quiz", "Clear quiz"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
@@ -135,7 +135,7 @@ public class FlashcardListForTestsActivity extends AppCompatActivity {
     private void clearTest() {
 
         final AlertDialog dialog = new AlertDialog.Builder(FlashcardListForTestsActivity.this).create();
-        dialog.setTitle("Clear test");
+        dialog.setTitle("Clear quiz");
         dialog.setMessage("Are you sure you wish to clear the quiz?");
 
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {

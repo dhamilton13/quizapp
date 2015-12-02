@@ -30,7 +30,7 @@ public class TestListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Test Flashcards");
+        setTitle("Quiz Flashcards");
         setContentView(R.layout.activity_list_test_flashcards);
 
         Intent intent = getIntent();
@@ -57,10 +57,10 @@ public class TestListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Create test?");
+                builder.setTitle("Create quiz?");
                 // The flashcard creation options
                 builder.setItems(new CharSequence[]
-                                {"Create test"},
+                                {"Create quiz"},
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position

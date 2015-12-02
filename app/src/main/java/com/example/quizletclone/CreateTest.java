@@ -33,7 +33,7 @@ public class CreateTest extends AppCompatActivity {
         /* Retrieve the ModelViewController object from the calling class */
         mvc = ModelViewController.getInstance(this);
 
-        setTitle("Create a test");
+        setTitle("Create a Quiz");
 
         initializeGUIComponents();
         createTestObject();
@@ -311,7 +311,7 @@ public class CreateTest extends AppCompatActivity {
 
                         /* Acknowledge the test was created by displaying a small message */
                     if (successfulCreation) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Test created",
+                        Toast toast = Toast.makeText(getApplicationContext(), "Quiz created",
                                 Toast.LENGTH_SHORT);
                         toast.show();
 
@@ -327,7 +327,7 @@ public class CreateTest extends AppCompatActivity {
                         }, 2000);
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(),
-                                "Failed to create test", Toast.LENGTH_SHORT);
+                                "Failed to create quiz", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 }
