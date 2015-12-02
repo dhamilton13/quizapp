@@ -216,5 +216,10 @@ public class ModelViewController {
 	public void deleteTest(String str) {database.deleteTest(str); }
 	public void deleteFlashCard(String str) {database.deleteFlashCard(str); }
 
+	public void updateTag(String question, String category, String newTag)
+	{
+		database.updateTag(question,category,newTag);
+	}
+
 
 }

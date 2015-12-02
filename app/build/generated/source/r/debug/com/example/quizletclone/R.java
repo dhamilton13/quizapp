@@ -2347,7 +2347,7 @@ containing a value of this type.
         public static final int action_bar_spinner=0x7f0c0001;
         public static final int action_bar_subtitle=0x7f0c003b;
         public static final int action_bar_title=0x7f0c003a;
-        public static final int action_category=0x7f0c00bb;
+        public static final int action_category=0x7f0c00bc;
         public static final int action_context_bar=0x7f0c005b;
         public static final int action_divider=0x7f0c00b1;
         public static final int action_menu_divider=0x7f0c0002;
@@ -2356,7 +2356,7 @@ containing a value of this type.
         public static final int action_mode_bar_stub=0x7f0c0056;
         public static final int action_mode_close_button=0x7f0c003c;
         public static final int action_settings=0x7f0c00ba;
-        public static final int action_sort=0x7f0c00bc;
+        public static final int action_sort=0x7f0c00bd;
         public static final int activity_chooser_view_content=0x7f0c003d;
         public static final int alertTitle=0x7f0c0049;
         public static final int always=0x7f0c0032;
@@ -2375,6 +2375,7 @@ containing a value of this type.
         public static final int center=0x7f0c001d;
         public static final int center_horizontal=0x7f0c001e;
         public static final int center_vertical=0x7f0c001f;
+        public static final int change_tag=0x7f0c00bb;
         public static final int checkAllCB=0x7f0c0087;
         public static final int checkbox=0x7f0c0052;
         public static final int checkboxA=0x7f0c0070;
@@ -2501,7 +2502,7 @@ containing a value of this type.
         public static final int status_bar_latest_event_content=0x7f0c00af;
         public static final int submit_area=0x7f0c0065;
         public static final int tabMode=0x7f0c000d;
-        public static final int tag_action_delete=0x7f0c00bd;
+        public static final int tag_action_delete=0x7f0c00be;
         public static final int tag_imageButton=0x7f0c007c;
         public static final int tag_recyclerview=0x7f0c007b;
         public static final int tag_to_card_recyclerview=0x7f0c0094;
@@ -2605,10 +2606,11 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int create=0x7f0d0000;
-        public static final int list=0x7f0d0001;
-        public static final int list_activity=0x7f0d0002;
-        public static final int main=0x7f0d0003;
-        public static final int tag=0x7f0d0004;
+        public static final int flashcard_activity=0x7f0d0001;
+        public static final int list=0x7f0d0002;
+        public static final int list_activity=0x7f0d0003;
+        public static final int main=0x7f0d0004;
+        public static final int tag=0x7f0d0005;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f050000;

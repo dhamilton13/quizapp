@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/ic_tags2"
           android:state_focused="true" />
     <item android:drawable="@drawable/ic_tags1" />
-</selector><!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/drawable/tagsbutton.xml -->
+</selector><!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/drawable/tagsbutton.xml -->

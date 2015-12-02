@@ -157,8 +157,11 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_1_T1 + "='" + str + "'");
         db.execSQL("DELETE FROM " + TABLE_2_NAME + " WHERE " + COL_7_T2 + "='" + str + "'");
-
     }
 
-
+    public void updateTag(String question, String category, String newTag)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + TABLE_NAME + " SET " + COL_4_T1 + "='" + newTag + "'" + " WHERE " + COL_1_T1 + "='" + question + "' AND " + COL_3_T1 + "='" + category + "'");
+    }
 }

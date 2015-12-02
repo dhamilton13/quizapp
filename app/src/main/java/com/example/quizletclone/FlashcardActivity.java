@@ -1,6 +1,8 @@
 package com.example.quizletclone;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,6 +129,46 @@ public class FlashcardActivity extends AppCompatActivity {
             mvc.isTag = false;      //toggle the bool back for other activity
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.flashcard_activity, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.change_tag) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            int size = mvc.getTags().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getTags().get(i);
+
+            builder.setTitle("Change the tag of this flashcard")
+                    .setItems(arr, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO: change the tag of this flashcard
+                            String str = mvc.getTags().get(which);
+                            String category = card.getCategory();
+                            String question = card.getQuestion();
+
+                            mvc.updateTag(question,category,str);
+                            //startActivity(getIntent());
+                            //finish();
+                        }
+                    });
+
+            AlertDialog a = builder.create();
+            a.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     protected void hideKeyboard(View view) {

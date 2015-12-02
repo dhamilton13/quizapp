@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.quizletclone.FlashcardActivity" >
+
+    <item
+        android:id="@+id/change_tag"
+        android:orderInCategory="100"
+        android:title="change_tag"
+        android:icon="@drawable/tags"
+        app:showAsAction="always"/>
+
+</menu><!-- From: file:/Users/zhishengliu/AndroidStudioProjects/quizApp/quizapp/app/src/main/res/menu/flashcard_activity.xml -->

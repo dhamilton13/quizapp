@@ -12,7 +12,7 @@ public class Flashcard {
 		this.listOfAnswers = listOfAnswers;
 		this.category = category;
 		if(tag == null)
-        	this.tag = "All";		//prevent empty tag
+        	this.tag = "root";		//prevent empty tag
 		else
 			this.tag = tag;
 	}
