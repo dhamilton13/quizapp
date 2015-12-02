@@ -229,8 +229,55 @@ public class ListActivity extends AppCompatActivity {
             a.show();
             return true;
         }
+        else if (id == R.id.tag_action_delete) {
+
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+
+            int size = mvc.getFlashcards().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getFlashcards().get(i).getQuestion();
+
+            builder.setTitle("Delete Flashcard")
+                    .setItems(arr, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //gets the tag you want to delete
+                            confirmDelete(mvc.getFlashcards().get(which).getQuestion());
+
+                        }
+                    });
+
+            android.app.AlertDialog a = builder.create();
+            a.show();
+            return true;
+        }
 		return super.onOptionsItemSelected(item);
 	}
+
+    public void confirmDelete(final String whichTest)
+    {
+        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(this);
+
+        alert.setTitle("Delete Confirmation");
+        alert.setMessage("Are you sure you would like to delete this flashcard?");
+
+        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                mvc.deleteFlashCard(whichTest);
+                startActivity(getIntent());
+                finish();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+    }
 
     /* The next three methods save flashcard data whenever the current activity is paused or
         terminated.

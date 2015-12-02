@@ -181,4 +181,8 @@ public class ModelViewController {
 	{
 		database.deleteTag(str);
 	}
+	public void deleteTest(String str) {database.deleteTest(str); }
+	public void deleteFlashCard(String str) {database.deleteFlashCard(str); }
+
+
 }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +79,13 @@ public class TestListActivity extends AppCompatActivity {
 
     }
 
+    @Override   //inflate the action menu bar
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.tag, menu);
+        return true;
+    }
+
     /* If 'back' is pressed on the device, return home. */
     @Override
     public void onBackPressed() {
@@ -96,9 +104,59 @@ public class TestListActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
+        id = item.getItemId();
+
+        //reaction when click the delete tag button
+        if (id == R.id.tag_action_delete) {
+
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+
+            int size = mvc.getTests().size();
+            String arr[] = new String[size];
+            for(int i=0;i<size;i++)
+                arr[i] = mvc.getTests().get(i).getName();
+
+            builder.setTitle("Delete Test")
+                    .setItems(arr, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //gets the tag you want to delete
+                                confirmDelete(mvc.getTests().get(which).getName());
+
+                        }
+                    });
+
+            android.app.AlertDialog a = builder.create();
+            a.show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+    public void confirmDelete(final String whichTest)
+    {
+        android.support.v7.app.AlertDialog.Builder alert = new android.support.v7.app.AlertDialog.Builder(this);
 
+        alert.setTitle("Delete Confirmation");
+        alert.setMessage("Are you sure you would like to delete this test?");
+
+        alert.setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                mvc.deleteTest(whichTest);
+                startActivity(getIntent());
+                finish();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+    }
     /* The next three methods save flashcard data whenever the current activity is paused or
         terminated.
      */

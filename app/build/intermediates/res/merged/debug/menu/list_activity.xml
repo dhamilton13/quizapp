@@ -18,5 +18,12 @@
         android:icon="@drawable/tags"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/tag_action_delete"
+        android:orderInCategory="100"
+        android:title="Delete"
+        android:icon="@drawable/delete"
+        app:showAsAction="always"/>
+
 </menu>
-<!-- From: file:/Users/sunnysarow/Desktop/QuizApp/quizapp/app/src/main/res/menu/list_activity.xml -->
+<!-- From: file:/Users/Jessica/AndroidStudioProjects/quizapp/app/src/main/res/menu/list_activity.xml -->

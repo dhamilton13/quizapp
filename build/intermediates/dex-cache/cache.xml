@@ -2,60 +2,60 @@
 <items version="2" >
 
     <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-5d9db162f4eefac747e2d46d44e7dd5762c5208a.jar" />
-    </item>
-    <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-717ddd52dcd7a44627e974775ff0664931e9bfc9.jar" />
-    </item>
-    <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-066a3ef9400f94e794c9440b4cc065139f6e7690.jar" />
-    </item>
-    <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-d1d1d484aa73c0f3f2d3038fa74f49edd1eb7f5d.jar" />
-    </item>
-    <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-d3ed97a6ec47ae56ce140f5f824da17801aea70f.jar" />
-    </item>
-    <item
-        jar="/Users/sunnysarow/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jar="/Users/Jessica/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/gson-2.2.4-bf77c6925ace0591d5228d43f62fc8be7166a275.jar" />
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/gson-2.2.4-420c01d43fc54071fe301dc0b5d6f634183429cf.jar" />
     </item>
     <item
-        jar="/Users/sunnysarow/Downloads/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/classes-79f9f94776778b51a7512566d7acd6138c709482.jar" />
+    </item>
+    <item
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/classes-df612c7a7eb9017acd28638d3cc2816bcf089b98.jar" />
+    </item>
+    <item
+        jar="/Users/Jessica/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-59d65c49fa0ae3612c3da5642d26906ccfe81ebd.jar" />
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-9c4ce99fdd981f0d4a40fd85bd1985137e4c1ddd.jar" />
     </item>
     <item
-        jar="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.0/jars/classes.jar"
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/classes-3fe67bbcd6cc7e5e054e5fdf3fb2c7095ae8584e.jar" />
+    </item>
+    <item
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-e996e4db5d6b3ac6ff1434afe681f6af507a7405.jar" />
+    </item>
+    <item
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/classes-6cfbee6da4d2466f27fe645ffe40bc45f66cdd8d.jar" />
+    </item>
+    <item
+        jar="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d96886efea7cc74fbb3abd0e3b51d5638fc57be0">
-        <dex dex="/Users/sunnysarow/Desktop/QuizApp/quizapp/app/build/intermediates/pre-dexed/debug/classes-70d56b64afbba1dfa3fd771d1830c5479e11abf8.jar" />
+        <dex dex="/Users/Jessica/AndroidStudioProjects/quizapp/app/build/intermediates/pre-dexed/debug/classes-2171ecf41f2a1d0e546241b19a8777dd2b4100f5.jar" />
     </item>
 
 </items>

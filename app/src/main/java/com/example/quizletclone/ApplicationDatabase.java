@@ -14,6 +14,7 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
     private static final String TABLE_2_NAME = "test_table";
     private static final String TABLE_3_NAME = "tag_table";
     private static final String COL_1_T3 = "TAG";
+
     private static final String COL_1_T2 = "NAME";
     private static final String COL_2_T2 = "DYNAMIC";
     private static final String COL_3_T2 = "SA";
@@ -143,6 +144,20 @@ public class ApplicationDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_3_NAME + " WHERE " + COL_1_T3 + "='" + str + "'");
         db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_4_T1 + "='" + str + "'");
+    }
+
+    public void deleteTest(String str)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_2_NAME + " WHERE " + COL_1_T2 + "='" + str + "'");
+    }
+
+    public void deleteFlashCard(String str)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_1_T1 + "='" + str + "'");
+        db.execSQL("DELETE FROM " + TABLE_2_NAME + " WHERE " + COL_7_T2 + "='" + str + "'");
+
     }
 
 
