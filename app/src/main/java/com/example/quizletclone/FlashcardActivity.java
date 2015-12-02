@@ -487,7 +487,7 @@ public class FlashcardActivity extends AppCompatActivity {
                                 checkAllAnswer = null;
 
                             TestGrader.addUserAnswer(checkAllAnswer, position);
-                            if (TestGrader.checkArrayAnswer(checkAllAnswer.split(PLACEHOLDER),
+                            if (checkAllAnswer != null && TestGrader.checkArrayAnswer(checkAllAnswer.split(PLACEHOLDER),
                                     TestGrader.getCorrectAnswers()[position].split(PLACEHOLDER)))
                                 TestGrader.increaseScore();
 
